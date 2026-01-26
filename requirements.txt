@@ -1,0 +1,19 @@
+# Daytona Agent - Parallel Browser Research AI Agent
+# Python dependencies
+
+# Core
+aiohttp>=3.9.0
+pydantic>=2.5.0
+
+# CLI
+rich>=13.7.0
+
+# Docker interaction
+docker>=7.0.0
+
+# Development
+pytest>=7.4.0
+pytest-asyncio>=0.23.0
+black>=23.12.0
+ruff>=0.1.0
+mypy>=1.7.0

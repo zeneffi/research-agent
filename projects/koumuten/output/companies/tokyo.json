@@ -1,0 +1,468 @@
+{
+  "metadata": {
+    "search_date": "2026-01-26",
+    "search_keywords": ["東京都 工務店", "東京 注文住宅 工務店"],
+    "total_count": 52
+  },
+  "koumuten_list": [
+    {
+      "company_name": "石田工務店",
+      "location": "東京都八王子市",
+      "official_url": "https://ishidakoumuten.net/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["ヒノキ使用", "高気密高断熱", "地域密着型", "専属大工", "10年保証"],
+      "rating": 4.55
+    },
+    {
+      "company_name": "小嶋工務店",
+      "location": "東京都小平市",
+      "official_url": "https://www.k-kojima.co.jp/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["東京の木で家を建てる", "長寿命住宅システム", "FSC認定", "天然乾燥材", "耐震等級3"],
+      "rating": 4.41
+    },
+    {
+      "company_name": "リガード",
+      "location": "東京都国分寺市本多5-26-40",
+      "official_url": "https://tokyo-chumon.com/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["狭小地・変形地対応", "高気密（C値0.4以下）", "高断熱", "デザイン住宅", "コスト効率"],
+      "rating": 3.87
+    },
+    {
+      "company_name": "にいむの杜",
+      "location": "東京都調布市国領町1-40-6",
+      "official_url": "https://niim.co.jp/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["一級建築士設計", "シックハウス対策", "自然素材", "木骨SE構法", "耐震等級3"],
+      "rating": 4.28
+    },
+    {
+      "company_name": "八幡",
+      "location": "東京都青梅市今寺5-16-15",
+      "official_url": "https://www.yahata-home.com/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["スーパーウォール工法", "高気密（C値0.5以下）", "高断熱", "自社一貫管理", "1000万円台対応"],
+      "rating": 3.42
+    },
+    {
+      "company_name": "ジェネシス",
+      "location": "東京都武蔵野市吉祥寺",
+      "official_url": "https://www.genesis-ltd.co.jp/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["木造住宅専門", "自由設計", "HEAT20 G1グレード", "耐震等級3", "適正価格"],
+      "rating": 3.33
+    },
+    {
+      "company_name": "AQ RESIDENCE",
+      "location": "東京都",
+      "official_url": "https://aq-r.jp/about/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["一級建築士設計", "グッドデザイン賞W受賞", "狭小地対応", "伝統技術と最新技術の融合"],
+      "rating": 3.29
+    },
+    {
+      "company_name": "BLISS",
+      "location": "東京都文京区湯島",
+      "official_url": "https://bliss-d.com/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["狭小住宅特化", "平均12坪施工", "セミオーダー式", "ローコスト対応", "デザイン住宅"],
+      "rating": 3.27
+    },
+    {
+      "company_name": "ベルクハウス",
+      "location": "東京都",
+      "official_url": "https://www.berk.co.jp/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["建築家コンペ方式", "海外建築部材", "狭小地対応", "長期優良住宅対応", "複数構法対応"],
+      "rating": 2.93
+    },
+    {
+      "company_name": "ワンズライフホーム",
+      "location": "東京都",
+      "official_url": "https://oneslife-home.com/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["建築家マッチング", "完全オーダーメイド", "自社施工管理", "木造・RC対応"],
+      "rating": 2.84
+    },
+    {
+      "company_name": "東京組",
+      "location": "東京都世田谷区",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["世田谷区中心", "城南地区対応"],
+      "rating": 1.44
+    },
+    {
+      "company_name": "ネクストハウス",
+      "location": "東京都23区",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["23区対応"],
+      "rating": 3.96
+    },
+    {
+      "company_name": "東勝建設",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["東京都対応"],
+      "rating": 3.42
+    },
+    {
+      "company_name": "誠賀建設",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["東京都対応"],
+      "rating": 3.38
+    },
+    {
+      "company_name": "ホープス",
+      "location": "東京都",
+      "official_url": "https://archi-hopes.co.jp/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["狭小注文住宅", "SE構法", "高耐震性", "ZEH水準", "オリジナルキッチン"],
+      "rating": null
+    },
+    {
+      "company_name": "設計工房/Arch-Planning Atelier",
+      "location": "東京都",
+      "official_url": "http://www.sekeikobo.com/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["光と空間コンセプト", "一級建築士", "天然素材", "省エネ等級4", "ローコスト"],
+      "rating": null
+    },
+    {
+      "company_name": "リバティホーム",
+      "location": "東京都",
+      "official_url": "https://www.liberty-home.biz/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["狭小住宅・3階建て", "1400棟以上実績", "10坪から対応", "専属棟梁100%直接施工"],
+      "rating": null
+    },
+    {
+      "company_name": "ティーアンドダブリュー",
+      "location": "東京都",
+      "official_url": "https://www.txw-kyoushou.com/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["狭小住宅特化", "空間設計技術", "高性能換気システム", "木造住宅"],
+      "rating": null
+    },
+    {
+      "company_name": "積水ハウス",
+      "location": "大阪府大阪市北区（本社）",
+      "official_url": "https://www.sekisuihouse.co.jp",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["業界最大手", "自由設計", "高性能住宅", "耐震性・断熱性", "東京28モデルハウス"],
+      "rating": 4.48
+    },
+    {
+      "company_name": "一条工務店",
+      "location": "東京都江東区木場5-10-10",
+      "official_url": "https://www.ichijo.co.jp",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["高性能住宅", "耐震性", "省エネ性", "標準仕様充実", "東京16モデルハウス"],
+      "rating": 4.29
+    },
+    {
+      "company_name": "住友林業",
+      "location": "東京都千代田区大手町1-3-2 経団連会館",
+      "official_url": "https://sfc.jp/ie/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["木造こだわり", "300年以上歴史", "高品質木材", "高デザイン性", "東京63モデルハウス"],
+      "rating": 4.28
+    },
+    {
+      "company_name": "スウェーデンハウス",
+      "location": "東京都世田谷区太子堂4-1-1キャロットタワー23F",
+      "official_url": "https://www.swedenhouse.co.jp",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["北欧スタイル輸入住宅", "高気密・高断熱", "遮音性", "IKEA協同商品", "東京7モデルハウス"],
+      "rating": 4.54
+    },
+    {
+      "company_name": "ミサワホーム",
+      "location": "東京都新宿区西新宿2-4-1 新宿NSビル",
+      "official_url": "https://www.misawa.co.jp/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["モノコック構造", "大収納空間「蔵」", "高耐震性", "東京20以上モデルハウス"],
+      "rating": 4.21
+    },
+    {
+      "company_name": "BESS",
+      "location": "東京都",
+      "official_url": "https://www.bess.jp/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["ログハウス", "住むより楽しむ", "宿泊体験可", "東京2展示場"],
+      "rating": 4.21
+    },
+    {
+      "company_name": "タマホーム",
+      "location": "東京都",
+      "official_url": "https://www.tamahome.jp/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["良質低価格", "国産木材74.1%", "長期優良住宅", "自由設計", "最大60年保証"],
+      "rating": null
+    },
+    {
+      "company_name": "レオハウス",
+      "location": "東京都江戸川区",
+      "official_url": "https://www.leohouse.jp/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["ヤマダホールディングスグループ", "木造住宅", "省令準耐火構造", "ローコスト"],
+      "rating": null
+    },
+    {
+      "company_name": "小林建設",
+      "location": "東京都東大和市",
+      "official_url": "https://www.kobaken.co.jp/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["コミコミ価格", "フル装備住宅", "長期優良住宅", "地域密着"],
+      "rating": null
+    },
+    {
+      "company_name": "パームスハウス",
+      "location": "東京都",
+      "official_url": "https://www.parms999.co.jp/",
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["ローコスト住宅"],
+      "rating": null
+    },
+    {
+      "company_name": "スモールハウス",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["狭小住宅プロデュース"],
+      "rating": null
+    },
+    {
+      "company_name": "三井ホーム",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["大手ハウスメーカー", "デザイン性"],
+      "rating": null
+    },
+    {
+      "company_name": "アキュラホーム",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["適正価格", "自由設計"],
+      "rating": null
+    },
+    {
+      "company_name": "YAZAWA LUMBER",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["木材こだわり"],
+      "rating": null
+    },
+    {
+      "company_name": "ヘーベルハウス",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["鉄骨造", "高耐久"],
+      "rating": null
+    },
+    {
+      "company_name": "アイダ設計",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["ローコスト住宅"],
+      "rating": null
+    },
+    {
+      "company_name": "クレバリーホーム",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["外壁タイル", "フランチャイズ"],
+      "rating": null
+    },
+    {
+      "company_name": "ユニバーサルホーム",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["地熱床システム"],
+      "rating": null
+    },
+    {
+      "company_name": "ヤマト住建",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["高性能住宅", "ZEH対応"],
+      "rating": null
+    },
+    {
+      "company_name": "アエラホーム",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["外張り断熱", "高気密高断熱"],
+      "rating": null
+    },
+    {
+      "company_name": "桧家住宅",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["全館空調Z空調", "泡断熱"],
+      "rating": null
+    },
+    {
+      "company_name": "富士住建",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["完全フル装備の家", "太陽光標準"],
+      "rating": null
+    },
+    {
+      "company_name": "オープンハウス・アーキテクト",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["都市型住宅", "狭小地対応"],
+      "rating": null
+    },
+    {
+      "company_name": "ポラス",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["グッドデザイン賞", "地域密着"],
+      "rating": null
+    },
+    {
+      "company_name": "住友不動産",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["デザイン性", "都市型住宅"],
+      "rating": null
+    },
+    {
+      "company_name": "トヨタホーム",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["鉄骨ユニット工法", "工場生産"],
+      "rating": null
+    },
+    {
+      "company_name": "パナソニックホームズ",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["鉄骨造", "全館空調"],
+      "rating": null
+    },
+    {
+      "company_name": "セキスイハイム",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["ユニット工法", "太陽光発電"],
+      "rating": null
+    },
+    {
+      "company_name": "大和ハウス",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["大手ハウスメーカー", "鉄骨・木造対応"],
+      "rating": null
+    },
+    {
+      "company_name": "三菱地所ホーム",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["全館空調エアロテック", "ツーバイフォー"],
+      "rating": null
+    },
+    {
+      "company_name": "ウィザースホーム",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["ツーバイシックス工法", "外壁タイル"],
+      "rating": null
+    },
+    {
+      "company_name": "アイフルホーム",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["LIXILグループ", "ローコスト"],
+      "rating": null
+    },
+    {
+      "company_name": "広島建設",
+      "location": "東京都",
+      "official_url": null,
+      "contact_form_url": null,
+      "instagram_url": null,
+      "features": ["セナリオハウス", "首都圏地域密着"],
+      "rating": null
+    }
+  ]
+}

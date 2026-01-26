@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeneffi Parallel Search</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0a0a0a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        header {
+            background: #111;
+            padding: 2px 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+            flex-shrink: 0;
+        }
+        h1 {
+            font-size: 11px;
+            font-weight: 500;
+            color: #888;
+        }
+        .controls {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        button {
+            background: #222;
+            border: 1px solid #444;
+            color: #ccc;
+            padding: 2px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        button:hover {
+            background: #333;
+        }
+        button.primary {
+            background: #1a5a40;
+            border-color: #2a7a50;
+            color: #6f6;
+        }
+        button.primary:hover {
+            background: #2a7a50;
+        }
+        .status {
+            font-size: 10px;
+            color: #666;
+        }
+        .grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 0;
+        }
+        .browser-cell {
+            background: #000;
+            overflow: hidden;
+        }
+        iframe {
+            flex: 1;
+            border: none;
+            background: #000;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Zeneffi Parallel Search</h1>
+        <div class="controls">
+            <span class="status" id="status">Ready</span>
+            <button onclick="startSearch()" class="primary">Start Parallel Search</button>
+            <button onclick="resetBrowsers()">Reset All</button>
+        </div>
+    </header>
+    <div class="grid">
+        <div class="browser-cell"><iframe src="http://localhost:50895/vnc.html?autoconnect=true&resize=scale"></iframe></div>
+        <div class="browser-cell"><iframe src="http://localhost:50897/vnc.html?autoconnect=true&resize=scale"></iframe></div>
+        <div class="browser-cell"><iframe src="http://localhost:50915/vnc.html?autoconnect=true&resize=scale"></iframe></div>
+        <div class="browser-cell"><iframe src="http://localhost:50913/vnc.html?autoconnect=true&resize=scale"></iframe></div>
+        <div class="browser-cell"><iframe src="http://localhost:50919/vnc.html?autoconnect=true&resize=scale"></iframe></div>
+        <div class="browser-cell"><iframe src="http://localhost:50923/vnc.html?autoconnect=true&resize=scale"></iframe></div>
+        <div class="browser-cell"><iframe src="http://localhost:50908/vnc.html?autoconnect=true&resize=scale"></iframe></div>
+        <div class="browser-cell"><iframe src="http://localhost:50904/vnc.html?autoconnect=true&resize=scale"></iframe></div>
+        <div class="browser-cell"><iframe src="http://localhost:59305/vnc.html?autoconnect=true&resize=scale"></iframe></div>
+        <div class="browser-cell"><iframe src="http://localhost:50892/vnc.html?autoconnect=true&resize=scale"></iframe></div>
+    </div>
+
+    <script>
+        const API_PORTS = [50893, 50898, 50916, 50911, 50920, 50921, 50909, 50903, 50901, 50890];
+        const SEARCHES = [
+            '日本 生成AI 活用事例 企業 2025',
+            '日本 生成AI 技術トレンド LLM 2025',
+            '日本 生成AI 市場規模 政策 2025',
+            '日本 国産LLM 開発 2025',
+            '日本 AIエージェント 導入事例 2025',
+            'USA generative AI use cases enterprise 2025',
+            'USA generative AI technology trends 2025',
+            'USA generative AI market size 2025',
+            'USA LLM enterprise adoption 2025',
+            'USA AI agents business 2025'
+        ];
+
+        function updateStatus(text) {
+            document.getElementById('status').textContent = text;
+        }
+
+        async function navigate(port, url) {
+            try {
+                const response = await fetch(`http://localhost:${port}/browser/navigate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
+                return await response.json();
+            } catch (e) {
+                console.error(`Error navigating port ${port}:`, e);
+                return { success: false };
+            }
+        }
+
+        async function startSearch() {
+            updateStatus('Starting parallel search...');
+            const promises = API_PORTS.map((port, i) => {
+                const url = `https://duckduckgo.com/?q=${encodeURIComponent(SEARCHES[i])}`;
+                return navigate(port, url);
+            });
+            await Promise.all(promises);
+            updateStatus('Search completed!');
+        }
+
+        async function resetBrowsers() {
+            updateStatus('Resetting browsers...');
+            const promises = API_PORTS.map(port => navigate(port, 'about:blank'));
+            await Promise.all(promises);
+            updateStatus('Ready');
+        }
+
+        window.onload = async () => {
+            updateStatus('Checking browsers...');
+            let healthy = 0;
+            for (const port of API_PORTS) {
+                try {
+                    const res = await fetch(`http://localhost:${port}/health`);
+                    if (res.ok) healthy++;
+                } catch (e) {}
+            }
+            updateStatus(`${healthy}/10 browsers ready`);
+        };
+    </script>
+</body>
+</html>

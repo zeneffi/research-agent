@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  browser:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DISPLAY=:99
+      - API_PORT=3000
+      - VNC_PORT=5900
+      - NOVNC_PORT=6080
+    ports:
+      - "3000"   # Browser API
+      - "5900"   # VNC
+      - "6080"   # noVNC
+    volumes:
+      - browser-data:/app/data
+    shm_size: "2gb"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 2G
+        reservations:
+          cpus: "0.5"
+          memory: 1G
+
+volumes:
+  browser-data:
+
+networks:
+  default:
+    name: daytona-browser-network

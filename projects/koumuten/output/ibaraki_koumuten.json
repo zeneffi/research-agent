@@ -1,0 +1,514 @@
+{
+  "metadata": {
+    "title": "茨城県工務店リスト",
+    "collected_date": "2026-01-26",
+    "total_count": 64,
+    "source": "DuckDuckGo検索 + yume-wagaya ZEHビルダー一覧 + 各種ポータルサイト"
+  },
+  "companies": [
+    {
+      "company_name": "株式会社池田建設",
+      "location": "茨城県",
+      "website_url": "https://www.ik-home.com/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社高野工務店",
+      "location": "茨城県",
+      "website_url": "https://made-in-tk.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社コダマホーム",
+      "location": "茨城県",
+      "website_url": "https://kodamahome.com/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社ロゴスホーム",
+      "location": "茨城県",
+      "website_url": "https://www.logoshome.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "有限会社エイチ・ケーホーム",
+      "location": "茨城県",
+      "website_url": "https://hk-home.com/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社蓮見工務店",
+      "location": "茨城県",
+      "website_url": "http://www.kkhasumi.com/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社スズセイホーム",
+      "location": "茨城県",
+      "website_url": "http://www.e-suzusei.com/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社クリエすずき建設",
+      "location": "茨城県",
+      "website_url": "https://www.crie-s.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社ワカバハウス",
+      "location": "茨城県",
+      "website_url": "https://wakabahouse.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社丸八工務店",
+      "location": "茨城県",
+      "website_url": "https://www.maru8-house.com/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "センターホーム（株式会社菅谷工務店）",
+      "location": "茨城県",
+      "website_url": "https://center-home.bsj.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社ハヤシ工務店",
+      "location": "茨城県",
+      "website_url": "https://hayashijyuken.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社一条工務店",
+      "location": "茨城県",
+      "website_url": "https://www.ichijo.co.jp/area/ibaraki/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["高性能住宅", "ZEHビルダー", "全館空調"]
+    },
+    {
+      "company_name": "株式会社和奏建設",
+      "location": "茨城県",
+      "website_url": "http://www.wakana-k.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社吉川工務店",
+      "location": "茨城県",
+      "website_url": "https://k-yoshikawa.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社小野不動産建設",
+      "location": "茨城県",
+      "website_url": "https://www.onofk.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "不動産"]
+    },
+    {
+      "company_name": "株式会社イサカホーム",
+      "location": "茨城県",
+      "website_url": "https://www.isaka-home.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社フォレストホーム",
+      "location": "茨城県",
+      "website_url": "",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅"]
+    },
+    {
+      "company_name": "株式会社石井工務店",
+      "location": "茨城県水戸市",
+      "website_url": "",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅"]
+    },
+    {
+      "company_name": "株式会社白石工務店",
+      "location": "茨城県",
+      "website_url": "https://shiraishi-koumuten.com/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社イオスホーム",
+      "location": "茨城県",
+      "website_url": "https://www.eoshome.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社黒須建設",
+      "location": "茨城県",
+      "website_url": "https://www.kuros.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社大塚建設",
+      "location": "茨城県",
+      "website_url": "http://www.otukakensetu.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社東武ニューハウス",
+      "location": "茨城県",
+      "website_url": "https://www.tobu-nh.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "分譲住宅"]
+    },
+    {
+      "company_name": "株式会社アイ工務店",
+      "location": "茨城県",
+      "website_url": "https://www.ai-koumuten.co.jp/exhibition-area/ibaraki/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "高性能住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "ウィザースホーム",
+      "location": "茨城県",
+      "website_url": "https://with-e-home.com/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ツーバイフォー", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社ノーブルホーム",
+      "location": "茨城県つくば市",
+      "website_url": "https://www.noblehome.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "分譲住宅", "デザイン住宅"]
+    },
+    {
+      "company_name": "株式会社細田工務店",
+      "location": "茨城県",
+      "website_url": "https://www.hosoda.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ZEHビルダー"]
+    },
+    {
+      "company_name": "株式会社土屋ホーム",
+      "location": "茨城県",
+      "website_url": "https://www.tsuchiyahome.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "高断熱住宅"]
+    },
+    {
+      "company_name": "株式会社大沼工務店",
+      "location": "茨城県水戸市",
+      "website_url": "",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅"]
+    },
+    {
+      "company_name": "株式会社三陽工務店",
+      "location": "茨城県",
+      "website_url": "",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅"]
+    },
+    {
+      "company_name": "株式会社奥山工務店",
+      "location": "茨城県",
+      "website_url": "https://www.okuyama-co.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅"]
+    },
+    {
+      "company_name": "株式会社大和田工務店",
+      "location": "茨城県",
+      "website_url": "https://ohwada-kensetsu.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅"]
+    },
+    {
+      "company_name": "株式会社匠の会住宅",
+      "location": "茨城県",
+      "website_url": "",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅"]
+    },
+    {
+      "company_name": "パパまるハウス",
+      "location": "茨城県",
+      "website_url": "https://www.papamaru.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["ローコスト住宅", "規格住宅"]
+    },
+    {
+      "company_name": "ヤマダホームズ",
+      "location": "茨城県",
+      "website_url": "https://yamadahomes.jp/products/office/area/kanto/ibaraki/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ハウスメーカー"]
+    },
+    {
+      "company_name": "To Casa",
+      "location": "茨城県",
+      "website_url": "https://www.tocasa.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅"]
+    },
+    {
+      "company_name": "パネットホーム（八文字屋）",
+      "location": "茨城県",
+      "website_url": "https://www.yatsumonji.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅"]
+    },
+    {
+      "company_name": "パナソニックホームズ",
+      "location": "茨城県",
+      "website_url": "https://homes.panasonic.com/kyoten/area/08/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ハウスメーカー", "鉄骨住宅"]
+    },
+    {
+      "company_name": "ミサワホーム",
+      "location": "茨城県",
+      "website_url": "https://www.misawa.co.jp/navi/office/detail/ibaraki/672/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ハウスメーカー", "蔵のある家"]
+    },
+    {
+      "company_name": "クレバリーホーム",
+      "location": "茨城県",
+      "website_url": "https://www.cleverlyhome.com/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "タイル外壁"]
+    },
+    {
+      "company_name": "桧家住宅",
+      "location": "茨城県",
+      "website_url": "https://www.hinokiya.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "全館空調", "Z空調"]
+    },
+    {
+      "company_name": "三井ホーム",
+      "location": "茨城県",
+      "website_url": "https://www.mitsuihome-ibaraki.com/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ハウスメーカー", "ツーバイフォー"]
+    },
+    {
+      "company_name": "大和ハウス工業",
+      "location": "茨城県",
+      "website_url": "https://www.daiwahouse.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ハウスメーカー", "鉄骨住宅"]
+    },
+    {
+      "company_name": "積水ハウス",
+      "location": "茨城県",
+      "website_url": "https://www.sekisuihouse.co.jp/liaison/region_lia02/reg08/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ハウスメーカー", "鉄骨住宅", "木造住宅"]
+    },
+    {
+      "company_name": "住友林業",
+      "location": "茨城県",
+      "website_url": "https://sfc.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ハウスメーカー", "木造住宅", "自然素材"]
+    },
+    {
+      "company_name": "セキスイハイム",
+      "location": "茨城県",
+      "website_url": "https://www.ibaraki-heim.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ハウスメーカー", "鉄骨住宅", "太陽光発電"]
+    },
+    {
+      "company_name": "タマホーム",
+      "location": "茨城県",
+      "website_url": "https://www.tamahome.jp/modelhouse/kanto/ibaraki/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ローコスト住宅"]
+    },
+    {
+      "company_name": "アキュラホーム",
+      "location": "茨城県つくば市",
+      "website_url": "https://www.aqura.co.jp/office/tsukuba/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "木造住宅", "適正価格"]
+    },
+    {
+      "company_name": "アエラホーム",
+      "location": "茨城県",
+      "website_url": "https://aerahome.com/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "高気密高断熱", "外張り断熱"]
+    },
+    {
+      "company_name": "トヨタホーム",
+      "location": "茨城県",
+      "website_url": "https://ibaraki.toyotahome.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ハウスメーカー", "鉄骨住宅"]
+    },
+    {
+      "company_name": "ユニバーサルホーム",
+      "location": "茨城県",
+      "website_url": "https://www.universalhome.co.jp/modelhouse/ibaraki/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "地熱床暖房", "フランチャイズ"]
+    },
+    {
+      "company_name": "セルコホーム",
+      "location": "茨城県つくば市",
+      "website_url": "https://selcohome.jp/offices/kanto/ibaraki/tsukuba/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "輸入住宅", "カナダ住宅"]
+    },
+    {
+      "company_name": "グランディハウス",
+      "location": "茨城県",
+      "website_url": "https://www.grandy.jp/ibarakiken",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["分譲住宅", "注文住宅"]
+    },
+    {
+      "company_name": "アイダ設計",
+      "location": "茨城県",
+      "website_url": "https://www.aidagroup.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ローコスト住宅", "分譲住宅"]
+    },
+    {
+      "company_name": "オープンハウス",
+      "location": "茨城県",
+      "website_url": "https://openhouse.yamatojk.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["分譲住宅", "注文住宅"]
+    },
+    {
+      "company_name": "ポラスグループ",
+      "location": "茨城県",
+      "website_url": "https://tec.polus.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["分譲住宅", "注文住宅", "リフォーム"]
+    },
+    {
+      "company_name": "富士住建",
+      "location": "茨城県",
+      "website_url": "http://www.fuji-juken.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "完全フル装備の家"]
+    },
+    {
+      "company_name": "レオハウス（ヤマダホームズ）",
+      "location": "茨城県",
+      "website_url": "https://yamadahomes.jp/leohouse/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "ローコスト住宅"]
+    },
+    {
+      "company_name": "アールプラスハウス",
+      "location": "茨城県",
+      "website_url": "https://www.r-plus-house.com/ibaraki/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "建築家住宅", "デザイン住宅"]
+    },
+    {
+      "company_name": "無添加住宅",
+      "location": "茨城県",
+      "website_url": "https://www.mutenkahouse.co.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["注文住宅", "自然素材", "健康住宅"]
+    },
+    {
+      "company_name": "BESS",
+      "location": "茨城県つくば市",
+      "website_url": "https://tsukuba.bess.jp/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["ログハウス", "アウトドアリビング"]
+    },
+    {
+      "company_name": "フィンランドビッグボックス",
+      "location": "茨城県",
+      "website_url": "https://www.fin-bigbox.com/",
+      "contact_form_url": "",
+      "instagram_url": "",
+      "features": ["ログハウス", "北欧住宅"]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "proxies": [
+    {"host": "xxx.xxx.xxx.xxx", "port": 1234, "username": "your_username", "password": "your_password"}
+  ]
+}

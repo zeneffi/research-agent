@@ -1,0 +1,19 @@
+# プロジェクト設定
+name: "プロジェクト名"
+description: "調査の説明"
+
+# 並列実行設定
+parallel:
+  max_containers: 5  # 最大コンテナ数
+
+# 調査対象
+targets:
+  - name: "対象1"
+    query: "検索クエリ1"
+  - name: "対象2"
+    query: "検索クエリ2"
+
+# 出力設定
+output:
+  format: "markdown"  # markdown, json, csv
+  dir: "./output"

@@ -1,0 +1,490 @@
+{
+  "metadata": {
+    "title": "栃木県工務店リスト",
+    "collected_date": "2026-01-26",
+    "total_count": 53,
+    "sources": [
+      "SUUMO 栃木県工務店ランキング",
+      "工務店ドットコム"
+    ]
+  },
+  "koumuten_list": [
+    {
+      "id": 1,
+      "company_name": "東建ビルダー",
+      "location": "足利市",
+      "official_url": "https://www.token-builder.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["デザイン住宅", "定額制", "コスト明確"]
+    },
+    {
+      "id": 2,
+      "company_name": "カクニシビルダー",
+      "location": "鹿沼市",
+      "official_url": "https://www.kakunishi.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["創業128年", "設計・性能・施工・費用・安心の5つのバランス", "職人技術"]
+    },
+    {
+      "id": 3,
+      "company_name": "アヴィエスホーム",
+      "location": "宇都宮市",
+      "official_url": "https://www.avies-home.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["塗り壁の家", "自然素材", "子育て世帯向け"]
+    },
+    {
+      "id": 4,
+      "company_name": "テクノホーム",
+      "location": "栃木県",
+      "official_url": "https://www.technohome.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["自然素材", "デザイン性", "永く愛される住まい"]
+    },
+    {
+      "id": 5,
+      "company_name": "パパまるハウス",
+      "location": "栃木県全域",
+      "official_url": "https://www.papamaru.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["充実標準装備", "高性能", "企画型住宅"]
+    },
+    {
+      "id": 6,
+      "company_name": "栃木建築社",
+      "location": "栃木県",
+      "official_url": "https://www.tochikenchiku.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["楽しさ", "癒し", "付加価値提案"]
+    },
+    {
+      "id": 7,
+      "company_name": "石井工務店",
+      "location": "栃木県全域",
+      "official_url": "https://www.ishii-koumuten.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["女性が考えた女性のための家", "夏涼しく冬暖かい", "女性ライフプロデューサー"]
+    },
+    {
+      "id": 8,
+      "company_name": "マルニホーム",
+      "location": "栃木県",
+      "official_url": "https://www.maruni-home.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["生活パターン重視", "造作家具", "親身な提案"]
+    },
+    {
+      "id": 9,
+      "company_name": "アルネットホーム",
+      "location": "栃木県",
+      "official_url": "https://www.alnethome.com/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["断熱性能", "耐震・制振性能", "基本性能重視"]
+    },
+    {
+      "id": 10,
+      "company_name": "横尾材木店",
+      "location": "栃木県",
+      "official_url": "https://www.yokoo-zaimoku.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["1000万円台から", "創業100周年", "木を愛する心"]
+    },
+    {
+      "id": 11,
+      "company_name": "棟匠",
+      "location": "栃木県",
+      "official_url": "https://www.tosho.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["外張り断熱", "無垢の木", "健康住宅"]
+    },
+    {
+      "id": 12,
+      "company_name": "マスケン",
+      "location": "栃木県",
+      "official_url": "https://www.mas-ken.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["中庭のある住宅", "一級建築士事務所", "設計力・施工力"]
+    },
+    {
+      "id": 13,
+      "company_name": "Karino/万建設興業",
+      "location": "栃木県",
+      "official_url": "https://www.yorozu-kensetsu.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["建築家と創る", "ミニマルデザイン", "女性設計士在籍"]
+    },
+    {
+      "id": 14,
+      "company_name": "イケダ工務店",
+      "location": "栃木県",
+      "official_url": "https://www.ikeda-k.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["素材の美しさ", "シンプルデザイン", "職人技術"]
+    },
+    {
+      "id": 15,
+      "company_name": "ニットーホーム",
+      "location": "栃木県",
+      "official_url": "https://www.nitto-home.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["世界を旅する家", "プロヴァンス", "輸入住宅スタイル"]
+    },
+    {
+      "id": 16,
+      "company_name": "NOA HOME",
+      "location": "栃木県",
+      "official_url": "https://www.noa-home.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["自然素材", "デザインセンス", "趣味を楽しむ家"]
+    },
+    {
+      "id": 17,
+      "company_name": "ロゴスホーム",
+      "location": "栃木県",
+      "official_url": "https://www.logoshome.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["高品質・高性能", "適正価格", "北海道発"]
+    },
+    {
+      "id": 18,
+      "company_name": "栃木ハウス",
+      "location": "栃木県",
+      "official_url": "https://www.tochigihouse.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["デザイナーと創る", "完全オーダー", "4邸のモデルハウス"]
+    },
+    {
+      "id": 19,
+      "company_name": "むぎくら",
+      "location": "宇都宮市",
+      "official_url": "https://www.mugikura.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["デザイナーズ住宅", "2000万円台前半", "フル装備"]
+    },
+    {
+      "id": 20,
+      "company_name": "島野工務店",
+      "location": "小山市",
+      "official_url": "https://www.shimano-k.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["高性能住宅専門", "断熱・気密・換気", "省エネ"]
+    },
+    {
+      "id": 21,
+      "company_name": "株式会社むぎくら",
+      "location": "宇都宮市上戸祭町3007-22",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["高評価", "口コミ多数"]
+    },
+    {
+      "id": 22,
+      "company_name": "大塚産業株式会社",
+      "location": "宇都宮市砥上町350-18",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 23,
+      "company_name": "有限会社すずき塗装店",
+      "location": "宇都宮市清住3-1-12",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["塗装工事"]
+    },
+    {
+      "id": 24,
+      "company_name": "株式会社髙橋義行塗装工芸社",
+      "location": "宇都宮市宝木本町1252-9",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["塗装工事"]
+    },
+    {
+      "id": 25,
+      "company_name": "宇都宮塗料工業株式会社",
+      "location": "宇都宮市氷室町1707-3",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["塗装工事"]
+    },
+    {
+      "id": 26,
+      "company_name": "株式会社元重建設",
+      "location": "宇都宮市今泉町435番地",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 27,
+      "company_name": "株式会社アズプラン",
+      "location": "宇都宮市平出町3737-27",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 28,
+      "company_name": "株式会社住まいる工務店",
+      "location": "宇都宮市今泉町3020-91",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 29,
+      "company_name": "株式会社増渕組",
+      "location": "宇都宮市簗瀬町2500-15",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 30,
+      "company_name": "株式会社吉田工務店",
+      "location": "宇都宮市山本1-1-12",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 31,
+      "company_name": "株式会社ゆうわ",
+      "location": "宇都宮市兵庫塚3丁目7番28号",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 32,
+      "company_name": "株式会社辻由",
+      "location": "宇都宮市問屋町3172-59",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 33,
+      "company_name": "栃木アシストホーム株式会社",
+      "location": "宇都宮市吉野1丁目10-17",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 34,
+      "company_name": "株式会社石川建築社",
+      "location": "宇都宮市西の宮1-28-15",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 35,
+      "company_name": "さくら塗工株式会社",
+      "location": "栃木市大森町455-5",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["塗装工事"]
+    },
+    {
+      "id": 36,
+      "company_name": "株式会社ソエル",
+      "location": "栃木市岩舟町曲ケ島1806番地4",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 37,
+      "company_name": "株式会社榮建設",
+      "location": "栃木市国府町304-7",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 38,
+      "company_name": "株式会社ノーブルホームとちぎリフォーム部",
+      "location": "栃木市箱森町20-24",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["リフォーム"]
+    },
+    {
+      "id": 39,
+      "company_name": "株式会社team-K風間",
+      "location": "佐野市金井上町2269-2",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["高評価"]
+    },
+    {
+      "id": 40,
+      "company_name": "ジェービープランニング",
+      "location": "佐野市朝日町790-1",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 41,
+      "company_name": "株式会社景月",
+      "location": "佐野市小中町18-5",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 42,
+      "company_name": "株式会社アルファテック",
+      "location": "小山市土塔3-1",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["高評価"]
+    },
+    {
+      "id": 43,
+      "company_name": "株式会社島野工務店",
+      "location": "小山市美しが丘3丁目20番地3",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["高性能住宅"]
+    },
+    {
+      "id": 44,
+      "company_name": "夢創ハウジング株式会社",
+      "location": "小山市乙女3-31-28",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 45,
+      "company_name": "ライフプラン株式会社",
+      "location": "小山市駅東通り2-35-10",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 46,
+      "company_name": "株式会社シマジュー",
+      "location": "小山市大字喜沢1419-4",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 47,
+      "company_name": "匠心鈴株式会社",
+      "location": "小山市暁2-15-19",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 48,
+      "company_name": "石川建設株式会社",
+      "location": "那須塩原市高砂町5-12",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 49,
+      "company_name": "田村建設株式会社",
+      "location": "那須塩原市上厚崎435-6",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 50,
+      "company_name": "SUZUKEN",
+      "location": "那須塩原市鍋掛1090-2",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    },
+    {
+      "id": 51,
+      "company_name": "小野岡塗装株式会社",
+      "location": "那須塩原市黒磯6-447",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["塗装工事"]
+    },
+    {
+      "id": 52,
+      "company_name": "有限会社田村塗装工業",
+      "location": "栃木市都賀町深沢50",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": ["塗装工事"]
+    },
+    {
+      "id": 53,
+      "company_name": "オオアク建装工業株式会社",
+      "location": "栃木市川原田町391-1",
+      "official_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": []
+    }
+  ]
+}

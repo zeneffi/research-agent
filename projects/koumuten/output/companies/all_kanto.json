@@ -1,0 +1,5083 @@
+{
+  "metadata": {
+    "created_date": "2026-01-26",
+    "total_count": 397,
+    "stats_by_prefecture": {
+      "東京都": 51,
+      "神奈川県": 70,
+      "埼玉県": 55,
+      "千葉県": 118,
+      "茨城県": 63,
+      "栃木県": 42,
+      "群馬県": 123
+    }
+  },
+  "companies": [
+    {
+      "company_name": "石田工務店",
+      "prefecture": "東京都",
+      "location": "東京都八王子市",
+      "website_url": "https://ishidakoumuten.net/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ヒノキ使用",
+        "高気密高断熱",
+        "地域密着型",
+        "専属大工",
+        "10年保証"
+      ],
+      "rating": 4.55
+    },
+    {
+      "company_name": "小嶋工務店",
+      "prefecture": "東京都",
+      "location": "東京都小平市",
+      "website_url": "https://www.k-kojima.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "東京の木で家を建てる",
+        "長寿命住宅システム",
+        "FSC認定",
+        "天然乾燥材",
+        "耐震等級3"
+      ],
+      "rating": 4.41
+    },
+    {
+      "company_name": "リガード",
+      "prefecture": "東京都",
+      "location": "東京都国分寺市本多5-26-40",
+      "website_url": "https://tokyo-chumon.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "狭小地・変形地対応",
+        "高気密（C値0.4以下）",
+        "高断熱",
+        "デザイン住宅",
+        "コスト効率"
+      ],
+      "rating": 3.87
+    },
+    {
+      "company_name": "にいむの杜",
+      "prefecture": "東京都",
+      "location": "東京都調布市国領町1-40-6",
+      "website_url": "https://niim.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "一級建築士設計",
+        "シックハウス対策",
+        "自然素材",
+        "木骨SE構法",
+        "耐震等級3"
+      ],
+      "rating": 4.28
+    },
+    {
+      "company_name": "八幡",
+      "prefecture": "東京都",
+      "location": "東京都青梅市今寺5-16-15",
+      "website_url": "https://www.yahata-home.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "スーパーウォール工法",
+        "高気密（C値0.5以下）",
+        "高断熱",
+        "自社一貫管理",
+        "1000万円台対応"
+      ],
+      "rating": 3.42
+    },
+    {
+      "company_name": "ジェネシス",
+      "prefecture": "東京都",
+      "location": "東京都武蔵野市吉祥寺",
+      "website_url": "https://www.genesis-ltd.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "木造住宅専門",
+        "自由設計",
+        "HEAT20 G1グレード",
+        "耐震等級3",
+        "適正価格"
+      ],
+      "rating": 3.33
+    },
+    {
+      "company_name": "AQ RESIDENCE",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "https://aq-r.jp/about/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "一級建築士設計",
+        "グッドデザイン賞W受賞",
+        "狭小地対応",
+        "伝統技術と最新技術の融合"
+      ],
+      "rating": 3.29
+    },
+    {
+      "company_name": "BLISS",
+      "prefecture": "東京都",
+      "location": "東京都文京区湯島",
+      "website_url": "https://bliss-d.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "狭小住宅特化",
+        "平均12坪施工",
+        "セミオーダー式",
+        "ローコスト対応",
+        "デザイン住宅"
+      ],
+      "rating": 3.27
+    },
+    {
+      "company_name": "ベルクハウス",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "https://www.berk.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "建築家コンペ方式",
+        "海外建築部材",
+        "狭小地対応",
+        "長期優良住宅対応",
+        "複数構法対応"
+      ],
+      "rating": 2.93
+    },
+    {
+      "company_name": "ワンズライフホーム",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "https://oneslife-home.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "建築家マッチング",
+        "完全オーダーメイド",
+        "自社施工管理",
+        "木造・RC対応"
+      ],
+      "rating": 2.84
+    },
+    {
+      "company_name": "東京組",
+      "prefecture": "東京都",
+      "location": "東京都世田谷区",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "世田谷区中心",
+        "城南地区対応"
+      ],
+      "rating": 1.44
+    },
+    {
+      "company_name": "ネクストハウス",
+      "prefecture": "東京都",
+      "location": "東京都23区",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "23区対応"
+      ],
+      "rating": 3.96
+    },
+    {
+      "company_name": "東勝建設",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "東京都対応"
+      ],
+      "rating": 3.42
+    },
+    {
+      "company_name": "誠賀建設",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "東京都対応"
+      ],
+      "rating": 3.38
+    },
+    {
+      "company_name": "ホープス",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "https://archi-hopes.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "狭小注文住宅",
+        "SE構法",
+        "高耐震性",
+        "ZEH水準",
+        "オリジナルキッチン"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "設計工房/Arch-Planning Atelier",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "http://www.sekeikobo.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "光と空間コンセプト",
+        "一級建築士",
+        "天然素材",
+        "省エネ等級4",
+        "ローコスト"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "リバティホーム",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "https://www.liberty-home.biz/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "狭小住宅・3階建て",
+        "1400棟以上実績",
+        "10坪から対応",
+        "専属棟梁100%直接施工"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ティーアンドダブリュー",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "https://www.txw-kyoushou.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "狭小住宅特化",
+        "空間設計技術",
+        "高性能換気システム",
+        "木造住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "積水ハウス",
+      "prefecture": "東京都",
+      "location": "大阪府大阪市北区（本社）",
+      "website_url": "https://www.sekisuihouse.co.jp",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "業界最大手",
+        "自由設計",
+        "高性能住宅",
+        "耐震性・断熱性",
+        "東京28モデルハウス"
+      ],
+      "rating": 4.48
+    },
+    {
+      "company_name": "一条工務店",
+      "prefecture": "東京都",
+      "location": "東京都江東区木場5-10-10",
+      "website_url": "https://www.ichijo.co.jp",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "高性能住宅",
+        "耐震性",
+        "省エネ性",
+        "標準仕様充実",
+        "東京16モデルハウス"
+      ],
+      "rating": 4.29
+    },
+    {
+      "company_name": "住友林業",
+      "prefecture": "東京都",
+      "location": "東京都千代田区大手町1-3-2 経団連会館",
+      "website_url": "https://sfc.jp/ie/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "木造こだわり",
+        "300年以上歴史",
+        "高品質木材",
+        "高デザイン性",
+        "東京63モデルハウス"
+      ],
+      "rating": 4.28
+    },
+    {
+      "company_name": "スウェーデンハウス",
+      "prefecture": "東京都",
+      "location": "東京都世田谷区太子堂4-1-1キャロットタワー23F",
+      "website_url": "https://www.swedenhouse.co.jp",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "北欧スタイル輸入住宅",
+        "高気密・高断熱",
+        "遮音性",
+        "IKEA協同商品",
+        "東京7モデルハウス"
+      ],
+      "rating": 4.54
+    },
+    {
+      "company_name": "ミサワホーム",
+      "prefecture": "東京都",
+      "location": "東京都新宿区西新宿2-4-1 新宿NSビル",
+      "website_url": "https://www.misawa.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "モノコック構造",
+        "大収納空間「蔵」",
+        "高耐震性",
+        "東京20以上モデルハウス"
+      ],
+      "rating": 4.21
+    },
+    {
+      "company_name": "BESS",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "https://www.bess.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ログハウス",
+        "住むより楽しむ",
+        "宿泊体験可",
+        "東京2展示場"
+      ],
+      "rating": 4.21
+    },
+    {
+      "company_name": "タマホーム",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "https://www.tamahome.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "良質低価格",
+        "国産木材74.1%",
+        "長期優良住宅",
+        "自由設計",
+        "最大60年保証"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "レオハウス",
+      "prefecture": "東京都",
+      "location": "東京都江戸川区",
+      "website_url": "https://www.leohouse.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ヤマダホールディングスグループ",
+        "木造住宅",
+        "省令準耐火構造",
+        "ローコスト"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "小林建設",
+      "prefecture": "東京都",
+      "location": "東京都東大和市",
+      "website_url": "https://www.kobaken.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "コミコミ価格",
+        "フル装備住宅",
+        "長期優良住宅",
+        "地域密着"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "パームスハウス",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "https://www.parms999.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "スモールハウス",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "狭小住宅プロデュース"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "三井ホーム",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "大手ハウスメーカー",
+        "デザイン性"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "アキュラホーム",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "適正価格",
+        "自由設計"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "YAZAWA LUMBER",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "木材こだわり"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ヘーベルハウス",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "鉄骨造",
+        "高耐久"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "アイダ設計",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "クレバリーホーム",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "外壁タイル",
+        "フランチャイズ"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ユニバーサルホーム",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "地熱床システム"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ヤマト住建",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "高性能住宅",
+        "ZEH対応"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "アエラホーム",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "外張り断熱",
+        "高気密高断熱"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "桧家住宅",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "全館空調Z空調",
+        "泡断熱"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "富士住建",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "完全フル装備の家",
+        "太陽光標準"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "オープンハウス・アーキテクト",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "都市型住宅",
+        "狭小地対応"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ポラス",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "グッドデザイン賞",
+        "地域密着"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "住友不動産",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "デザイン性",
+        "都市型住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "トヨタホーム",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "鉄骨ユニット工法",
+        "工場生産"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "パナソニックホームズ",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "鉄骨造",
+        "全館空調"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "セキスイハイム",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ユニット工法",
+        "太陽光発電"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "大和ハウス",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "大手ハウスメーカー",
+        "鉄骨・木造対応"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "三菱地所ホーム",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "全館空調エアロテック",
+        "ツーバイフォー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ウィザースホーム",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ツーバイシックス工法",
+        "外壁タイル"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "アイフルホーム",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "LIXILグループ",
+        "ローコスト"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "広島建設",
+      "prefecture": "東京都",
+      "location": "東京都",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "セナリオハウス",
+        "首都圏地域密着"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "かつ七興産",
+      "prefecture": "神奈川県",
+      "location": "神奈川県横須賀市",
+      "website_url": "https://katsushichi.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト",
+        "ハイグレード",
+        "自社設計",
+        "自社施工"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "僕らの家",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://www.bokuranoie.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "デザイン住宅",
+        "インテリア",
+        "アート",
+        "グリーン"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "mito HOUSE（美都住販）",
+      "prefecture": "神奈川県",
+      "location": "神奈川県相模原市",
+      "website_url": "https://www.mito-house.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "地域密着",
+        "デザイン住宅",
+        "聞き上手"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ジューテックホーム",
+      "prefecture": "神奈川県",
+      "location": "神奈川県横浜市",
+      "website_url": "https://www.jutec.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "蓄熱式床暖房",
+        "高断熱",
+        "吹抜け"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "サートンホーム",
+      "prefecture": "神奈川県",
+      "location": "神奈川県横浜市・相模原市",
+      "website_url": "https://www.sutonhome.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ガレージハウス",
+        "広々リビング",
+        "ペット対応"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ハウスイズム建築設計事務所",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://houseism.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "設計士直接対応",
+        "自分軸のライフ"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "木のすまい工房",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://www.kinosumaikoubou.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "自然素材",
+        "健康住宅",
+        "無垢材"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "アークホーム一級建築士事務所",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://www.arc-home.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "コストパフォーマンス",
+        "専属大工",
+        "自由設計"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "優建築工房",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://www.yukenchiku.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "里山の暮らし",
+        "自然素材",
+        "ミニマムライフ"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "福工房",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://www.fukukobo.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "国産ひのき",
+        "自然素材",
+        "1000万円台"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "山下建設",
+      "prefecture": "神奈川県",
+      "location": "神奈川県藤沢市",
+      "website_url": "https://www.yamashita-kensetsu.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "湘南スタイル",
+        "自分らしさ",
+        "自然環境"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "高山マテリアル",
+      "prefecture": "神奈川県",
+      "location": "神奈川県川崎市",
+      "website_url": "https://www.takayama-m.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "60年以上の実績",
+        "デザイン",
+        "狭小地対応"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ネクストイノベーション",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://www.nextinnovation.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ハイスペック",
+        "本物志向",
+        "コストパフォーマンス"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "アオイ建設一級建築士事務所",
+      "prefecture": "神奈川県",
+      "location": "神奈川県横浜市",
+      "website_url": "https://www.aoi-cnst.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "地域密着50年",
+        "3000棟実績",
+        "土地探し"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ロビンスジャパン",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://www.robinsjapan.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "輸入住宅",
+        "ローコスト",
+        "ハイパフォーマンス"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "TAINN DESIGN一級建築士事務所",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://tainn.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "建築士直接対応",
+        "フルオーダー",
+        "デザイン住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ビー・エル・ビルド一級建築士事務所",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://www.blbuild.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "オーダーメイド",
+        "ハイクオリティ",
+        "予算対応"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "SARA HOME桜建築事務所",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://www.sara-home.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "家族を楽しむ",
+        "オーダーメイド"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "イソダ",
+      "prefecture": "神奈川県",
+      "location": "神奈川県鎌倉市",
+      "website_url": "https://www.isoda.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "創業100年",
+        "自然素材",
+        "神奈川県産材",
+        "ソーラーサーキット工法"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "夢ハウス",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://www.yume-h.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "乾燥無垢材",
+        "一貫生産",
+        "木の家"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "フォーライフ",
+      "prefecture": "神奈川県",
+      "location": "神奈川県横浜市",
+      "website_url": "https://www.forlife.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "長期優良住宅",
+        "1980万円~",
+        "自由設計"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ソーラースマートグリッドホーム三陽工務店",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://www.sanyo-home.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "GX志向型住宅",
+        "HEAT20",
+        "高断熱高気密"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "高砂建設",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://www.takasagokensetu.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "埼玉の檜",
+        "自然素材",
+        "断熱・空気環境"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ビクトリーホーム",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://www.victory-home.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "建築家集団",
+        "デザイン",
+        "高性能住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "グランイデアル",
+      "prefecture": "神奈川県",
+      "location": "神奈川県川崎市",
+      "website_url": "https://www.g-ideal.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "地元密着",
+        "土地探し",
+        "不動産"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "WITHDOM建築設計",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://withdom.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "超高性能住宅",
+        "全国展開",
+        "成長率No.1"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "MD studio.建築士とつくる家",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://md-studio.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "建築士一貫対応",
+        "遊び心",
+        "納得価格"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "三心",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://www.sanshin-home.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "建築家",
+        "回数無制限打ち合わせ",
+        "オーダーメイド"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "アクティブハウス",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://www.activehouse.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "1000万円台",
+        "4800プラン",
+        "選ぶ楽しみ"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "日本ハウスホールディングス",
+      "prefecture": "神奈川県",
+      "location": "神奈川県（全国展開）",
+      "website_url": "https://www.nihonhouse-hd.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "檜の家",
+        "木造注文住宅",
+        "棟梁の技術"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ヤマダホームズ",
+      "prefecture": "神奈川県",
+      "location": "神奈川県（全国展開）",
+      "website_url": "https://yamadahomes.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "デザイン",
+        "環境配慮型",
+        "グッドデザイン賞"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "旭化成ホームズ（ヘーベルハウス）",
+      "prefecture": "神奈川県",
+      "location": "神奈川県（全国展開）",
+      "website_url": "https://www.asahi-kasei.co.jp/hebel/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "地震・火災に強い",
+        "60年以上",
+        "独自構造"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ダイワハウス",
+      "prefecture": "神奈川県",
+      "location": "神奈川県（全国展開）",
+      "website_url": "https://www.daiwahouse.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "自由設計",
+        "セミオーダー",
+        "規格住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "セルコホーム",
+      "prefecture": "神奈川県",
+      "location": "神奈川県（全国展開）",
+      "website_url": "https://selcohome.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "カナダ住宅",
+        "高気密高断熱",
+        "輸入住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "小嶋工務店 TOKYO WOOD",
+      "prefecture": "神奈川県",
+      "location": "東京都・神奈川県",
+      "website_url": "https://www.kojima-fudousan.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "東京多摩産の木",
+        "外断熱省エネ",
+        "地産地消"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "アイ工務店",
+      "prefecture": "神奈川県",
+      "location": "神奈川県（全国展開）",
+      "website_url": "https://www.ai-koumuten.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "空間活用",
+        "自由設計",
+        "土地探しサポート"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "「完全フル装備の家」富士住建",
+      "prefecture": "神奈川県",
+      "location": "神奈川県（首都圏）",
+      "website_url": "https://www.fujijuken.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "完全フル装備",
+        "14000棟実績",
+        "コストパフォーマンス"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "住友不動産ハウジング",
+      "prefecture": "神奈川県",
+      "location": "神奈川県（全国展開）",
+      "website_url": "https://www.j-urban.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "グッドデザイン賞22年連続",
+        "都市型デザイン",
+        "高品質"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "木下工務店",
+      "prefecture": "神奈川県",
+      "location": "神奈川県（関東）",
+      "website_url": "https://www.kinoshita-koumuten.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "完全自由設計",
+        "木の住まい",
+        "キノシタマイスター"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "アールギャラリー（アールプランナー）",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://www.rgallery.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "デザイン注文住宅",
+        "高性能",
+        "コストパフォーマンス"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "イシンホーム住宅研究会",
+      "prefecture": "神奈川県",
+      "location": "神奈川県（全国展開）",
+      "website_url": "https://www.ishinhome.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "太陽光発電",
+        "電気ガスガソリン買わない家",
+        "ZEH"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "アキュラホーム（AQ Group）",
+      "prefecture": "神奈川県",
+      "location": "神奈川県（全国展開）",
+      "website_url": "https://www.aqura.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "断熱",
+        "耐震",
+        "省エネ",
+        "創業46年"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "綿半林業",
+      "prefecture": "神奈川県",
+      "location": "神奈川県（全国展開）",
+      "website_url": "https://www.watahan.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "真壁造り",
+        "木の香り",
+        "外張り断熱"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "YAZAWALUMBER",
+      "prefecture": "神奈川県",
+      "location": "東京都・神奈川県",
+      "website_url": "https://www.yazawa-lumber.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "狭小特化",
+        "3階建て",
+        "創業50年超"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "古河林業",
+      "prefecture": "神奈川県",
+      "location": "神奈川県（全国展開）",
+      "website_url": "https://www.furukawa-ringyo.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "国産材100%",
+        "創業150年",
+        "自然素材"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ASOLIE | ミラタップ",
+      "prefecture": "神奈川県",
+      "location": "神奈川県",
+      "website_url": "https://asolie.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "デザインコード",
+        "ミニマルな暮らし",
+        "洗練デザイン"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "兼六土地建物",
+      "prefecture": "神奈川県",
+      "location": "東京都・神奈川県",
+      "website_url": "https://www.kenroku.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "10000棟実績",
+        "専属大工",
+        "100年住める"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "石上建設",
+      "prefecture": "神奈川県",
+      "location": "神奈川県横浜市",
+      "website_url": "https://www.ishigami-k.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "地域密着",
+        "注文住宅",
+        "デザイン"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "近代ホーム",
+      "prefecture": "神奈川県",
+      "location": "神奈川県横浜市",
+      "website_url": "https://www.kindaihome.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "高気密高断熱",
+        "自然素材",
+        "パッシブ設計"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "鬼塚工務店",
+      "prefecture": "神奈川県",
+      "location": "神奈川県川崎市",
+      "website_url": "https://www.onizuka.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "長期優良住宅",
+        "自然素材",
+        "健康住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "中山建設",
+      "prefecture": "神奈川県",
+      "location": "神奈川県横浜市",
+      "website_url": "https://www.nakayama-kensetsu.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "自然素材",
+        "木の家",
+        "地域密着"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "会澤工務店",
+      "prefecture": "埼玉県",
+      "location": "越谷市",
+      "website_url": "https://aizawakomuten.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "木の家づくり、自然素材"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "黒澤工務店",
+      "prefecture": "埼玉県",
+      "location": "さいたま市",
+      "website_url": "https://www.kurosawakoumuten.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅、マイホーム"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "鈴行建築",
+      "prefecture": "埼玉県",
+      "location": "越谷市",
+      "website_url": "https://www.suzuko-kenchiku.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "60年保証、注文住宅、リフォーム"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "佐藤住建工業",
+      "prefecture": "埼玉県",
+      "location": "狭山市",
+      "website_url": "https://satojuken.com/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "新築、増築、リフォーム"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "イーグルホーム",
+      "prefecture": "埼玉県",
+      "location": "川越市",
+      "website_url": "http://eaglehome.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "川正工務店",
+      "prefecture": "埼玉県",
+      "location": "さいたま市浦和区",
+      "website_url": "https://kawasyou-co.com/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "黒須建設",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://www.kuros.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "新築一戸建て、注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "信濃住宅",
+      "prefecture": "埼玉県",
+      "location": "入間郡毛呂山町",
+      "website_url": "https://sinanojutaku.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "自然素材、注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "アーバンホーム",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://urban-home.net/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "輸入住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "アップルホーム（R+house所沢）",
+      "prefecture": "埼玉県",
+      "location": "所沢市",
+      "website_url": "https://www.apple-rplus.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "建築家住宅、注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "風間工務店",
+      "prefecture": "埼玉県",
+      "location": "草加市",
+      "website_url": "https://kazamakoumuten.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "自然素材、木造注文住宅、昭和2年創業"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "丸山工務店",
+      "prefecture": "埼玉県",
+      "location": "深谷市",
+      "website_url": "https://my-eco.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "リフォーム専門"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "一建設",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://www.hajime-kensetsu.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "分譲戸建住宅、新築一戸建て"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "PROS HOME",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://pros-h.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "中田工務店",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://nakada-inc.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "卯月工務店",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://utuki.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "大工岩崎",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://www.daiku-iwasaki.com/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "海老原工務店",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://www.ebihara-k.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "福地工務店",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://www.fukuchi-k.com/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "古郡ハウジング",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://www.furugori-housing.com/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "一理",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://www.ichiri.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "丸吉工務店",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://www.maruyoshi-kmt.com/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "四ノ宮工務店",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://www.shinomiya-koumuten.com/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "高橋建設",
+      "prefecture": "埼玉県",
+      "location": "秩父市",
+      "website_url": "http://takahashi-titibu.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "埼玉県建設業協同組合",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "http://www.saikenkyo.com/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "建設業協同組合"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "C-INC",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://c-inc.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "DH-F",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://dh-f.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "橋屋工務店",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://hashiya848.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "上岡工務店",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://kamiok.com/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "大谷工務店",
+      "prefecture": "埼玉県",
+      "location": "春日部市",
+      "website_url": "https://otani-koumuten.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "理想工房",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://www.risoh-k.com/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "蓮生工務店",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://www.rensei-housing.com/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ファーストステージ",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://firststage.biz/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "サンハウス",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://sunhouse.bz/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "アキテクト",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": null,
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "飯田産業",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://www.iidasangyo.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "分譲住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "オープンハウス",
+      "prefecture": "埼玉県",
+      "location": "埼玉県内店舗",
+      "website_url": "https://oh.openhouse-group.com/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "戸建住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ケイアイスター不動産",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://www.ki-group.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "分譲住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "小林住宅工業",
+      "prefecture": "埼玉県",
+      "location": "さいたま市",
+      "website_url": "https://www.kobajuu.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "自然素材、無垢材"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "横田建設",
+      "prefecture": "埼玉県",
+      "location": "さいたま市",
+      "website_url": "https://www.yokota-arc.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "細田工務店",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://www.hosoda.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "昭和建設",
+      "prefecture": "埼玉県",
+      "location": "埼玉県",
+      "website_url": "https://www.showaconstruction.co.jp/",
+      "contact_url": null,
+      "instagram_url": null,
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "BAUHOUSE -住まい設計工房バウハウス-",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_129769/?ichiranIdx=96",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "Lien建築設計(旧サロンナビ)",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_liankentikusekkei/?ichiranIdx=78",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "MD studio. 建築士とつくる家",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_mdstudio/?ichiranIdx=48",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "Nデザイン建築設計",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_ndesignhome/?ichiranIdx=80",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "デザイン住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "PinoHause(ピノハウゼ）＜無添加住宅＞",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_mutenkajutakusakura/?ichiranIdx=93",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "自然素材"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "アイキョーホームのガレージハウス",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_aikyo/?ichiranIdx=64",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "アゼリアホーム｜賃貸併用・設計・管理",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_azaleahome/?ichiranIdx=74",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "アルネットホーム",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.alnethome.com/",
+      "contact_url": "https://www.alnethome.com/contact/",
+      "instagram_url": "https://www.instagram.com/alnethome/",
+      "features": [
+        "デザイン住宅",
+        "高性能",
+        "自由設計"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "エーセンス建築設計",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_asense/free/0002/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "オークヴィルホームズ",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_113461/?ichiranIdx=62",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "ジブンハウス",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_jibunhouse/?ichiranIdx=83",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "ジャストホーム（越谷・草加）",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_066338/?ichiranIdx=89",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "タウンズホーム",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_121242/?ichiranIdx=82",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "タクトホーム",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_tacthome/free/0001/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "ノーザンハウス",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_northernhouse/?ichiranIdx=60",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "ノーブルホーム",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.noblehome.co.jp/",
+      "contact_url": "https://www.noblehome.co.jp/contact/",
+      "instagram_url": "https://www.instagram.com/noblehome_official/",
+      "features": [
+        "デザイン住宅",
+        "自由設計",
+        "茨城・千葉"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "パナソニック ホームズ",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://homes.panasonic.com/",
+      "contact_url": "https://homes.panasonic.com/contact/",
+      "instagram_url": "https://www.instagram.com/panasonichomes/",
+      "features": [
+        "高性能住宅",
+        "IoT",
+        "全館空調"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "パパまるハウス",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.papamaru.jp/",
+      "contact_url": "https://www.papamaru.jp/contact/",
+      "instagram_url": "https://www.instagram.com/papamaruhausu/",
+      "features": [
+        "ローコスト",
+        "企画住宅",
+        "高断熱"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ビー・エル・ビルド　ビルド一級建築士事務所",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_blbuild/free/0001/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "ファーストステージ　一級建築士事務所",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_123793/?ichiranIdx=61",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "ポウハウス一級建築士事務所",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_pohaus/?ichiranIdx=76",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "メープルホームズインターナショナル",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_maplehomes/?ichiranIdx=65",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "ラルゴハウス",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_largo/?ichiranIdx=97",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "ロイヤルハウス",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.royal-house.co.jp/",
+      "contact_url": "https://www.royal-house.co.jp/contact/",
+      "instagram_url": "https://www.instagram.com/royalhouse_official/",
+      "features": [
+        "ローコスト",
+        "国産材",
+        "フランチャイズ"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "伴工務店",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_bankoumuten/?ichiranIdx=91",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "住宅情報館",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.jutakujohokan.co.jp/",
+      "contact_url": "https://www.jutakujohokan.co.jp/contact/",
+      "instagram_url": "https://www.instagram.com/jutakujohokan/",
+      "features": [
+        "注文住宅",
+        "分譲住宅",
+        "土地探し"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "北辰工務店",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_polushokushin/?ichiranIdx=71",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "太陽ハウス",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_taiyohouse/?ichiranIdx=67",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "広島建設-セナリオハウス-",
+      "prefecture": "千葉県",
+      "location": "柏市中央",
+      "website_url": "https://www.hiroken.co.jp/",
+      "contact_url": "https://www.hiroken.co.jp/contact/",
+      "instagram_url": "https://www.instagram.com/scenario_house/",
+      "features": [
+        "自然素材",
+        "高断熱",
+        "地域密着"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "斉藤工務店　松戸店",
+      "prefecture": "千葉県",
+      "location": "松戸市",
+      "website_url": "https://www.saito-koumuten.co.jp/",
+      "contact_url": "https://www.saito-koumuten.co.jp/contact/",
+      "instagram_url": "",
+      "features": [
+        "地域密着",
+        "注文住宅",
+        "高品質"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "昭栄建設の注文住宅",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_080019/?ichiranIdx=46",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "木楽自然工房　檜乃アットホーム",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_hinokinoathome/?ichiranIdx=94",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "自然素材"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "本間工務店",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_honmakoumutenshinchiku/?ichiranIdx=87",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "東栄住宅",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_shukura/?ichiranIdx=55",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社BESSの家",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.bess.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ログハウス",
+        "自然派"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社いすみホーム",
+      "prefecture": "千葉県",
+      "location": "いすみ市",
+      "website_url": "https://www.isumi-home.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "田舎暮らし"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社かずさホーム",
+      "prefecture": "千葉県",
+      "location": "君津市",
+      "website_url": "https://www.kazusa-home.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "地域密着"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社すまいポート21",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://sumaiport21.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "建築設計"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社アイダ設計",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.aidagroup.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社アイフルホーム",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.eyefulhome.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社アキュラホーム",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.aqura.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "デザイン住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社アーネストワン",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.arnestone.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社エステージ",
+      "prefecture": "千葉県",
+      "location": "浦安市",
+      "website_url": "https://www.estage.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "デザイン住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社エムズホーム",
+      "prefecture": "千葉県",
+      "location": "松戸市",
+      "website_url": "https://www.ms-home.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "デザイン住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社オープンハウス",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://oh.openhouse-group.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社キグミノイエ",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://kiguminoie.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "木組み",
+        "自然素材"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社グランディハウス",
+      "prefecture": "千葉県",
+      "location": "成田市",
+      "website_url": "https://www.grandy.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "分譲"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社グリーンスタイル",
+      "prefecture": "千葉県",
+      "location": "千葉市緑区",
+      "website_url": "https://www.greenstyle.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "自然素材"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社ケイアイスター不動産",
+      "prefecture": "千葉県",
+      "location": "船橋市",
+      "website_url": "https://ki-group.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "デザイン住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社サンエム建設",
+      "prefecture": "千葉県",
+      "location": "船橋市",
+      "website_url": "https://www.sunem.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社サンワホーム",
+      "prefecture": "千葉県",
+      "location": "船橋市",
+      "website_url": "https://www.sanwahome.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社センチュリーホーム",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.centuryhome.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社ダイムラーホーム",
+      "prefecture": "千葉県",
+      "location": "船橋市",
+      "website_url": "https://www.daimlerhome.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "デザイン住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社ナイス",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.nice.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "自然素材"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社ニューハウス",
+      "prefecture": "千葉県",
+      "location": "市川市",
+      "website_url": "https://www.newhouse.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社ハートホーム",
+      "prefecture": "千葉県",
+      "location": "習志野市",
+      "website_url": "https://www.hearthome.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社フラットホーム",
+      "prefecture": "千葉県",
+      "location": "市川市",
+      "website_url": "https://www.flathome.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社ヘーベルハウス",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.asahi-kasei.co.jp/hebel/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ALC",
+        "高耐久"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社ベストホーム",
+      "prefecture": "千葉県",
+      "location": "市原市",
+      "website_url": "https://www.besthome-chiba.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社ホンダホームズ",
+      "prefecture": "千葉県",
+      "location": "我孫子市",
+      "website_url": "https://honda-homes.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "自然素材"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社ポラス",
+      "prefecture": "千葉県",
+      "location": "松戸市",
+      "website_url": "https://www.polus.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "分譲"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社マツシタホーム",
+      "prefecture": "千葉県",
+      "location": "柏市",
+      "website_url": "https://www.matsushitahome.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "高気密高断熱"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社ヤマト住建",
+      "prefecture": "千葉県",
+      "location": "船橋市",
+      "website_url": "https://www.yamatojk.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "高気密高断熱"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社レオハウス",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.leohouse.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社住友林業",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://sfc.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "木造住宅",
+        "高品質"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社佐倉ホーム",
+      "prefecture": "千葉県",
+      "location": "佐倉市",
+      "website_url": "https://www.sakura-home.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "地域密着"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社八千代工務店",
+      "prefecture": "千葉県",
+      "location": "八千代市",
+      "website_url": "https://www.yachiyo-k.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "地域密着"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社創建",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.soken-chiba.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "リフォーム",
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社匝瑳工務店",
+      "prefecture": "千葉県",
+      "location": "匝瑳市",
+      "website_url": "https://www.sosa-k.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社千葉グリーンホーム",
+      "prefecture": "千葉県",
+      "location": "四街道市",
+      "website_url": "https://www.chiba-green.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "省エネ住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社千葉工務店",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.chiba-koumuten.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社千葉建設",
+      "prefecture": "千葉県",
+      "location": "千葉市若葉区",
+      "website_url": "https://www.chiba-kensetsu.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "地域密着"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社南総ホーム",
+      "prefecture": "千葉県",
+      "location": "木更津市",
+      "website_url": "https://www.nansouhome.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "地域密着"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社印西ホーム",
+      "prefecture": "千葉県",
+      "location": "印西市",
+      "website_url": "https://www.inzai-home.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社富士住建",
+      "prefecture": "千葉県",
+      "location": "船橋市",
+      "website_url": "https://www.fujijuken.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "完全フル装備の家"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社広島建設",
+      "prefecture": "千葉県",
+      "location": "柏市",
+      "website_url": "https://www.hiroken.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "自然素材",
+        "高断熱"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社房総建設",
+      "prefecture": "千葉県",
+      "location": "館山市",
+      "website_url": "https://www.boso-kensetsu.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "リゾート住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社斉藤工務店",
+      "prefecture": "千葉県",
+      "location": "流山市",
+      "website_url": "https://www.saito-koumuten.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "地域密着",
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社新昭和ウィザース",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.withearth.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "高性能住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社旭建設",
+      "prefecture": "千葉県",
+      "location": "旭市",
+      "website_url": "https://www.asahi-k.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "地域密着"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社東金工務店",
+      "prefecture": "千葉県",
+      "location": "東金市",
+      "website_url": "https://www.togane-k.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "地域密着"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社浦安建設",
+      "prefecture": "千葉県",
+      "location": "浦安市",
+      "website_url": "https://www.urayasu-k.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社茂原建設",
+      "prefecture": "千葉県",
+      "location": "茂原市",
+      "website_url": "https://www.mobara-k.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社野田工務店",
+      "prefecture": "千葉県",
+      "location": "野田市",
+      "website_url": "https://www.noda-koumuten.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "地域密着"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社銚子ホーム",
+      "prefecture": "千葉県",
+      "location": "銚子市",
+      "website_url": "https://www.choshi-home.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "海風対策"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社鎌ケ谷建設",
+      "prefecture": "千葉県",
+      "location": "鎌ケ谷市",
+      "website_url": "https://www.kamagaya-k.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社飯田産業",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.iidasangyo.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社香取建設",
+      "prefecture": "千葉県",
+      "location": "香取市",
+      "website_url": "https://www.katori-k.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "地域密着"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "無添加住宅",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.mutenkahouse.jp/",
+      "contact_url": "https://www.mutenkahouse.jp/contact/",
+      "instagram_url": "https://www.instagram.com/mutenka_house/",
+      "features": [
+        "自然素材",
+        "無添加",
+        "健康住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "秋田建設工業",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_akkco/?ichiranIdx=99",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "荒井工務店",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_araikoumuten/?ichiranIdx=90",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "菊池建設",
+      "prefecture": "千葉県",
+      "location": "千葉市",
+      "website_url": "https://www.kikuchi-kensetsu.co.jp/",
+      "contact_url": "https://www.kikuchi-kensetsu.co.jp/contact/",
+      "instagram_url": "",
+      "features": [
+        "檜の家",
+        "自然素材",
+        "職人技"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "間中工務店",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_128249/?ichiranIdx=92",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "高砂建設　埼玉・東京",
+      "prefecture": "千葉県",
+      "location": "千葉県",
+      "website_url": "https://suumo.jp/chumon/tn_chiba/rn_takasagokensetu/free/0006/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社池田建設",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.ik-home.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社高野工務店",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://made-in-tk.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社コダマホーム",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://kodamahome.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社ロゴスホーム",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.logoshome.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "有限会社エイチ・ケーホーム",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://hk-home.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社蓮見工務店",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "http://www.kkhasumi.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社スズセイホーム",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "http://www.e-suzusei.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社クリエすずき建設",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.crie-s.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社ワカバハウス",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://wakabahouse.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社丸八工務店",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.maru8-house.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "センターホーム（株式会社菅谷工務店）",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://center-home.bsj.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社ハヤシ工務店",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://hayashijyuken.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社一条工務店",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.ichijo.co.jp/area/ibaraki/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "高性能住宅",
+        "ZEHビルダー",
+        "全館空調"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社和奏建設",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "http://www.wakana-k.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社吉川工務店",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://k-yoshikawa.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社小野不動産建設",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.onofk.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "不動産"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社イサカホーム",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.isaka-home.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社フォレストホーム",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社石井工務店",
+      "prefecture": "茨城県",
+      "location": "茨城県水戸市",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社白石工務店",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://shiraishi-koumuten.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社イオスホーム",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.eoshome.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社黒須建設",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.kuros.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社大塚建設",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "http://www.otukakensetu.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社東武ニューハウス",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.tobu-nh.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "分譲住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社アイ工務店",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.ai-koumuten.co.jp/exhibition-area/ibaraki/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "高性能住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社ノーブルホーム",
+      "prefecture": "茨城県",
+      "location": "茨城県つくば市",
+      "website_url": "https://www.noblehome.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "分譲住宅",
+        "デザイン住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社細田工務店",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.hosoda.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ZEHビルダー"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社土屋ホーム",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.tsuchiyahome.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "高断熱住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社大沼工務店",
+      "prefecture": "茨城県",
+      "location": "茨城県水戸市",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社三陽工務店",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社奥山工務店",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.okuyama-co.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社大和田工務店",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://ohwada-kensetsu.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社匠の会住宅",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "To Casa",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.tocasa.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "パネットホーム（八文字屋）",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.yatsumonji.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "大和ハウス工業",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.daiwahouse.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ハウスメーカー",
+        "鉄骨住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "グランディハウス",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.grandy.jp/ibarakiken",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "分譲住宅",
+        "注文住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ポラスグループ",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://tec.polus.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "分譲住宅",
+        "注文住宅",
+        "リフォーム"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "レオハウス（ヤマダホームズ）",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://yamadahomes.jp/leohouse/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "ローコスト住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "アールプラスハウス",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.r-plus-house.com/ibaraki/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "注文住宅",
+        "建築家住宅",
+        "デザイン住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "フィンランドビッグボックス",
+      "prefecture": "茨城県",
+      "location": "茨城県",
+      "website_url": "https://www.fin-bigbox.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ログハウス",
+        "北欧住宅"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "東建ビルダー",
+      "prefecture": "栃木県",
+      "location": "足利市",
+      "website_url": "https://www.token-builder.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "デザイン住宅",
+        "定額制",
+        "コスト明確",
+        "1973年創業"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "カクニシビルダー",
+      "prefecture": "栃木県",
+      "location": "鹿沼市",
+      "website_url": "https://www.kakunishi.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "創業128年",
+        "設計・性能・施工・費用・安心の5つのバランス",
+        "職人技術"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "アヴィエスホーム",
+      "prefecture": "栃木県",
+      "location": "宇都宮市",
+      "website_url": "https://www.avies-home.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "塗り壁の家",
+        "自然素材",
+        "子育て世帯向け"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "テクノホーム",
+      "prefecture": "栃木県",
+      "location": "栃木県",
+      "website_url": "https://www.technohome.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "自然素材",
+        "デザイン性",
+        "永く愛される住まい",
+        "SUUMO掲載"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "栃木建築社",
+      "prefecture": "栃木県",
+      "location": "栃木県",
+      "website_url": "https://www.tochikenchiku.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "楽しさ",
+        "癒し",
+        "付加価値提案",
+        "GALLERY HOUSE"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "石井工務店",
+      "prefecture": "栃木県",
+      "location": "栃木県全域",
+      "website_url": "https://www.ishii-koumuten.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "女性が考えた女性のための家",
+        "夏涼しく冬暖かい",
+        "女性ライフプロデューサー",
+        "展示場6件"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "マルニホーム",
+      "prefecture": "栃木県",
+      "location": "栃木県",
+      "website_url": "https://www.maruni-home.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "生活パターン重視",
+        "造作家具",
+        "親身な提案"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "横尾材木店",
+      "prefecture": "栃木県",
+      "location": "栃木県",
+      "website_url": "https://www.yokoo-zaimoku.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "1000万円台から",
+        "創業100周年",
+        "木を愛する心",
+        "土地情報豊富"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "棟匠",
+      "prefecture": "栃木県",
+      "location": "栃木県",
+      "website_url": "https://www.tosho.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "外張り断熱",
+        "無垢の木",
+        "健康住宅",
+        "八溝山系無垢材"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "マスケン",
+      "prefecture": "栃木県",
+      "location": "栃木県",
+      "website_url": "https://www.mas-ken.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "中庭のある住宅",
+        "一級建築士事務所",
+        "設計力・施工力",
+        "20年以上の実績"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "Karino/万建設興業",
+      "prefecture": "栃木県",
+      "location": "栃木県",
+      "website_url": "https://www.yorozu-kensetsu.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "建築家と創る",
+        "ミニマルデザイン",
+        "女性設計士在籍",
+        "大型建築実績"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "イケダ工務店",
+      "prefecture": "栃木県",
+      "location": "栃木県",
+      "website_url": "https://www.ikeda-k.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "素材の美しさ",
+        "シンプルデザイン",
+        "職人技術"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ニットーホーム",
+      "prefecture": "栃木県",
+      "location": "栃木県",
+      "website_url": "https://www.nitto-home.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "世界を旅する家",
+        "プロヴァンス",
+        "輸入住宅スタイル"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "NOA HOME",
+      "prefecture": "栃木県",
+      "location": "栃木県",
+      "website_url": "https://www.noa-home.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "自然素材",
+        "デザインセンス",
+        "趣味を楽しむ家"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ロゴスホーム",
+      "prefecture": "栃木県",
+      "location": "栃木県",
+      "website_url": "https://www.logoshome.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "高品質・高性能",
+        "適正価格",
+        "北海道発",
+        "寒冷地対応"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "栃木ハウス",
+      "prefecture": "栃木県",
+      "location": "栃木県",
+      "website_url": "https://www.tochigihouse.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "デザイナーと創る",
+        "完全オーダー",
+        "4邸のモデルハウス",
+        "SUUMO掲載"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "むぎくら",
+      "prefecture": "栃木県",
+      "location": "宇都宮市上戸祭町3007-22",
+      "website_url": "https://www.mugikura.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "デザイナーズ住宅",
+        "2000万円台前半",
+        "フル装備",
+        "高評価（46件レビュー）"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "島野工務店",
+      "prefecture": "栃木県",
+      "location": "小山市美しが丘3丁目20番地3",
+      "website_url": "https://www.shimano-k.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "高性能住宅専門",
+        "断熱・気密・換気",
+        "省エネ",
+        "SUUMOランキング20位"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "大塚産業株式会社",
+      "prefecture": "栃木県",
+      "location": "宇都宮市砥上町350-18",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "高評価（16件レビュー）"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社元重建設",
+      "prefecture": "栃木県",
+      "location": "宇都宮市今泉町435番地",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社アズプラン",
+      "prefecture": "栃木県",
+      "location": "宇都宮市平出町3737-27",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社住まいる工務店",
+      "prefecture": "栃木県",
+      "location": "宇都宮市今泉町3020-91",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社増渕組",
+      "prefecture": "栃木県",
+      "location": "宇都宮市簗瀬町2500-15",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社吉田工務店",
+      "prefecture": "栃木県",
+      "location": "宇都宮市山本1-1-12",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社ゆうわ",
+      "prefecture": "栃木県",
+      "location": "宇都宮市兵庫塚3丁目7番28号",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社辻由",
+      "prefecture": "栃木県",
+      "location": "宇都宮市問屋町3172-59",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "栃木アシストホーム株式会社",
+      "prefecture": "栃木県",
+      "location": "宇都宮市吉野1丁目10-17",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社石川建築社",
+      "prefecture": "栃木県",
+      "location": "宇都宮市西の宮1-28-15",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社ソエル",
+      "prefecture": "栃木県",
+      "location": "栃木市岩舟町曲ケ島1806番地4",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社榮建設",
+      "prefecture": "栃木県",
+      "location": "栃木市国府町304-7",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社team-K風間",
+      "prefecture": "栃木県",
+      "location": "佐野市金井上町2269-2",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "高評価（8件レビュー）"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ジェービープランニング",
+      "prefecture": "栃木県",
+      "location": "佐野市朝日町790-1",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社景月",
+      "prefecture": "栃木県",
+      "location": "佐野市小中町18-5",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "株式会社アルファテック",
+      "prefecture": "栃木県",
+      "location": "小山市土塔3-1",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "高評価（12件レビュー）"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "夢創ハウジング株式会社",
+      "prefecture": "栃木県",
+      "location": "小山市乙女3-31-28",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "ライフプラン株式会社",
+      "prefecture": "栃木県",
+      "location": "小山市駅東通り2-35-10",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "石川建設株式会社",
+      "prefecture": "栃木県",
+      "location": "那須塩原市高砂町5-12",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "田村建設株式会社",
+      "prefecture": "栃木県",
+      "location": "那須塩原市上厚崎435-6",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "SUZUKEN",
+      "prefecture": "栃木県",
+      "location": "那須塩原市鍋掛1090-2",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "石田屋",
+      "prefecture": "群馬県",
+      "location": "群馬県藤岡市",
+      "website_url": "https://www.ishidaya.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト",
+        "平屋",
+        "ZEH対応",
+        "自然素材",
+        "木造",
+        "長期優良住宅",
+        "耐震",
+        "注文住宅",
+        "健康住宅",
+        "無添加",
+        "省エネ",
+        "高性能"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "廣神建設",
+      "prefecture": "群馬県",
+      "location": "高崎市",
+      "website_url": "https://www.wabika.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "和風",
+        "平屋",
+        "ZEH対応",
+        "自然素材",
+        "木造",
+        "注文住宅",
+        "無垢材",
+        "省エネ",
+        "デザイン住宅",
+        "耐震"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ハーバーハウス",
+      "prefecture": "群馬県",
+      "location": "（高崎市・前橋市・伊勢崎市・太田市",
+      "website_url": "https://www.herbarhouse.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト",
+        "平屋",
+        "ZEH対応",
+        "木造",
+        "耐震",
+        "注文住宅",
+        "省エネ",
+        "デザイン住宅",
+        "高性能"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "デザインハウス・エフ",
+      "prefecture": "群馬県",
+      "location": "群馬県太田市",
+      "website_url": "https://www.designhouse-f.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト",
+        "平屋",
+        "ZEH対応",
+        "自然素材",
+        "注文住宅",
+        "無垢材",
+        "省エネ",
+        "デザイン住宅",
+        "輸入住宅",
+        "耐震"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "大進建設",
+      "prefecture": "群馬県",
+      "location": "群馬県伊勢崎市",
+      "website_url": "https://www.daishin-kensetsu.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "平屋",
+        "自然素材",
+        "木造",
+        "耐震",
+        "注文住宅",
+        "省エネ",
+        "地域密着"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "昭栄建設",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "https://www.shoei-c.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "平屋",
+        "ZEH対応",
+        "自然素材",
+        "木造",
+        "長期優良住宅",
+        "リフォーム",
+        "注文住宅",
+        "地域密着",
+        "無垢材",
+        "省エネ",
+        "耐震"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ステーツ",
+      "prefecture": "群馬県",
+      "location": "太田市",
+      "website_url": "https://www.states.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト",
+        "平屋",
+        "ZEH対応",
+        "木造",
+        "注文住宅",
+        "高性能",
+        "省エネ",
+        "デザイン住宅",
+        "耐震"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "Rico Life",
+      "prefecture": "群馬県",
+      "location": "群馬県（館林市",
+      "website_url": "https://rico-life.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト",
+        "平屋",
+        "ZEH対応",
+        "木造",
+        "注文住宅",
+        "省エネ",
+        "耐震"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "和奏建設",
+      "prefecture": "群馬県",
+      "location": "太田市",
+      "website_url": "https://wakana-k.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト",
+        "平屋",
+        "ZEH対応",
+        "自然素材",
+        "木造",
+        "健康住宅",
+        "注文住宅",
+        "無垢材",
+        "省エネ",
+        "デザイン住宅",
+        "耐震"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "オールハウジング",
+      "prefecture": "群馬県",
+      "location": "高崎市",
+      "website_url": "https://all-housing.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト",
+        "平屋",
+        "リフォーム",
+        "木造",
+        "耐震",
+        "注文住宅",
+        "地域密着"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "T's ALL WORKS",
+      "prefecture": "群馬県",
+      "location": "高崎市",
+      "website_url": "https://ts-allworks.com/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ガレージハウス",
+        "ローコスト",
+        "平屋",
+        "ZEH対応",
+        "木造",
+        "注文住宅",
+        "省エネ",
+        "デザイン住宅",
+        "耐震"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "コンチネンタルホーム",
+      "prefecture": "群馬県",
+      "location": "太田市",
+      "website_url": "https://www.continentalhome.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト",
+        "平屋",
+        "ZEH対応",
+        "自然素材",
+        "木造",
+        "耐震",
+        "注文住宅",
+        "無垢材",
+        "省エネ",
+        "高気密・高断熱",
+        "高性能"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "野口建設",
+      "prefecture": "群馬県",
+      "location": "前橋市",
+      "website_url": "https://www.noguchi-k.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト",
+        "平屋",
+        "自然素材",
+        "木造",
+        "地域密着",
+        "注文住宅",
+        "省エネ",
+        "デザイン住宅",
+        "耐震"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "相生建設",
+      "prefecture": "群馬県",
+      "location": "群馬県伊勢崎市",
+      "website_url": "https://www.aioi-k.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "平屋",
+        "木造",
+        "耐震",
+        "注文住宅",
+        "省エネ",
+        "地域密着"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "サンワ設計",
+      "prefecture": "群馬県",
+      "location": "(館林市、太田市、桐生市",
+      "website_url": "https://www.sanwa-sekkei.co.jp/",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト",
+        "平屋",
+        "ZEH対応",
+        "自然素材",
+        "注文住宅",
+        "高性能",
+        "省エネ",
+        "デザイン住宅",
+        "耐震"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ホビースタイル角屋工業",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "アイワホーム",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "ファイブイズホーム",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "アートクラフト",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "いい感じの平屋IKI",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "かなう家",
+      "prefecture": "群馬県",
+      "location": "】太田市・伊勢崎市・邑楽郡・桐生市・みどり市・館林市・高崎市・前橋市・玉村町【栃木県】足利市・佐野市【埼玉県】熊谷市・羽生市・深谷市・本庄市　※太田市",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト",
+        "平屋",
+        "ZEH対応",
+        "木造",
+        "注文住宅",
+        "省エネ",
+        "デザイン住宅",
+        "耐震"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "サンエルホーム",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "楽屋",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "thinks",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "メープルホームズ",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト",
+        "平屋",
+        "自然素材",
+        "木造",
+        "長期優良住宅",
+        "注文住宅",
+        "無垢材",
+        "省エネ",
+        "輸入住宅",
+        "耐震"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "竹並建設",
+      "prefecture": "群馬県",
+      "location": "群馬県伊勢崎市",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "平屋",
+        "ZEH対応",
+        "木造",
+        "注文住宅",
+        "省エネ",
+        "高性能",
+        "耐震"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "カシワ建設",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "平屋工房",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "TIME+",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト",
+        "平屋",
+        "ZEH対応",
+        "木造",
+        "注文住宅",
+        "省エネ",
+        "耐震"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "BinO前橋/立見建設",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "小向建設",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "エースホーム太田店(白石建設)",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "古郡ホーム",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "しのだ工務店",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "大一建設",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "アットナチュレ",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "タツホーム 竜建",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "Eco+Kamiken 上里建設",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "Kayu style ハウス",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "Bespoke Design Works",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "ハウス オブ デコ",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "ジブログデザイン",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "SAMATA",
+      "prefecture": "群馬県",
+      "location": "高崎市",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト",
+        "平屋",
+        "自然素材",
+        "木造",
+        "耐震",
+        "注文住宅",
+        "省エネ",
+        "高性能"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ZENSYU-HOUSE",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "モックの家/草処建設",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "IE-LABO/三山建設",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "エイ・ワン(A-1 home)",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "フジコーポレーション",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "SHIROTA",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "ヤマミズホーム",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "リッケンハウジング",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "ARC style",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "Archi Factory ヒマワリ",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "Vie house",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "無垢スタイル建築設計",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "Toiro 四季の住まい",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "ワコーハウジング",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "ソーフィールドホーム",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "リソーケンセツ",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "大雄建設",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "齋藤住建",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト",
+        "平屋",
+        "木造",
+        "注文住宅",
+        "省エネ",
+        "耐震"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "ビスコッティハウス",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "藍の家",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "RELUXY HOME",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "彩ハウス",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "トトモニ",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "平屋",
+        "自然素材",
+        "木造",
+        "注文住宅",
+        "無垢材",
+        "省エネ",
+        "耐震"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "渋沢",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "関工務所",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "シブサワスタイル",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "杉内建設",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "fun style",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "高草木工務店",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "BinO太田 中村住宅工業",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "ヒロミヤ住建",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "A ARCHiTECT",
+      "prefecture": "群馬県",
+      "location": "前橋市",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "木造",
+        "平屋",
+        "注文住宅",
+        "耐震"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "古川工務店",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "studio*mag",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [
+        "ローコスト",
+        "平屋",
+        "自然素材",
+        "木造",
+        "注文住宅",
+        "無垢材",
+        "省エネ",
+        "デザイン住宅",
+        "耐震"
+      ],
+      "rating": null
+    },
+    {
+      "company_name": "山田工務店",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    },
+    {
+      "company_name": "リプレイ",
+      "prefecture": "群馬県",
+      "location": "群馬県",
+      "website_url": "",
+      "contact_url": "",
+      "instagram_url": "",
+      "features": [],
+      "rating": null
+    }
+  ]
+}
