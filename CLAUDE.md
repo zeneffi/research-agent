@@ -30,6 +30,7 @@
 を使わない
 
 **検索エンジンはDuckDuckGoを使用する**
+
 - URL: `https://duckduckgo.com/?q=検索クエリ`
 - Googleは使用しない（CAPTCHA回避のため）
 
@@ -68,6 +69,7 @@ cp -r projects/_template projects/新プロジェクト名
 ### プロジェクト構成
 
 各プロジェクトは以下の構成：
+
 - `README.md` - プロジェクト概要
 - `config.yaml` - 設定ファイル（任意）
 - `scripts/` - 実行スクリプト
