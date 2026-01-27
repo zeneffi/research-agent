@@ -40,6 +40,10 @@ secrets/
 data/sessions/*.json
 !data/sessions/.gitkeep
 
+# エージェントプロファイル（ログイン情報を含む）
+data/profiles/*/
+!data/profiles/.gitkeep
+
 # スクリーンショット（大きいバイナリファイル）
 data/screenshots/*.png
 data/screenshots/*.jpg

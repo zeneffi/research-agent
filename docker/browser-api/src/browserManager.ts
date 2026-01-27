@@ -77,6 +77,7 @@ export class BrowserManager {
     const proxyServer = process.env.PROXY_SERVER;
     const proxyUsername = process.env.PROXY_USERNAME;
     const proxyPassword = process.env.PROXY_PASSWORD;
+    const profileDir = process.env.BROWSER_PROFILE_DIR;
 
     const contextOptions: any = {
       viewport: { width: 1920, height: 1080 },
@@ -91,6 +92,17 @@ export class BrowserManager {
         password: proxyPassword
       };
       console.log(`Using proxy: ${proxyServer}`);
+    }
+
+    // プロファイルが存在する場合は復元
+    if (profileDir) {
+      const statePath = path.join(profileDir, 'state.json');
+      if (fs.existsSync(statePath)) {
+        console.log(`Loading browser profile from: ${statePath}`);
+        contextOptions.storageState = statePath;
+      } else {
+        console.log(`No existing profile found at: ${statePath}`);
+      }
     }
 
     this.context = await this.browser.newContext(contextOptions);
@@ -353,14 +365,47 @@ export class BrowserManager {
   }
 
   async close(): Promise<void> {
+    console.log('[CLOSE] Starting browser close sequence...');
     if (this.browser) {
+      // プロファイルを保存
+      const profileDir = process.env.BROWSER_PROFILE_DIR;
+      console.log(`[CLOSE] Profile directory: ${profileDir || 'not set'}`);
+
+      if (profileDir && this.context) {
+        const statePath = path.join(profileDir, 'state.json');
+        console.log(`[CLOSE] Attempting to save profile to: ${statePath}`);
+        console.log(`[CLOSE] Context exists: ${!!this.context}, Browser exists: ${!!this.browser}`);
+        try {
+          console.log(`[CLOSE] Calling storageState...`);
+          const result = await this.context.storageState({ path: statePath });
+          console.log(`[CLOSE] storageState returned:`, result ? 'with data' : 'undefined');
+          console.log(`[CLOSE] ✓ Browser profile saved successfully to: ${statePath}`);
+
+          // Verify file was created
+          if (fs.existsSync(statePath)) {
+            const stats = fs.statSync(statePath);
+            console.log(`[CLOSE] ✓ File verified: ${stats.size} bytes`);
+          } else {
+            console.error(`[CLOSE] ✗ File not found after save: ${statePath}`);
+          }
+        } catch (error) {
+          console.error('[CLOSE] ✗ Failed to save browser profile:', error);
+          console.error('[CLOSE] Error stack:', error instanceof Error ? error.stack : 'no stack');
+        }
+      } else {
+        console.log('[CLOSE] Skipping profile save (no profile dir or context)');
+      }
+
+      console.log('[CLOSE] Closing browser...');
       await this.browser.close();
       this.browser = null;
       this.context = null;
       this.tabs.clear();
       this.currentTabId = null;
       this.ready = false;
-      console.log('Browser closed');
+      console.log('[CLOSE] ✓ Browser closed successfully');
+    } else {
+      console.log('[CLOSE] Browser already closed or not initialized');
     }
   }
 

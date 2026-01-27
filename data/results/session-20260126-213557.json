@@ -1,0 +1,22 @@
+{
+  "session_id": "97cfd08a-733e-48fd-9a38-46646a1383fc",
+  "query": "テスト検索",
+  "created_at": "2026-01-26T21:35:57.548093",
+  "completed_at": "2026-01-26T21:36:31.936436",
+  "stats": {
+    "total": 7,
+    "completed": 7,
+    "success_rate": 100.0
+  },
+  "findings": [
+    {
+      "source": "https://duckduckgo.com/?q=%E3%83%86%E3%82%B9%E3%83%88%E6%A4%9C%E7%B4%A2",
+      "title": "テスト検索 at DuckDuckGo",
+      "summary": "テスト内の検索 - Ibm\nテスト内でのテキストの検索および置換 「テスト検索」 機能を使用すると、テスト内のテキストの検索、または特定のテスト・エレメント内での検索が可能です。 オプションで、検出されたテキストを置換することもできます。\nMore Results\nClose menu",
+      "keywords": [
+        "テスト検索"
+      ],
+      "relevance": 1.0
+    }
+  ]
+}

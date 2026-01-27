@@ -129,7 +129,8 @@ class BrowserPool:
         self,
         count: int,
         session: str,
-        build: bool = False
+        build: bool = False,
+        profile_dir: Optional[Path] = None
     ) -> list[BrowserInstance]:
         """
         Start browser containers with individual proxy assignments.
@@ -138,6 +139,7 @@ class BrowserPool:
             count: Number of containers to start
             session: Session name for labeling
             build: Whether to rebuild the image
+            profile_dir: Browser profile directory to mount (for persistent login)
 
         Returns:
             List of started browser instances
@@ -173,6 +175,15 @@ class BrowserPool:
                     "-e", f"PROXY_PASSWORD={proxy['password']}",
                 ])
 
+            # ボリュームマウント設定
+            volume_args = []
+            if profile_dir:
+                # プロファイルディレクトリをコンテナにマウント
+                host_profile = Path(profile_dir).absolute()
+                host_profile.mkdir(parents=True, exist_ok=True)
+                volume_args = ["-v", f"{host_profile}:/app/profile"]
+                env_args.extend(["-e", "BROWSER_PROFILE_DIR=/app/profile"])
+
             # コンテナを起動
             result = self._run_docker_command(
                 "run", "-d",
@@ -182,6 +193,7 @@ class BrowserPool:
                 "-p", "5900",
                 "-p", "6080",
                 *env_args,
+                *volume_args,
                 "docker-browser"
             )
             if result.returncode != 0:

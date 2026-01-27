@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "updated_at": "2026-01-27T12:26:22.817853",
+  "agents": [
+    {
+      "name": "GoogleAccount",
+      "agent_type": "search",
+      "file_path": "projects/google-search/search.py",
+      "profile_dir": "data/profiles/googleaccount",
+      "description": "Google検索用アカウント",
+      "enabled": true,
+      "config": {},
+      "created_at": "2026-01-26T21:24:51.795181",
+      "updated_at": "2026-01-26T21:24:51.795186"
+    },
+    {
+      "name": "XAccount",
+      "agent_type": "scraper",
+      "file_path": "x_search.py",
+      "profile_dir": "data/profiles/xaccount",
+      "description": "X(Twitter)アカウント",
+      "enabled": true,
+      "config": {},
+      "created_at": "2026-01-27T12:26:22.817845",
+      "updated_at": "2026-01-27T12:26:22.817851"
+    }
+  ]
+}

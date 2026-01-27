@@ -70,13 +70,15 @@ class Orchestrator:
         output_dir: Path = Path("data"),
         screenshot: bool = False,
         session_name: Optional[str] = None,
-        timeout: int = 300
+        timeout: int = 300,
+        profile_dir: Optional[Path] = None
     ):
         self.parallel = parallel
         self.output_dir = output_dir
         self.screenshot = screenshot
         self.session_name = session_name or f"session-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
         self.timeout = timeout
+        self.profile_dir = profile_dir
 
         self.pool = BrowserPool()
         self.snapshot_manager = SnapshotManager(output_dir)
@@ -128,7 +130,8 @@ class Orchestrator:
 
             instances = await self.pool.start(
                 count=min(self.parallel, len(tasks)),
-                session=self.session_name
+                session=self.session_name,
+                profile_dir=self.profile_dir
             )
 
             if progress:
@@ -218,7 +221,8 @@ class Orchestrator:
         # Start browsers and continue
         instances = await self.pool.start(
             count=min(self.parallel, len(remaining_tasks)),
-            session=self.session_name
+            session=self.session_name,
+            profile_dir=self.profile_dir
         )
 
         if progress:

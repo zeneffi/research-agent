@@ -188,6 +188,16 @@ app.get('/session', async (_req: Request, res: Response) => {
   }
 });
 
+// プロファイル保存（テスト用）
+app.post('/save-profile', async (_req: Request, res: Response) => {
+  try {
+    await browserManager.close();
+    res.json({ success: true, message: 'Profile saved and browser closed' });
+  } catch (error) {
+    res.status(500).json({ success: false, error: String(error) });
+  }
+});
+
 // エラーハンドリング
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   console.error('Unhandled error:', err);
@@ -211,19 +221,35 @@ const server = app.listen(PORT, async () => {
 
 // グレースフルシャットダウン
 process.on('SIGTERM', async () => {
-  console.log('SIGTERM received, shutting down...');
-  await browserManager.close();
+  console.log('[SIGNAL] SIGTERM received, shutting down gracefully...');
+  try {
+    await browserManager.close();
+    console.log('[SIGNAL] Browser manager closed successfully');
+  } catch (error) {
+    console.error('[SIGNAL] Error closing browser manager:', error);
+  }
   server.close(() => {
-    console.log('Server closed');
+    console.log('[SIGNAL] Server closed, exiting process');
     process.exit(0);
   });
+
+  // Timeout to force exit if graceful shutdown takes too long
+  setTimeout(() => {
+    console.error('[SIGNAL] Forced exit after timeout');
+    process.exit(1);
+  }, 8000);
 });
 
 process.on('SIGINT', async () => {
-  console.log('SIGINT received, shutting down...');
-  await browserManager.close();
+  console.log('[SIGNAL] SIGINT received, shutting down gracefully...');
+  try {
+    await browserManager.close();
+    console.log('[SIGNAL] Browser manager closed successfully');
+  } catch (error) {
+    console.error('[SIGNAL] Error closing browser manager:', error);
+  }
   server.close(() => {
-    console.log('Server closed');
+    console.log('[SIGNAL] Server closed, exiting process');
     process.exit(0);
   });
 });

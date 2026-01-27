@@ -1,0 +1,31 @@
+{
+  "version": "1.0",
+  "updated_at": "2026-01-26T20:00:00.000000",
+  "agents": [
+    {
+      "name": "Google検索Agent",
+      "agent_type": "search",
+      "file_path": "projects/example/scripts/google_search.py",
+      "profile_dir": "data/profiles/google検索agent",
+      "description": "Google検索を実行するエージェント",
+      "enabled": true,
+      "config": {},
+      "created_at": "2026-01-26T20:00:00.000000",
+      "updated_at": "2026-01-26T20:00:00.000000"
+    },
+    {
+      "name": "Twitter調査Agent",
+      "agent_type": "scraper",
+      "file_path": "projects/twitter/scripts/scrape.py",
+      "profile_dir": "data/profiles/twitter調査agent",
+      "description": "Twitter情報収集エージェント",
+      "enabled": true,
+      "config": {
+        "max_tweets": 100,
+        "include_replies": false
+      },
+      "created_at": "2026-01-26T20:00:00.000000",
+      "updated_at": "2026-01-26T20:00:00.000000"
+    }
+  ]
+}

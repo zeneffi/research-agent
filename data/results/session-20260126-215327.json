@@ -1,0 +1,513 @@
+{
+  "session_id": "922eb597-01c7-44ae-a27a-30b17c3a8054",
+  "query": "Google test",
+  "created_at": "2026-01-26T21:53:27.641924",
+  "completed_at": "2026-01-26T21:53:56.465760",
+  "stats": {
+    "total": 7,
+    "completed": 7,
+    "success_rate": 100.0
+  },
+  "findings": [
+    {
+      "source": "https://duckduckgo.com/?q=Google+test",
+      "title": "Google test at DuckDuckGo",
+      "summary": "GoogleTest User's Guide | GoogleTest\nLearn how to use GoogleTest, a C++ testing and mocking framework by Google, to write and run tests. Find samples, tips, FAQs, and cheat sheets for mocking and test",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test",
+      "title": "Google test at DuckDuckGo",
+      "summary": "GoogleTest - Google Testing and Mocking Framework Supported Platforms GoogleTest follows Google's Foundational C++ Support Policy. See this table for a list of currently supported versions compilers, ",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test",
+      "title": "Google test at DuckDuckGo",
+      "summary": "Quickstart: Building with Bazel This tutorial aims to get you up and running with GoogleTest using the Bazel build system. If you're using GoogleTest for the first time or need a refresher, we recomme",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test",
+      "title": "Google test at DuckDuckGo",
+      "summary": "Quickstart: Building with CMake This tutorial aims to get you up and running with GoogleTest using CMake. If you're using GoogleTest for the first time or need a refresher, we recommend this tutorial ",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test",
+      "title": "Google test at DuckDuckGo",
+      "summary": "The related term Test, as it is used in GoogleTest, corresponds to the term Test Case of ISTQB and others. The term Test is commonly of broad enough sense, including ISTQB's definition of Test Case, s",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test",
+      "title": "Google test at DuckDuckGo",
+      "summary": "Advanced GoogleTest Topics Introduction Now that you have read the GoogleTest Primer and learned how to write tests using GoogleTest, it's time to learn some new tricks. This document will show you mo",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test",
+      "title": "Google test at DuckDuckGo",
+      "summary": "GoogleTest - Google Testing and Mocking Framework - GitHub\nGoogleTest - Google Testing and Mocking Framework. Contribute to google/googletest development by creating an account on GitHub.",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test",
+      "title": "Google test at DuckDuckGo",
+      "summary": "Internet Speed Test | Check Broadband Speed | Google Fiber\nTest your current internet speed, and find out how fast your broadband wi-fi handles uploads and downloads. See Google Fiber plan options for",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test",
+      "title": "Google test at DuckDuckGo",
+      "summary": "GTest Framework - GeeksforGeeks\nMar 20, 2024What is Googletest? It is a test framework i.e., a software tool for writing and running unit tests. It is a library for writing C++ tests. It is based on x",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test",
+      "title": "Google test at DuckDuckGo",
+      "summary": "Google Test - Wikipedia\nGoogle Test, often referred to as gtest, is a specialized library utilized to conduct unit testing in the C++ programming language. This library operates under the terms of the",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+latest+2024",
+      "title": "Google test latest 2024 at DuckDuckGo",
+      "summary": "https://github.com › google › googletest › releases",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+latest+2024",
+      "title": "Google test latest 2024 at DuckDuckGo",
+      "summary": "Releases · google/googletest - GitHub\nGoogleTest - Google Testing and Mocking Framework. Contribute to google/googletest development by creating an account on GitHub.\nContact",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+latest+2024",
+      "title": "Google test latest 2024 at DuckDuckGo",
+      "summary": "Google Testing Blog: August 2024\nAug 21, 2024Include only essential information in the comments and leverage external references to reduce cognitive load on the reader. For comments suggesting improve",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+latest+2024",
+      "title": "Google test latest 2024 at DuckDuckGo",
+      "summary": "Recap of Google's Updates in 2024 - AdCellerant\nAug 20, 2024June: Spam Update Google completed the rollout of its latest spam update, focusing on enhancing the detection and demotion of spammy content",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+latest+2024",
+      "title": "Google test latest 2024 at DuckDuckGo",
+      "summary": "The Keyword | Google Product and Technology News and Stories\nGet the latest news and stories about Google products, technology and innovation on the Keyword, Google's official blog.",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+latest+2024",
+      "title": "Google test latest 2024 at DuckDuckGo",
+      "summary": "Last Algorithm Update of 2024; Google Rolls Out December Core Update\nDec 13, 2024Google rolls out the December 2024 Core Algorithm Update, aiming to enhance search result relevance and user experience",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+latest+2024",
+      "title": "Google test latest 2024 at DuckDuckGo",
+      "summary": "Google Algorithm Updates in 2024: What Happened and What It Means for ...\nJan 1, 2025FAQs about Google Algorithm Updates in 2024 What are Google core updates, and why do they affect my website ranking",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+comparison+alternatives",
+      "title": "Google test comparison alternatives at DuckDuckGo",
+      "summary": "https://stackshare.io › google-test › alternatives",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+comparison+alternatives",
+      "title": "Google test comparison alternatives at DuckDuckGo",
+      "summary": "Best Google Test Alternatives in 2025 | StackShare\nWhat are some alternatives to Google Test? Compare the best Google Test alternatives based on real user reviews and ratings from developers using Goo",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+comparison+alternatives",
+      "title": "Google test comparison alternatives at DuckDuckGo",
+      "summary": "Google Test Alternatives: Top 5 Unit Testing Tools & Similar Apps\nThe best Google Test alternatives are UquoniTest, Tessy and Criterion. Our crowd-sourced lists contains five apps similar to Google Te",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+comparison+alternatives",
+      "title": "Google test comparison alternatives at DuckDuckGo",
+      "summary": "Alternatives to Google Optimize: Your Next Go-To A/B Testing ... - Reddit\nThe biggest difference between Google Optimize and these alternatives is that they offer (generally) a lot more features than ",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+comparison+alternatives",
+      "title": "Google test comparison alternatives at DuckDuckGo",
+      "summary": "https://www.repeato.app › boost-test-vs-google-test-framework-which-one-should-you-choose",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+comparison+alternatives",
+      "title": "Google test comparison alternatives at DuckDuckGo",
+      "summary": "Boost Test vs. Google Test Framework: Which One Should You Choose?\nMay 21, 2024Discover the best unit testing framework for C++ in our comparison of Boost Test vs. Google Test. Learn which tool suits ",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+comparison+alternatives",
+      "title": "Google test comparison alternatives at DuckDuckGo",
+      "summary": "https://cpp.libhunt.com › googletest-google-alternatives",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+comparison+alternatives",
+      "title": "Google test comparison alternatives at DuckDuckGo",
+      "summary": "Google Test Alternatives - C++ Debug | LibHunt\nGoogle Test alternatives and similar libraries Based on the \"Debug\" category. Alternatively, view Google Test alternatives based on common mentions on so",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+comparison+alternatives",
+      "title": "Google test comparison alternatives at DuckDuckGo",
+      "summary": "Google Test Alternatives and Reviews - LibHunt\nWhich is the best alternative to Google Test? Based on common mentions it is: ESLint, Redis, Starter-workflows, {fmt}, Cmake-init, Vcpkg, Shields, SFML o",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+comparison+alternatives",
+      "title": "Google test comparison alternatives at DuckDuckGo",
+      "summary": "https://stackshare.io › stackups › google-test-vs-pytest",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+news",
+      "title": "Google test news at DuckDuckGo",
+      "summary": "https://www.euronews.com › next › 2024 › 11 › 14 › google-removes-eu-based-news-content-from-search-feeds-as-part-of-time-limited-test",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+news",
+      "title": "Google test news at DuckDuckGo",
+      "summary": "Google removes EU-based news content as part of 'time-limited test'\nNov 14, 2024The test aims to provide regulators and publishers with further data on how Google is used to access news content. Googl",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+news",
+      "title": "Google test news at DuckDuckGo",
+      "summary": "https://www.timesnownews.com › technology-science › googles-search-test-exposes-how-little-it-cares-about-news-key-points-to-know-article-119316252",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+news",
+      "title": "Google test news at DuckDuckGo",
+      "summary": "Google's Search Test Exposes How Little It Cares About News: Key Points ...\nMar 22, 2025According to the report, Google conducted the test due to European copyright laws, which require it to pay news ",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+news",
+      "title": "Google test news at DuckDuckGo",
+      "summary": "https://techcrunch.com › 2025 › 03 › 21 › google-claims-news-is-worthless-to-its-ad-business-after-test-involving-1-of-search-results-in-eight-eu-markets",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+news",
+      "title": "Google test news at DuckDuckGo",
+      "summary": "Google claims news is worthless to its ad business after test involving ...\nMar 21, 2025Google has reported the results of an experiment it ran which removed news from search results for 1% of users f",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+news",
+      "title": "Google test news at DuckDuckGo",
+      "summary": "Google News\nStay updated with the latest news and stories from around the world on Google News.",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+news",
+      "title": "Google test news at DuckDuckGo",
+      "summary": "https://www.engadget.com › big-tech › a-google-test-will-omit-eu-publishers-from-news-links-184536615.html",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+news",
+      "title": "Google test news at DuckDuckGo",
+      "summary": "A Google 'test' will omit EU publishers from news links - Engadget\nNov 13, 2024A new Google \"test\" will exclude results from EU news publishers, affecting users in nine countries. The company says it ",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=Google+test+news",
+      "title": "Google test news at DuckDuckGo",
+      "summary": "https://www.androidheadlines.com › 2025 › 12 › google-discover-test-ai-generated-rewritten-headlines-titles.html",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Awikipedia.org+Google+test",
+      "title": "site:wikipedia.org Google test at DuckDuckGo",
+      "summary": "Google Test - Wikipedia\nGoogle Test, often referred to as gtest, is a specialized library utilized to conduct unit testing in the C++ programming language. This library operates under the terms of the",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Awikipedia.org+Google+test",
+      "title": "site:wikipedia.org Google test at DuckDuckGo",
+      "summary": "Lighthouse (software) - Wikipedia\nLighthouse audits performance, accessibility, and search engine optimization factors of web pages, [2][3][4] this is the major difference from Google PageSpeed, Light",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Awikipedia.org+Google+test",
+      "title": "site:wikipedia.org Google test at DuckDuckGo",
+      "summary": "https://ru.wikipedia.org › wiki › Google_C++_Testing_Framework",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Awikipedia.org+Google+test",
+      "title": "site:wikipedia.org Google test at DuckDuckGo",
+      "summary": "Google C++ Testing Framework — Википедия\nGoogle C++ Testing Framework (Google Test) — библиотека для модульного тестирования (англ. unit testing) на языке C++. Исходные тексты открыты с середины 2008 ",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Awikipedia.org+Google+test",
+      "title": "site:wikipedia.org Google test at DuckDuckGo",
+      "summary": "Searches related to site:wikipedia.org Google test",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Awikipedia.org+Google+test",
+      "title": "site:wikipedia.org Google test at DuckDuckGo",
+      "summary": "test google speed​\ntest internet speed​\ninternet speed​\nspeed test​\ngoogle internet test​\ngoogle testing framework​\ngoogle test ui​\ngoogle internet speed test​\nClose menu\nSEARCH\nHomepage\nThemes\nSettin",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Amedium.com+Google+test",
+      "title": "site:medium.com Google test at DuckDuckGo",
+      "summary": "https://medium.com › @chittaranjansethi › introduction-to-unit-testing-with-google-test-gtest-in-c-344a89b8eb4",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Amedium.com+Google+test",
+      "title": "site:medium.com Google test at DuckDuckGo",
+      "summary": "Introduction to Unit Testing with Google Test (GTest) in C++\nWhat is Google Test (GTest)? Google Test is a C++ testing framework developed by Google. It provides a rich set of tools and features to wr",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Amedium.com+Google+test",
+      "title": "site:medium.com Google test at DuckDuckGo",
+      "summary": "https://chamikaramendis.medium.com › a-comprehensive-guide-to-setting-up-google-test-gtest-and-google-mock-gmock-for-unit-testing-in-fc033e3b532d",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Amedium.com+Google+test",
+      "title": "site:medium.com Google test at DuckDuckGo",
+      "summary": "A Comprehensive Guide to Setting Up Google Test (GTest) and ... - Medium\nConclusion Setting up Google Test (GTest) and Google Mock (GMock) for unit testing in C++ is an essential step in building reli",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Amedium.com+Google+test",
+      "title": "site:medium.com Google test at DuckDuckGo",
+      "summary": "https://medium.com › @oleg.shipitko › unit-testing-with-googletest-in-5-minutes-56401fc03af4",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Amedium.com+Google+test",
+      "title": "site:medium.com Google test at DuckDuckGo",
+      "summary": "Unit testing in 5 minutes (with googletest) - Medium\nUnit testing in 5 minutes (with googletest) Unit testing is a software testing technique in which individual modules of software (e.g. functions an",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Amedium.com+Google+test",
+      "title": "site:medium.com Google test at DuckDuckGo",
+      "summary": "https://medium.com › foxguard-development › google-test-and-google-mock-20a7e416f93e",
+      "keywords": [
+        "google",
+        "test"
+      ],
+      "relevance": 1.0
+    }
+  ]
+}

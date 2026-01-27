@@ -1,0 +1,463 @@
+{
+  "session_id": "7adb5900-39b2-4003-b94d-2fbe6eae8887",
+  "query": "test",
+  "created_at": "2026-01-26T22:14:37.099650",
+  "completed_at": "2026-01-26T22:15:05.799424",
+  "stats": {
+    "total": 7,
+    "completed": 7,
+    "success_rate": 100.0
+  },
+  "findings": [
+    {
+      "source": "https://duckduckgo.com/?q=test",
+      "title": "test at DuckDuckGo",
+      "summary": "Speedtest by Ookla - The Global Broadband Speed Test\nTest your internet speed on any device with Speedtest by Ookla, available for free on desktop and mobile apps.\nSpeedtest",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test",
+      "title": "test at DuckDuckGo",
+      "summary": "Create an Account Join the millions of other people helping us to accelerate the Internet! By creating an account, you'll be able to access your historical results anywhere and manage your Speedtest p",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test",
+      "title": "test at DuckDuckGo",
+      "summary": "Test your internet speed and performance with Speedtest by Ookla, available on desktop and mobile devices for free.",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test",
+      "title": "test at DuckDuckGo",
+      "summary": "Install a free Speedtest Travel eSIM to provide international data for vacation travel and business trips.",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test",
+      "title": "test at DuckDuckGo",
+      "summary": "Use Speedtest on all your devices with our free desktop and mobile apps.",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test",
+      "title": "test at DuckDuckGo",
+      "summary": "Test your internet speed with Speedtest by Ookla, a reliable tool for measuring broadband performance worldwide.",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test",
+      "title": "test at DuckDuckGo",
+      "summary": "Learn what to do when your computer is not connecting to Wi-Fi and how Speedtest can help you audit your internet experience across your home network",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test",
+      "title": "test at DuckDuckGo",
+      "summary": "Internet Speed Test | Fast.com\nHow fast is your download speed? In seconds, FAST.com's simple Internet speed test will estimate your ISP speed.",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test",
+      "title": "test at DuckDuckGo",
+      "summary": "Internet Speed Test - Check Wi-Fi Speed | TestMySpeed.com\nTest your internet speed instantly with TestMySpeed, the leading broadband speed test. Get real-time results for download, upload, and ping.",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test",
+      "title": "test at DuckDuckGo",
+      "summary": "https://www.highspeedinternet.com › tools › speed-test",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+latest+2024",
+      "title": "test latest 2024 at DuckDuckGo",
+      "summary": "https://www.ielts-blog.com › recent-ielts-exams › recent-ielts-test-questions-and-topics-worldwide-2022",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+latest+2024",
+      "title": "test latest 2024 at DuckDuckGo",
+      "summary": "Recent IELTS Test Questions + Topics Worldwide, 2025 and 2026 - IELTS-Blog\n4 days agoWe post here the latest, most recent IELTS questions that test takers remembered and shared, updated daily in real ",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+latest+2024",
+      "title": "test latest 2024 at DuckDuckGo",
+      "summary": "Welcome to our new latest IELTS exam questions page! Here you will find the most recent IELTS questions that test takers remembered and shared, updated daily in real time.",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+latest+2024",
+      "title": "test latest 2024 at DuckDuckGo",
+      "summary": "Getting Your Writing Corrected is the Fastest and Most Reliable Way to a Higher IELTS Score. Experienced teachers who trained 1000's of successful IELTS test takers will help you every step of the way",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+latest+2024",
+      "title": "test latest 2024 at DuckDuckGo",
+      "summary": "The SAT - SAT Suite | College Board\nRegistration for the testing year 2024-25 is now open. Use these testing dates to plan to take the SAT. Dates and Deadlines",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+latest+2024",
+      "title": "test latest 2024 at DuckDuckGo",
+      "summary": "The Nation's Report Card\nThe NAEP Experiences and Opportunities in Education dashboard provides users with quick access to contextual information about whether students have access to the necessary re",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+latest+2024",
+      "title": "test latest 2024 at DuckDuckGo",
+      "summary": "ACT Registration & ACT Testing Dates | The ACT Test\nThe ACT fits YOUR learning style with flexible and balanced testing to help you do your best! Next Test: Feb 14 Registration deadline extended throu",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+latest+2024",
+      "title": "test latest 2024 at DuckDuckGo",
+      "summary": "LSAT Dates, Deadlines, and Score Release Dates | The Law School ...\nImportant dates for recent and upcoming LSAT administrations are listed below. All dates are listed in Eastern Time (ET), and all re",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+latest+2024",
+      "title": "test latest 2024 at DuckDuckGo",
+      "summary": "SAT Dates and Deadlines - SAT Suite | College Board\nAug 8, 2025At this time, registration is open for all students for the entire 2025-26 testing year. All deadlines expire at 11:59 p.m. ET, U.S. Augu",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+latest+2024",
+      "title": "test latest 2024 at DuckDuckGo",
+      "summary": "https://www.espncricinfo.com › series › new-zealand-in-india-test-2024-25-1439848 › match-schedule-fixtures-and-results",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+comparison+alternatives",
+      "title": "test comparison alternatives at DuckDuckGo",
+      "summary": "There are several alternatives for testing platforms, including Rainforest QA, Testlio, and QA Wolf, which can enhance your software team's QA capabilities. These options often provide better features",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+comparison+alternatives",
+      "title": "test comparison alternatives at DuckDuckGo",
+      "summary": "https://www.g2.com › categories › software-testing",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+comparison+alternatives",
+      "title": "test comparison alternatives at DuckDuckGo",
+      "summary": "Best Software Testing Tools: User Reviews from January 2026 - G2\nTop Software Testing Tools. Choose the right Software Testing Tools using real-time, up-to-date product reviews from 17885 verified use",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+comparison+alternatives",
+      "title": "test comparison alternatives at DuckDuckGo",
+      "summary": "https://zetcode.com › terms-testing › comparative-testing",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+comparison+alternatives",
+      "title": "test comparison alternatives at DuckDuckGo",
+      "summary": "Comparative Testing Tutorial: Definition, Types, and Best ... - ZetCode\nApr 4, 2025Learn comparative testing in software development: its definition, types, benefits, and best practices. A comprehensi",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+comparison+alternatives",
+      "title": "test comparison alternatives at DuckDuckGo",
+      "summary": "https://www.statsig.com › comparison › top-alternatives-ab-testing",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+comparison+alternatives",
+      "title": "test comparison alternatives at DuckDuckGo",
+      "summary": "Top 7 alternatives to Optimizely for A/B Testing - statsig.com\nJul 10, 2025Modern alternatives deliver faster time-to-value, transparent pricing, and integrated analytics that actually help teams make",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+comparison+alternatives",
+      "title": "test comparison alternatives at DuckDuckGo",
+      "summary": "https://maze.co › compare › usertesting-alternatives",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+comparison+alternatives",
+      "title": "test comparison alternatives at DuckDuckGo",
+      "summary": "Best UserTesting Alternatives for UX Teams in 2026 | Maze\nDec 12, 2025Discover the best UserTesting alternatives for UX teams. Compare pricing, features, AI tools, and reviews to find the right fit fo",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+comparison+alternatives",
+      "title": "test comparison alternatives at DuckDuckGo",
+      "summary": "5 Best qTest Alternatives [In-Depth Comparison] - Testsigma\nSep 8, 20255 Best qTest Alternatives [in-Depth Comparison] Discover top Leading qTest alternatives offer robust test management, automation,",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+news",
+      "title": "test news at DuckDuckGo",
+      "summary": "Open menu\n All\nImages\nNews\nVideos\nMore\nMaps\nShopping\nSearch Assist\n Duck.ai\nSearch Settings\nProtected\nAll regions\nSafe search: moderate\nAny time\nNews for test news\nLegacy F-15 Eagles Boost NASA Test F",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+news",
+      "title": "test news at DuckDuckGo",
+      "summary": "https://www.planetf1.com › news › f1-testing-live-2026-updates-day-one-barcelona",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+news",
+      "title": "test news at DuckDuckGo",
+      "summary": "What we're seeing at F1's private Barcelona test — Live updates\nTodayThe F1 2026 season creeps ever more closer with teams out in Barcelona for the first joint shakedown of the campaign. While the off",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+news",
+      "title": "test news at DuckDuckGo",
+      "summary": "https://apnews.com › article › f1-preseason-test-barcelona-2026-a9928f8fa367767bd18b1780ae6187d3",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+news",
+      "title": "test news at DuckDuckGo",
+      "summary": "F1 teams test their all-new 2026 cars in ... - Associated Press News\nTodayF1 starts a new era with the public and the media excluded from its private testing session in Spain starting Monday.",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+news",
+      "title": "test news at DuckDuckGo",
+      "summary": "Test News - Latest Test News, Breaking Test News, Test News Headlines\nGet top and latest Test News - Read Breaking Test News and Test News Headlines. WION is leading news channel worldwide get all lat",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+news",
+      "title": "test news at DuckDuckGo",
+      "summary": "https://www.msn.com › en-us › sports › other › f1-2026-testing-start-time-and-schedule-for-barcelona-event › ar-AA1UPTEH",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+news",
+      "title": "test news at DuckDuckGo",
+      "summary": "F1 2026 testing: Start time and schedule for Barcelona event - MSN\nF1 2026 testing: Start time and schedule for Barcelona event - The first action of the 2026 F1 season is a private five-day test in B",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+news",
+      "title": "test news at DuckDuckGo",
+      "summary": "https://www.upi.com › Top_News › US › 2026 › 01 › 26 › no-clear-plan-replace-aging-vital-Navy-test-ship-GAO-says › 9951769023182",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=test+news",
+      "title": "test news at DuckDuckGo",
+      "summary": "No clear plan to replace aging, but vital, Navy 'test ship,' GAO says\nTodayThe Navy's \"Self Defense Test Ship,\" an aging, decommissioned destroyer, is vital to security, but there's no clear plan to r",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Awikipedia.org+test",
+      "title": "site:wikipedia.org test at DuckDuckGo",
+      "summary": "Test - Wikipedia\nTest Look up test, testing, Test, or TEST in Wiktionary, the free dictionary. Test (s), testing, or TEST may refer to: Test (assessment), an educational assessment intended to measure",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Awikipedia.org+test",
+      "title": "site:wikipedia.org test at DuckDuckGo",
+      "summary": "Test - Simple English Wikipedia, the free encyclopedia\nA test is a way of checking something to see if it is true, or false, or if it is edible or not. If something can be tested, or finishes the test",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Awikipedia.org+test",
+      "title": "site:wikipedia.org test at DuckDuckGo",
+      "summary": "Test method - Wikipedia\nA test method is a method for a test in science or engineering, such as a physical test, chemical test, or statistical test. It is a specified procedure that produces a test re",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Awikipedia.org+test",
+      "title": "site:wikipedia.org test at DuckDuckGo",
+      "summary": "Test automation - Wikipedia\nTest automation is the use of software (separate from the software being tested) for controlling the execution of tests and comparing actual outcome with predicted. [1] Tes",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Awikipedia.org+test",
+      "title": "site:wikipedia.org test at DuckDuckGo",
+      "summary": "Test (biology) - Wikipedia\nIn biology, a test is the hard shell of some spherical aquatic animals and protists, notably sea urchins and microorganisms such as testate foraminiferans, radiolarians, and",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Awikipedia.org+test",
+      "title": "site:wikipedia.org test at DuckDuckGo",
+      "summary": "Test score - Wikipedia\nA test score is a piece of information, usually a number, that conveys the performance of an examinee on a test. One formal definition is that it is \"a summary of the evidence c",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Awikipedia.org+test",
+      "title": "site:wikipedia.org test at DuckDuckGo",
+      "summary": "https://en.wikipedia.org › wiki › List_of_standardized_tests_in_the_United_States",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Awikipedia.org+test",
+      "title": "site:wikipedia.org test at DuckDuckGo",
+      "summary": "List of standardized tests in the United States - Wikipedia\nA standardized test is a test administered and scored in a standard manner. The following are such tests as administered across the United S",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Awikipedia.org+test",
+      "title": "site:wikipedia.org test at DuckDuckGo",
+      "summary": "https://en.wikipedia.org › wiki › Standardized_test",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    },
+    {
+      "source": "https://duckduckgo.com/?q=site%3Awikipedia.org+test",
+      "title": "site:wikipedia.org test at DuckDuckGo",
+      "summary": "Standardized test - Wikipedia\nA standardized test is a test that is administered and scored in a consistent or standard manner. Standardized tests are designed in such a way that the questions and int",
+      "keywords": [
+        "test"
+      ],
+      "relevance": 1.0
+    }
+  ]
+}

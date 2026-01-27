@@ -13,6 +13,7 @@ Daytona Agentは、Dockerコンテナ内で複数のブラウザを並列起動�
 - **セッション管理**: 調査の中断・再開が可能
 - **スクリーンショット**: 各ステップの画面を保存
 - **結果エクスポート**: JSON/Markdown形式で結果を保存
+- **エージェントプロファイル**: ログイン状態を保存・復元（毎回ログイン不要）
 
 ## アーキテクチャ
 
@@ -53,11 +54,18 @@ daytona-agent/
 │   ├── orchestrator.py         # タスク管理
 │   ├── browser_pool.py         # コンテナプール管理
 │   ├── task_parser.py          # クエリ解析
-│   └── snapshot.py             # セッション保存
+│   ├── snapshot.py             # セッション保存
+│   └── agent_registry.py       # エージェント管理
+├── config/
+│   ├── agents.json             # エージェント定義
+│   └── agents.example.json     # サンプル
 ├── data/
 │   ├── sessions/               # セッション状態
 │   ├── screenshots/            # スクリーンショット
+│   ├── profiles/               # エージェントプロファイル（ログイン情報）
 │   └── results/                # 調査結果
+├── docs/
+│   └── AGENT_PROFILE.md        # エージェント機能の詳細
 ├── requirements.txt
 └── README.md
 ```
@@ -108,20 +116,41 @@ python -m src.cli research "市場調査" --session my-research
 python -m src.cli research "競合分析" --output ./results
 ```
 
+### エージェント管理（ログイン状態の保存）
+
+```bash
+# エージェントを登録
+python -m src agent register "Google検索Agent" \
+  --type search \
+  --file projects/example/search.py \
+  --description "Google検索エージェント"
+
+# エージェントを使って調査（ログイン状態が自動保存される）
+python -m src research "検索クエリ" --agent "Google検索Agent"
+
+# エージェント一覧
+python -m src agent list
+
+# エージェント削除（プロファイルも削除する場合は --delete-profile）
+python -m src agent delete "Google検索Agent"
+```
+
+詳細は [docs/AGENT_PROFILE.md](docs/AGENT_PROFILE.md) を参照。
+
 ### その他のコマンド
 
 ```bash
 # ステータス確認
-python -m src.cli status
+python -m src status
 
 # セッション一覧
-python -m src.cli list
+python -m src list
 
 # セッション再開
-python -m src.cli resume セッション名
+python -m src resume セッション名
 
 # コンテナ停止
-python -m src.cli stop
+python -m src stop
 ```
 
 ## 出力ファイル

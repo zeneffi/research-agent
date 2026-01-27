@@ -23,6 +23,7 @@ from .orchestrator import Orchestrator
 from .browser_pool import BrowserPool
 from .snapshot import SnapshotManager
 from .task_parser import TaskParser
+from .agent_registry import AgentRegistry
 
 console = Console()
 
@@ -90,6 +91,12 @@ Examples:
         default=300,
         help="Timeout in seconds per task (default: 300)"
     )
+    research_parser.add_argument(
+        "--agent",
+        type=str,
+        default=None,
+        help="Use a registered agent profile"
+    )
 
     # status command
     status_parser = subparsers.add_parser("status", help="Show current status")
@@ -130,6 +137,27 @@ Examples:
         help="Session name to resume"
     )
 
+    # agent command
+    agent_parser = subparsers.add_parser("agent", help="Manage agents")
+    agent_subparsers = agent_parser.add_subparsers(dest="agent_command", help="Agent commands")
+
+    # agent register
+    agent_register = agent_subparsers.add_parser("register", help="Register a new agent")
+    agent_register.add_argument("name", type=str, help="Agent name")
+    agent_register.add_argument("--type", type=str, required=True, help="Agent type (search, scraper, etc.)")
+    agent_register.add_argument("--file", type=str, required=True, help="Path to agent script")
+    agent_register.add_argument("--description", type=str, default="", help="Agent description")
+
+    # agent list
+    agent_list = agent_subparsers.add_parser("list", help="List all agents")
+    agent_list.add_argument("--type", type=str, help="Filter by agent type")
+    agent_list.add_argument("--enabled-only", action="store_true", help="Show only enabled agents")
+
+    # agent delete
+    agent_delete = agent_subparsers.add_parser("delete", help="Delete an agent")
+    agent_delete.add_argument("name", type=str, help="Agent name")
+    agent_delete.add_argument("--delete-profile", action="store_true", help="Also delete profile data")
+
     return parser
 
 
@@ -143,12 +171,25 @@ async def cmd_research(args: argparse.Namespace) -> int:
     output_dir = Path(args.output)
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    # エージェントプロファイルを取得
+    profile_dir = None
+    if args.agent:
+        registry = AgentRegistry()
+        agent = registry.get(args.agent)
+        if not agent:
+            console.print(f"[red]Agent '{args.agent}' not found[/red]")
+            return 1
+        profile_dir = Path(agent.profile_dir)
+        console.print(f"[green]Using agent: {agent.name}[/green]")
+        console.print(f"[green]Profile: {profile_dir}[/green]")
+
     console.print(Panel(
         f"[bold blue]Starting Research Session[/bold blue]\n\n"
         f"Query: {args.query}\n"
         f"Parallel browsers: {parallel}\n"
         f"Output: {output_dir}\n"
-        f"Screenshots: {'Enabled' if args.screenshot else 'Disabled'}",
+        f"Screenshots: {'Enabled' if args.screenshot else 'Disabled'}\n"
+        f"Agent: {args.agent or 'None'}",
         title="Daytona Agent"
     ))
 
@@ -158,7 +199,8 @@ async def cmd_research(args: argparse.Namespace) -> int:
         output_dir=output_dir,
         screenshot=args.screenshot,
         session_name=args.session,
-        timeout=args.timeout
+        timeout=args.timeout,
+        profile_dir=profile_dir
     )
 
     try:
@@ -338,6 +380,65 @@ async def cmd_resume(args: argparse.Namespace) -> int:
         return 1
 
 
+async def cmd_agent(args: argparse.Namespace) -> int:
+    """Manage agents."""
+    registry = AgentRegistry()
+
+    if args.agent_command == "register":
+        try:
+            agent = registry.register(
+                name=args.name,
+                agent_type=args.type,
+                file_path=args.file,
+                description=args.description
+            )
+            console.print(f"[green]Agent '{agent.name}' registered successfully[/green]")
+            console.print(f"Profile directory: {agent.profile_dir}")
+            return 0
+        except ValueError as e:
+            console.print(f"[red]Error: {e}[/red]")
+            return 1
+
+    elif args.agent_command == "list":
+        agents = registry.list(
+            agent_type=args.type,
+            enabled_only=args.enabled_only
+        )
+
+        if not agents:
+            console.print("[yellow]No agents found[/yellow]")
+            return 0
+
+        table = Table(title="Registered Agents")
+        table.add_column("Name", style="cyan")
+        table.add_column("Type", style="green")
+        table.add_column("File Path", style="yellow")
+        table.add_column("Profile Dir", style="blue")
+        table.add_column("Status", style="magenta")
+
+        for agent in agents:
+            table.add_row(
+                agent.name,
+                agent.agent_type,
+                agent.file_path,
+                agent.profile_dir,
+                "✓ Enabled" if agent.enabled else "✗ Disabled"
+            )
+
+        console.print(table)
+        return 0
+
+    elif args.agent_command == "delete":
+        if registry.delete(args.name, delete_profile=args.delete_profile):
+            console.print(f"[green]Agent '{args.name}' deleted[/green]")
+            return 0
+        else:
+            console.print(f"[red]Agent '{args.name}' not found[/red]")
+            return 1
+
+    return 0
+
+
 async def async_main(args: argparse.Namespace) -> int:
     """Async main entry point."""
     if args.command == "research":
@@ -350,6 +451,8 @@ async def async_main(args: argparse.Namespace) -> int:
         return await cmd_list(args)
     elif args.command == "resume":
         return await cmd_resume(args)
+    elif args.command == "agent":
+        return await cmd_agent(args)
     else:
         parser = create_parser()
         parser.print_help()
