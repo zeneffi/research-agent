@@ -5,6 +5,7 @@ import subprocess
 import re
 import json
 import time
+import os
 
 
 def run_browser_command(cmd):
@@ -93,7 +94,7 @@ if __name__ == "__main__":
 
     # 結果をJSONファイルに保存
     with open(
-        "/Users/wakiyamasora/Documents/product/zeneffi/zeneffi-ai-base/daytona-agent/lp_urls.json",
+        os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "output", "lp_urls.json"),
         "w",
     ) as f:
         json.dump(lp_urls, f, ensure_ascii=False, indent=2)

@@ -8,6 +8,7 @@ SUUMO、LIFULL HOME'S などから工務店リストを収集
 import json
 import re
 import time
+import os
 import requests
 from typing import List, Dict, Optional
 from dataclasses import dataclass, asdict
@@ -271,7 +272,9 @@ def main():
     companies = collector.collect_all()
 
     # JSON出力
-    output_file = "/Users/wakiyamasora/Documents/product/zeneffi/zeneffi-ai-base/daytona-agent/projects/koumuten/output/chiba_koumuten_list.json"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_dir = os.path.dirname(os.path.dirname(script_dir))
+    output_file = os.path.join(project_dir, "output", "chiba_koumuten_list.json")
     collector.export_json(companies, output_file)
 
     # サマリー出力

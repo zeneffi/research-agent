@@ -6,7 +6,7 @@ import re
 import time
 import os
 
-OUTPUT_DIR = "/Users/wakiyamasora/Documents/product/zeneffi/zeneffi-ai-base/daytona-agent/lp_screenshots"
+OUTPUT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "output", "lp_screenshots")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def run_cmd(cmd):

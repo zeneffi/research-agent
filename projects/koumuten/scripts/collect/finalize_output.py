@@ -1,8 +1,12 @@
 import json
+import os
 
 def finalize_output():
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_dir = os.path.dirname(os.path.dirname(script_dir))
+
     # Load enriched data
-    with open('/Users/wakiyamasora/Documents/product/zeneffi/zeneffi-ai-base/daytona-agent/projects/gunma-koumuten/output/koumuten_enriched.json', 'r', encoding='utf-8') as f:
+    with open(os.path.join(project_dir, 'output', 'koumuten_enriched.json'), 'r', encoding='utf-8') as f:
         companies = json.load(f)
 
     # Final output format
@@ -52,7 +56,7 @@ def finalize_output():
         final_output['companies'].append(formatted_company)
 
     # Save final output
-    output_path = '/Users/wakiyamasora/Documents/product/zeneffi/zeneffi-ai-base/daytona-agent/projects/gunma-koumuten/output/gunma_koumuten_final.json'
+    output_path = os.path.join(project_dir, 'output', 'gunma_koumuten_final.json')
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(final_output, f, ensure_ascii=False, indent=2)
 

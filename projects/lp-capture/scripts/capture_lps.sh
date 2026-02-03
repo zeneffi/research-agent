@@ -1,7 +1,8 @@
 #!/bin/bash
 # LP幹事から工務店LPのフルスクリーンショットを取得するスクリプト
 
-OUTPUT_DIR="/Users/wakiyamasora/Documents/product/zeneffi/zeneffi-ai-base/daytona-agent/lp_screenshots"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+OUTPUT_DIR="$SCRIPT_DIR/../output/lp_screenshots"
 mkdir -p "$OUTPUT_DIR"
 
 # LP名と実際のURLのリスト
@@ -12,34 +13,34 @@ get_lp_url() {
     local ref=$1
     local name=$2
     local index=$3
-
+    
     echo "[$index/20] $name の処理中..."
-
+    
     # 一覧ページを開く
     agent-browser open "https://lp-kanji.com/search/construction/" > /dev/null 2>&1
     sleep 1
-
+    
     # LPリンクをクリック
     agent-browser click @$ref > /dev/null 2>&1
     sleep 2
-
+    
     # 詳細ページのスナップショットを取得してURLを抽出
     snapshot=$(agent-browser snapshot -i 2>/dev/null)
-
+    
     # https:// で始まるリンクを探す
     url=$(echo "$snapshot" | grep -o 'link "https://[^"]*"' | head -1 | sed 's/link "\(.*\)"/\1/')
-
+    
     if [ -n "$url" ]; then
         echo "  URL: $url"
-
+        
         # LPページを開く
         agent-browser open "$url" > /dev/null 2>&1
         sleep 3
-
+        
         # フルページスクリーンショットを撮影
         filename=$(printf "%02d_%s.png" $index "$(echo "$name" | tr ' ' '_' | tr '/' '_' | cut -c1-30)")
         agent-browser screenshot --full "$OUTPUT_DIR/$filename" > /dev/null 2>&1
-
+        
         if [ -f "$OUTPUT_DIR/$filename" ]; then
             echo "  スクリーンショット保存: $filename"
         else

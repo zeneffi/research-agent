@@ -1,7 +1,8 @@
 #!/bin/bash
 # LP幹事から工務店LPのスクリーンショットを取得
 
-OUTPUT_DIR="/Users/wakiyamasora/Documents/product/zeneffi/zeneffi-ai-base/daytona-agent/lp_screenshots"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+OUTPUT_DIR="$SCRIPT_DIR/../output/lp_screenshots"
 mkdir -p "$OUTPUT_DIR"
 
 # 関数: LPを取得してスクリーンショット
@@ -9,40 +10,40 @@ capture_lp() {
     local index=$1
     local name=$2
     local ref=$3
-
+    
     echo ""
     echo "=== [$index/20] $name ==="
-
+    
     # 一覧ページを開く
     agent-browser open "https://lp-kanji.com/search/construction/" > /dev/null 2>&1
     sleep 2
-
+    
     # スナップショット取得
     agent-browser snapshot -i > /dev/null 2>&1
-
+    
     # クリック
     agent-browser click @$ref > /dev/null 2>&1
     sleep 2
-
+    
     # LP URLを取得
     snapshot=$(agent-browser snapshot -i 2>/dev/null)
     lp_url=$(echo "$snapshot" | grep -oE 'link "https?://[^"]+' | head -1 | sed 's/link "//')
-
+    
     if [ -z "$lp_url" ] || [[ "$lp_url" == *"lp-kanji.com"* ]]; then
         echo "  URL取得失敗、スキップ"
         return 1
     fi
-
+    
     echo "  URL: $lp_url"
-
+    
     # LPを開く
     agent-browser open "$lp_url" > /dev/null 2>&1
     sleep 4
-
+    
     # スクリーンショット
     filename=$(printf "lp_%02d_%s.png" $index "$name")
     agent-browser screenshot --full "$OUTPUT_DIR/$filename" 2>&1
-
+    
     if [ -f "$OUTPUT_DIR/$filename" ]; then
         size=$(ls -lh "$OUTPUT_DIR/$filename" | awk '{print $5}')
         echo "  保存: $filename ($size)"

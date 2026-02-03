@@ -62,7 +62,7 @@ Dockerコンテナで起動した並列ブラウザを使用してWeb調査を�
 ### 1. Dockerコンテナの起動/接続
 
 ```bash
-cd /Users/wakiyamasora/Documents/product/zeneffi/zeneffi-ai-base/daytona-agent/docker
+cd ./docker
 docker compose up -d --scale browser=5
 ```
 

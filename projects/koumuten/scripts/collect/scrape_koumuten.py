@@ -2,6 +2,7 @@ import requests
 import re
 import json
 import time
+import os
 from urllib.parse import urljoin
 
 BASE_URL = "https://suumo.jp"
@@ -122,7 +123,9 @@ def main():
         time.sleep(0.5)
 
     # Save results
-    output_path = '/Users/wakiyamasora/Documents/product/zeneffi/zeneffi-ai-base/daytona-agent/projects/gunma-koumuten/output/koumuten_list.json'
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_dir = os.path.dirname(os.path.dirname(script_dir))
+    output_path = os.path.join(project_dir, 'output', 'koumuten_list.json')
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(detailed_companies, f, ensure_ascii=False, indent=2)
 

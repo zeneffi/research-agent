@@ -2,6 +2,7 @@ import json
 import requests
 import re
 import time
+import os
 
 # Known official websites for major builders
 KNOWN_WEBSITES = {
@@ -112,8 +113,11 @@ COMPANY_FEATURES = {
 }
 
 def enrich_data():
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_dir = os.path.dirname(os.path.dirname(script_dir))
+
     # Load existing data
-    with open('/Users/wakiyamasora/Documents/product/zeneffi/zeneffi-ai-base/daytona-agent/projects/gunma-koumuten/output/koumuten_detailed.json', 'r', encoding='utf-8') as f:
+    with open(os.path.join(project_dir, 'output', 'koumuten_detailed.json'), 'r', encoding='utf-8') as f:
         companies = json.load(f)
 
     # Enrich with known data
@@ -134,7 +138,7 @@ def enrich_data():
             company['features'] = list(existing_features.union(new_features))
 
     # Save enriched data
-    output_path = '/Users/wakiyamasora/Documents/product/zeneffi/zeneffi-ai-base/daytona-agent/projects/gunma-koumuten/output/koumuten_enriched.json'
+    output_path = os.path.join(project_dir, 'output', 'koumuten_enriched.json')
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(companies, f, ensure_ascii=False, indent=2)
 

@@ -6,6 +6,7 @@
 
 import json
 import re
+import os
 from typing import List, Dict
 
 def load_data(filepath: str) -> List[Dict]:
@@ -323,8 +324,10 @@ def get_company_details(companies: List[Dict]) -> List[Dict]:
     return companies
 
 def main():
-    input_file = '/Users/wakiyamasora/Documents/product/zeneffi/zeneffi-ai-base/daytona-agent/projects/koumuten/output/chiba_koumuten_list.json'
-    output_file = '/Users/wakiyamasora/Documents/product/zeneffi/zeneffi-ai-base/daytona-agent/projects/koumuten/output/chiba_koumuten_final.json'
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_dir = os.path.dirname(os.path.dirname(script_dir))
+    input_file = os.path.join(project_dir, 'output', 'chiba_koumuten_list.json')
+    output_file = os.path.join(project_dir, 'output', 'chiba_koumuten_final.json')
 
     # データ読み込み
     companies = load_data(input_file)
