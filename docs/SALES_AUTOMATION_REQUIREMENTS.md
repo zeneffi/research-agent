@@ -743,7 +743,7 @@ def generate_sales_message(company_info: dict) -> str:
     industry = company_info.get("industry", "")
 
     # カスタム項目の内容から企業タイプを推測して最適なパターンを選択
-    
+
     # パターン1: 資金調達企業向け
     # custom_field_1が「シリーズA」「シリーズB」などを含む場合
     if custom_1 and any(keyword in custom_1 for keyword in ["シリーズ", "ラウンド", "資金調達"]):
@@ -1260,10 +1260,40 @@ python3 scripts/test_form_detection.py output/sales_list_20260204_2034.json --ma
 #### Phase 6: 統合テスト（進行中）
 - [x] フォーム検出テストスクリプト作成
 - [x] 5社でフォーム検出テスト実施
+- [x] フォーム検出アルゴリズム改善（2026/02/05）
+- [x] 設定ファイル検証機能追加（2026/02/05）
 - [ ] 実際のフォームで2社にテスト送信（検出成功企業のみ）
 - [ ] CAPTCHA検出の動作確認
 - [ ] 送信成功率の測定
 - [ ] エラーハンドリングの検証
+
+#### Phase 7: フォーム検出・送信機能の改善（2026年2月5日完了）
+
+**問題1: メール未到達の根本原因**
+- ✅ 設定ファイル検証機能を追加（send_sales_form.py:62-73）
+  - デフォルト値での実行を防止
+  - メールアドレス形式検証
+  - example.comドメインを拒否
+- ✅ 送信前に送信者情報を表示
+
+**問題2: フォーム検出成功率の改善**
+- ✅ キーワード検証を緩和（contact_finder.py:45-47）
+  - Before: `body.includes('お問い合わせフォーム')` - 完全一致
+  - After: `body.includes('お問い合わせ')` - 部分一致
+- ✅ HTML構造検出を追加（新規メソッド 1.5）
+  - `<form>`タグ、`<input type="email">`、`<textarea>`、送信ボタンの検出
+  - キーワード検証失敗時のフォールバック
+- ✅ 待機時間を延長
+  - JavaScript動的生成対応: 1秒 → 5秒
+  - ページ読み込み待機: 1秒 → 2秒
+- ✅ デバッグログを追加
+  - 検出方法（Method 1/1.5/2/3）をログ出力
+  - 検出失敗時もログ記録
+
+**期待される効果:**
+- フォーム検出成功率: 40% → 50-60%
+- zeneffi.co.jpのような動的サイトでも検出可能
+- デバッグ効率の向上
 
 #### 本番運用準備
 - [ ] 送信者情報の正しい設定
@@ -1315,3 +1345,69 @@ python3 scripts/send_sales_form.py output/sales_list_20260204_2034.json --max-se
 | テスト送信実施（2社） | ⏳ 待機中 | - | **次のステップ** |
 | 本番運用準備 | ⏳ 待機中 | - | 送信者情報設定 |
 | 本番運用開始 | ⏳ 待機中 | - | テスト送信後 |
+
+
+
+ 実装後の使い方
+
+ 営業リスト作成
+ /sales-list-creation "東京 Web制作会社" --max-companies 50
+
+ フォーム送信
+ # 1. 送信者情報を設定
+ vim projects/sales-automation/config/sales_automation.json
+ # 2. テスト送信
+ /form-sales output/sales_list_20260204_2034.json --max-sends 3
+ # 3. 本番送信
+ /form-sales output/sales_list_20260204_2034.json
+
+ パイプライン実行
+ # 1. リスト作成
+ /sales-list-creation "東京 IT企業" --max-companies 100
+ # 2. 送信者情報設定
+ vim projects/sales-automation/config/sales_automation.json
+ # 3. フォーム送信
+ /form-sales output/sales_list_*.json --max-sends 10
+
+### 🎯 実際の送信テスト結果（2026年2月5日）
+
+#### zeneffi合同会社への再送信テスト
+
+**実行日時**: 2026-02-05 15:41:26
+
+**テスト概要**:
+- 目的: 実際のフォーム送信機能の動作検証
+- 対象: zeneffi合同会社（自社テスト）
+- 送信先URL: https://zeneffi.co.jp/contact
+
+**送信結果**:
+- 総数: 1社
+- 成功: 1社（100%）
+- 失敗: 0社
+- スキップ: 0社
+
+**検出フィールド**:
+- `email` - メールアドレス
+- `company` - 会社名
+- `message` - お問い合わせ内容
+
+**送信者情報**:
+- 会社名: zeneffi合同会社
+- 担当者: 藤崎俊平
+- メール: shumpei.fujisaki@zeneffi.co.jp
+
+**生成ファイル**:
+- 送信ログ: `output/send_log.json`
+- 送信レポート: `output/send_report.md`
+- 送信リスト: `output/zeneffi_resend.json`
+
+**検証結果**:
+- ✅ フォーム検出機能が正常動作
+- ✅ 営業文生成が正常動作
+- ✅ フォーム送信が正常完了
+- ✅ ログ・レポート生成が正常動作
+
+**次のステップ**:
+- 本番運用に向けて、より多くの企業でテスト送信を実施
+- 送信成功率のモニタリング
+- CAPTCHA検出率の確認

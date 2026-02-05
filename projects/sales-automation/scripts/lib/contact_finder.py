@@ -24,7 +24,7 @@ COMMON_CONTACT_PATHS = [
 
 def find_contact_form_url(port: int, base_url: str) -> str:
     """
-    問い合わせフォームURLを3段階で検出
+    問い合わせフォームURLを4段階で検出
 
     Args:
         port: ブラウザコンテナのポート
@@ -37,25 +37,47 @@ def find_contact_form_url(port: int, base_url: str) -> str:
     for path in COMMON_CONTACT_PATHS:
         candidate_url = urljoin(base_url, path)
         if browser_navigate(port, candidate_url, timeout=10):
-            time.sleep(1)
-            # ページタイトル・本文で確認
+            time.sleep(2)  # JavaScript読み込み待機を延長
+            # ページタイトル・本文で確認（キーワード検証を緩和）
             script = """(function() {
                 const title = document.title.toLowerCase();
                 const body = document.body.innerText.toLowerCase();
                 const hasContactKeyword = title.includes('contact') || title.includes('問い合わせ') ||
                                          title.includes('お問い合わせ') || title.includes('inquiry') ||
-                                         body.includes('お問い合わせフォーム') || body.includes('contact form');
+                                         body.includes('お問い合わせ') || body.includes('contact') ||
+                                         body.includes('問い合わせ') || body.includes('form');
                 return hasContactKeyword;
             })()"""
             result = browser_evaluate(port, script, timeout=10)
             if result == 'true':
+                print(f"  [DEBUG] Method 1 (common paths + keywords): {candidate_url}")
+                return candidate_url
+
+    # === 方法1.5: HTML構造で検出（フォーム要素の存在確認）===
+    for path in COMMON_CONTACT_PATHS:
+        candidate_url = urljoin(base_url, path)
+        if browser_navigate(port, candidate_url, timeout=10):
+            time.sleep(2)
+            # HTML要素で判定
+            html_check_script = """(function() {
+                const hasForm = !!document.querySelector('form');
+                const hasEmailInput = !!document.querySelector('input[type="email"]');
+                const hasSubmitButton = !!document.querySelector('button[type="submit"], input[type="submit"]');
+                const hasTextarea = !!document.querySelector('textarea');
+
+                // フォーム要素が揃っていれば、問い合わせフォームと判定
+                return (hasForm && hasSubmitButton) || (hasEmailInput && hasTextarea && hasSubmitButton);
+            })()"""
+            result = browser_evaluate(port, html_check_script, timeout=10)
+            if result == 'true':
+                print(f"  [DEBUG] Method 1.5 (HTML structure): {candidate_url}")
                 return candidate_url
 
     # === 方法2: トップページからリンクを探す ===
     if not browser_navigate(port, base_url):
         return ''
 
-    time.sleep(2)
+    time.sleep(5)  # JavaScript動的生成リンク対応のため待機延長
 
     # 問い合わせリンクを検出するスクリプト
     script = """(function() {
@@ -92,11 +114,13 @@ def find_contact_form_url(port: int, base_url: str) -> str:
         try:
             parsed = json.loads(result)
             if isinstance(parsed, str) and parsed:
+                print(f"  [DEBUG] Method 2 (link search): {parsed}")
                 return parsed
         except json.JSONDecodeError:
             pass
         # 文字列として直接返す
         if isinstance(result, str) and result.startswith('http'):
+            print(f"  [DEBUG] Method 2 (link search): {result}")
             return result
 
     # === 方法3: フッターやヘッダーから検出 ===
@@ -127,16 +151,18 @@ def find_contact_form_url(port: int, base_url: str) -> str:
     result = browser_evaluate(port, footer_script)
     if result and result != '':
         try:
-            import json
             parsed = json.loads(result)
             if isinstance(parsed, str) and parsed:
+                print(f"  [DEBUG] Method 3 (footer/header): {parsed}")
                 return parsed
-        except:
+        except json.JSONDecodeError:
             pass
         if isinstance(result, str) and result.startswith('http'):
+            print(f"  [DEBUG] Method 3 (footer/header): {result}")
             return result
 
     # 見つからなかった
+    print(f"  [DEBUG] Form URL not found for {base_url}")
     return ''
 
 

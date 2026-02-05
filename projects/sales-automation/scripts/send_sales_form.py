@@ -61,16 +61,50 @@ def load_sales_list(file_path: str) -> list:
 
 def load_config(config_path: str) -> dict:
     """
-    設定ファイル読み込み
+    設定ファイルを読み込み、検証する
 
     Args:
         config_path: 設定ファイルパス
 
     Returns:
         設定辞書
+
+    Raises:
+        ValueError: 設定が不正な場合
     """
     with open(config_path, 'r', encoding='utf-8') as f:
-        return json.load(f)
+        config = json.load(f)
+
+    sender_info = config['form_sales']['sender_info']
+
+    # デフォルト値チェック
+    if sender_info['company_name'] == '株式会社Example':
+        print("=" * 60)
+        print("⚠️  エラー: 送信者情報がデフォルト値のままです")
+        print("=" * 60)
+        print("config/sales_automation.json を編集して、以下を設定してください：")
+        print("  - company_name: 実際の会社名")
+        print("  - contact_name: 実際の担当者名")
+        print("  - email: 実際のメールアドレス")
+        print("  - phone: 実際の電話番号")
+        print("=" * 60)
+        raise ValueError("Sender info not configured. Please edit config/sales_automation.json")
+
+    # メールアドレス形式検証
+    email = sender_info['email']
+    if '@' not in email or '.' not in email.split('@')[-1]:
+        print(f"⚠️  エラー: メールアドレスが不正です: {email}")
+        raise ValueError("Invalid email format")
+
+    # example.comドメインの警告
+    if 'example.com' in email:
+        print("⚠️  警告: example.comドメインは使用できません")
+        raise ValueError("Cannot use example.com domain")
+
+    print(f"✓ 送信者情報: {sender_info['company_name']} / {sender_info['contact_name']}")
+    print(f"✓ メール: {sender_info['email']}")
+
+    return config
 
 
 def send_to_company(port: int, company: dict, sender_info: dict, rate_limiter: RateLimiter) -> dict:

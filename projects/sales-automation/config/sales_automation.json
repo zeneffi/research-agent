@@ -7,10 +7,10 @@
       "interval_seconds": 180
     },
     "sender_info": {
-      "company_name": "株式会社Example",
-      "contact_name": "山田太郎",
-      "email": "info@example.com",
-      "phone": "03-1234-5678"
+      "company_name": "zeneffi合同会社",
+      "contact_name": "藤崎俊平",
+      "email": "shumpei.fujisaki@zeneffi.co.jp",
+      "phone": "070-1317-2700"
     },
     "screenshot_on_error": true,
     "screenshot_dir": "output/screenshots"
