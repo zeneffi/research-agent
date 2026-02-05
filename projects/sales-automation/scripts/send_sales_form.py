@@ -328,9 +328,10 @@ def main():
         interval_seconds=config['form_sales']['rate_limit']['interval_seconds']
     )
 
-    # 4. コンテナポート取得（5個のみ使用）
+    # 4. コンテナポート取得
     print("[2/5] ブラウザコンテナ確認中...")
-    ports = get_container_ports()[:5]  # 5コンテナのみ
+    max_containers = config['form_sales'].get('max_containers', 5)
+    ports = get_container_ports()[:max_containers]
     if not ports:
         print("エラー: Dockerコンテナが起動していません")
         print("docker compose up -d で起動してください")

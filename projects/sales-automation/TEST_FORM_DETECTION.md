@@ -22,12 +22,12 @@
 ### 基本的な使用方法
 
 ```bash
-# Dockerコンテナを起動
-cd /Users/fujisakishumpei/Documents/projects/research-agent/docker
+# Dockerコンテナを起動（プロジェクトルートからの相対パス）
+cd ../../docker
 docker compose up -d
 
 # sales-automationディレクトリに移動
-cd /Users/fujisakishumpei/Documents/projects/research-agent/projects/sales-automation
+cd ../projects/sales-automation
 
 # 最大10社をテスト（デフォルト）
 python3 scripts/test_form_detection.py output/sales_list_20260204_2034.json
@@ -143,7 +143,7 @@ docker compose up -d で起動してください
 
 **解決方法:**
 ```bash
-cd /Users/fujisakishumpei/Documents/projects/research-agent/docker
+cd ../../docker
 docker compose up -d
 ```
 

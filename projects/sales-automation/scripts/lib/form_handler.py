@@ -153,7 +153,8 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
                 if (sel.includes(':has-text') || sel.includes(':contains')) {{
                     const buttons = document.querySelectorAll('button');
                     for (const b of buttons) {{
-                        if (b.textContent.includes('送信') || b.textContent.includes('確認')) {{
+                        const buttonText = b.textContent.trim();
+                        if (buttonText === '送信' || buttonText === '確認' || buttonText === '送信する' || buttonText === '確認する') {{
                             btn = b;
                             break;
                         }}

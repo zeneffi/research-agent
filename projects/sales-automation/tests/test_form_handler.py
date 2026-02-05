@@ -2,7 +2,6 @@
 form_handler.py のテスト
 """
 import pytest
-from scripts.lib.form_handler import detect_company_type
 
 
 def test_detect_captcha():

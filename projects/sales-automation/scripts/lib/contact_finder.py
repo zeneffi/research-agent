@@ -1,6 +1,7 @@
 """
 問い合わせフォーム検出機能
 """
+import json
 import re
 import time
 from urllib.parse import urljoin, urlparse
@@ -89,11 +90,10 @@ def find_contact_form_url(port: int, base_url: str) -> str:
     if result and result != '':
         # JSON文字列の場合はパース
         try:
-            import json
             parsed = json.loads(result)
             if isinstance(parsed, str) and parsed:
                 return parsed
-        except:
+        except json.JSONDecodeError:
             pass
         # 文字列として直接返す
         if isinstance(result, str) and result.startswith('http'):

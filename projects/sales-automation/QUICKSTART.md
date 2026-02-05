@@ -241,7 +241,8 @@ import json
 with open('output/send_log.json') as f:
     data = json.load(f)
     s = data['summary']
-    print(f'成功率: {s[\"success\"]/s[\"total\"]*100:.1f}%')
+    rate = (s[\"success\"] / s[\"total\"] * 100) if s[\"total\"] > 0 else 0.0
+    print(f'成功率: {rate:.1f}%')
     print(f'成功: {s[\"success\"]}社')
     print(f'失敗: {s[\"failed\"]}社')
     print(f'スキップ: {s[\"skipped\"]}社')
