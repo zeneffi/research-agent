@@ -38,25 +38,71 @@ def extract_company_info(port: int, url: str, search_context: str = 'General') -
         const body = document.body.innerText;
         const title = document.title;
 
-        // 企業名抽出（複数パターン）
+        // === 企業名抽出（優先度順） ===
         let companyName = '';
-        const companyPatterns = [
-            /(?:会社名|社名)[：:・\\s]*([^\\n]+)/,
-            /(?:株式会社|有限会社|合同会社)([^\\n、,]+)/,
-        ];
-        for (const pattern of companyPatterns) {{
-            const match = body.match(pattern);
-            if (match) {{
-                companyName = match[1].trim();
-                break;
+
+        // 1. meta要素から取得（最も信頼性が高い）
+        const ogSiteName = document.querySelector('meta[property="og:site_name"]')?.content;
+        if (ogSiteName && ogSiteName.length > 2 && ogSiteName.length < 50) {{
+            companyName = ogSiteName.trim();
+        }}
+
+        // 2. 明示的な「会社名：〇〇」形式
+        if (!companyName) {{
+            const explicitPatterns = [
+                /(?:会社名|社名|商号|運営会社)[：:・\\s]+([^\\n、,（(]+)/,
+            ];
+            for (const pattern of explicitPatterns) {{
+                const match = body.match(pattern);
+                if (match && match[1].trim().length > 1) {{
+                    companyName = match[1].trim();
+                    break;
+                }}
             }}
         }}
 
-        // タイトルからフォールバック
+        // 3. 法人格パターン（前株・後株両対応）
         if (!companyName) {{
-            const titleMatch = title.match(/(.+?)(?:｜|\\||のホームページ|公式サイト|株式会社|有限会社)/);
-            if (titleMatch) companyName = titleMatch[1].trim();
+            // 後株：「ABC株式会社」「ゼネフィ合同会社」
+            const postfixMatch = body.match(/([ァ-ヶー一-龥a-zA-Zａ-ｚＡ-Ｚ0-9０-９]+?)\\s*(?:株式会社|有限会社|合同会社|合資会社)/);
+            if (postfixMatch && postfixMatch[1].trim().length > 1) {{
+                companyName = postfixMatch[0].trim();
+            }}
         }}
+
+        if (!companyName) {{
+            // 前株：「株式会社ABC」
+            const prefixMatch = body.match(/(?:株式会社|有限会社|合同会社|合資会社)\\s*([ァ-ヶー一-龥a-zA-Zａ-ｚＡ-Ｚ0-9０-９]+)/);
+            if (prefixMatch && prefixMatch[1].trim().length > 1) {{
+                companyName = prefixMatch[0].trim();
+            }}
+        }}
+
+        // 4. タイトルからフォールバック（法人格含む形式）
+        if (!companyName) {{
+            // タイトルに法人格が含まれている場合
+            const titleCorpMatch = title.match(/((?:株式会社|有限会社|合同会社)[^｜|\\n]+|[^｜|\\n]+(?:株式会社|有限会社|合同会社))/);
+            if (titleCorpMatch) {{
+                companyName = titleCorpMatch[1].trim();
+            }}
+        }}
+
+        // 5. タイトルから区切り文字前を取得
+        if (!companyName) {{
+            const titleMatch = title.match(/(.+?)(?:｜|\\||\\s*-\\s*|のホームページ|公式サイト|公式)/);
+            if (titleMatch && titleMatch[1].trim().length > 1) {{
+                companyName = titleMatch[1].trim();
+            }}
+        }}
+
+        // 6. 最終フォールバック：タイトルそのまま
+        if (!companyName) {{
+            companyName = title.substring(0, 50);
+        }}
+
+        // 不要な文字を除去
+        companyName = companyName.replace(/[\\s　]+/g, ' ').trim();
+        companyName = companyName.replace(/^【[^】]*】/, '').trim();  // 【公式】等を除去
 
         // 所在地抽出
         let location = '';
