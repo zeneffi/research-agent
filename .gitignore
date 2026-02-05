@@ -58,6 +58,12 @@ data/screenshots/*.jpeg
 # Jupyter
 .ipynb_checkpoints/
 
+# Projects output directories
+projects/*/output/*.json
+projects/*/output/*.csv
+projects/*/output/*.md
+!projects/*/output/.gitkeep
+
 # その他
 *.log
 *.tmp

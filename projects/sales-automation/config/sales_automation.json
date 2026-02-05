@@ -1,0 +1,19 @@
+{
+  "form_sales": {
+    "max_containers": 5,
+    "timeout_seconds": 120,
+    "rate_limit": {
+      "daily_limit": 100,
+      "interval_seconds": 180
+    },
+    "sender_info": {
+      "company_name": "zeneffi合同会社",
+      "contact_name": "藤崎俊平",
+      "email": "shumpei.fujisaki@zeneffi.co.jp",
+      "phone": "070-1317-2700"
+    },
+    "screenshot_on_error": true,
+    "screenshot_dir": "output/screenshots"
+  },
+  "output_dir": "output"
+}
