@@ -1,0 +1,120 @@
+# Sales Automation Configuration
+
+search:
+  # 検索エンジン設定
+  engine: duckduckgo  # 固定（Googleは使用しない）
+  max_pages: 3        # 1クエリあたりの最大検索ページ数
+  results_per_page: 10
+
+  # 除外ドメイン（検索結果から除外）
+  skip_domains:
+    - facebook.com
+    - twitter.com
+    - instagram.com
+    - youtube.com
+    - wikipedia.org
+    - amazon.co.jp
+    - rakuten.co.jp
+    - indeed.com
+    - wantedly.com
+
+collection:
+  # 収集設定
+  max_companies: 100     # 最大収集企業数
+  parallel_containers: 15 # 並列実行コンテナ数
+  timeout: 30            # ページロードタイムアウト（秒）
+
+  # カスタム項目（業種別）
+  custom_fields:
+    IT:
+      - name: tech_stack
+        label: 技術スタック
+        patterns:
+          - "(?:使用技術|技術スタック|Tech Stack)[：:・\\s]*([^\\n]+)"
+          - "(React|Vue|Angular|Node\\.js|Python|Ruby|Go|Java)"
+      - name: engineer_count
+        label: エンジニア数
+        patterns:
+          - "エンジニア[：:・\\s]*(\\d+)[名人]"
+      - name: development_achievements
+        label: 開発実績
+        patterns:
+          - "(?:開発実績|実績)[：:・\\s]*([^\\n]+)"
+
+    Manufacturing:
+      - name: main_products
+        label: 主要製品
+        patterns:
+          - "(?:主要製品|製品)[：:・\\s]*([^\\n]+)"
+      - name: factory_location
+        label: 工場所在地
+        patterns:
+          - "(?:工場|生産拠点)[：:・\\s]*([^\\n]+)"
+      - name: iso_certification
+        label: ISO認証
+        patterns:
+          - "(ISO\\s*\\d+)"
+
+    Startup:
+      - name: funding_round
+        label: 調達ラウンド
+        patterns:
+          - "(シリーズ[A-E]|プレシリーズA|シード|Seed|Series [A-E])"
+      - name: funding_amount
+        label: 調達額
+        patterns:
+          - "(\\d+(?:\\.\\d+)?)[\\s]*億円"
+          - "(\\d+(?:,\\d+)?)[\\s]*百万円"
+      - name: funding_date
+        label: 調達日
+        patterns:
+          - "(\\d{4})年(\\d{1,2})月"
+
+contact_form:
+  # 問い合わせフォーム検出
+  common_paths:
+    - /contact
+    - /contact-us
+    - /inquiry
+    - /toiawase
+    - /お問い合わせ
+    - /form
+
+  link_patterns:
+    - "お問い?合わ?せ"
+    - "contact"
+    - "inquiry"
+    - "ご相談"
+    - "資料請求"
+
+output:
+  # 出力設定
+  formats:
+    - json
+    - csv
+    - markdown
+
+  directory: output
+
+  # CSV列定義
+  csv_columns:
+    - company_name
+    - company_url
+    - contact_form_url
+    - location
+    - business
+    - custom_field_1
+    - custom_field_2
+    - custom_field_3
+    - source_query
+    - collected_at
+
+normalization:
+  # 企業名正規化
+  remove_patterns:
+    - "株式会社"
+    - "有限会社"
+    - "合同会社"
+    - "一般社団法人"
+    - "公益財団法人"
+    - "\\s+"  # 空白

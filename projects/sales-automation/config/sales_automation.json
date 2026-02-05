@@ -1,0 +1,19 @@
+{
+  "form_sales": {
+    "max_containers": 5,
+    "timeout_seconds": 120,
+    "rate_limit": {
+      "daily_limit": 100,
+      "interval_seconds": 180
+    },
+    "sender_info": {
+      "company_name": "株式会社Example",
+      "contact_name": "山田太郎",
+      "email": "info@example.com",
+      "phone": "03-1234-5678"
+    },
+    "screenshot_on_error": true,
+    "screenshot_dir": "output/screenshots"
+  },
+  "output_dir": "output"
+}
