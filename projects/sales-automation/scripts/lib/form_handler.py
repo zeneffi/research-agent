@@ -2,6 +2,7 @@
 フォーム検出・入力・送信機能
 
 auto_contact.py からの移植版（Playwright → browser_evaluate 変換）
+v2: 検出精度向上版
 """
 import json
 import os
@@ -13,53 +14,240 @@ from .browser import browser_navigate, browser_evaluate
 
 def detect_form_fields(port: int, url: str) -> Optional[Dict[str, str]]:
     """
-    フォーム項目を自動検出
+    フォーム項目を自動検出（v2: 精度向上版）
 
-    移植元: koumuten/auto_contact.py 行69-75
+    検出戦略:
+    1. name/id属性のパターンマッチ
+    2. placeholder属性のパターンマッチ
+    3. aria-label属性のパターンマッチ
+    4. label要素からの特定（for属性 or 内包）
+    5. 親要素のテキストからの推定
 
     Args:
         port: ブラウザコンテナのポート
         url: フォームページURL
 
     Returns:
-        {'company': 'company-name', 'name': 'your-name', 'email': 'email',
-         'phone': 'tel', 'message': 'message'}
+        {'company': 'selector', 'name': 'selector', 'email': 'selector',
+         'phone': 'selector', 'message': 'selector'}
         または None（フォームが見つからない場合）
     """
-    # auto_contact.py のセレクタパターンをそのまま使用
-    form_selectors = {
-        "name": ['input[name*="name"]', 'input[name*="氏名"]', 'input[placeholder*="お名前"]'],
-        "email": ['input[type="email"]', 'input[name*="mail"]', 'input[name*="メール"]'],
-        "phone": ['input[name*="tel"]', 'input[name*="phone"]', 'input[name*="電話"]'],
-        "company": ['input[name*="company"]', 'input[name*="会社"]', 'input[name*="法人"]'],
-        "message": ['textarea', 'textarea[name*="message"]', 'textarea[name*="内容"]']
-    }
-
     script = """
     (function() {
-        const selectors = """ + json.dumps(form_selectors) + """;
+        // フィールド検出パターン（優先度順）
+        const patterns = {
+            name: {
+                namePatterns: ['name', 'fullname', 'your-name', 'yourname', 'contact-name', 'contactname', 'shimei', '氏名', 'namae', '名前'],
+                placeholderPatterns: ['お名前', '氏名', '名前', 'ご担当者', '担当者名', 'フルネーム', 'your name', 'full name'],
+                labelPatterns: ['お名前', '氏名', '名前', 'ご担当者', '担当者', 'ご芳名', '御名前']
+            },
+            email: {
+                namePatterns: ['email', 'mail', 'e-mail', 'メール', 'メールアドレス'],
+                placeholderPatterns: ['メールアドレス', 'メール', 'email', 'e-mail', 'your email', 'ご連絡先'],
+                labelPatterns: ['メールアドレス', 'メール', 'E-mail', 'email', 'ご連絡先メール'],
+                typePatterns: ['email']
+            },
+            phone: {
+                namePatterns: ['tel', 'phone', 'telephone', 'mobile', '電話', '携帯', 'denwa'],
+                placeholderPatterns: ['電話番号', '電話', 'お電話', '携帯番号', 'phone', 'tel', '000-0000-0000', '03-'],
+                labelPatterns: ['電話番号', 'お電話番号', '電話', 'TEL', 'ご連絡先電話']
+            },
+            company: {
+                namePatterns: ['company', 'organization', 'corp', 'firm', '会社', '法人', '企業', '所属', 'kaisha', 'shozoku'],
+                placeholderPatterns: ['会社名', '法人名', '企業名', 'ご所属', '組織名', 'company', 'organization', '株式会社'],
+                labelPatterns: ['会社名', '御社名', '貴社名', '法人名', '企業名', 'ご所属', '組織名']
+            },
+            message: {
+                namePatterns: ['message', 'content', 'body', 'inquiry', 'comment', 'detail', 'description', '内容', '本文', 'naiyou', 'メッセージ', 'お問い合わせ'],
+                placeholderPatterns: ['お問い合わせ内容', 'ご質問', 'メッセージ', '内容', '本文', 'ご要望', 'ご相談内容', 'message'],
+                labelPatterns: ['お問い合わせ内容', 'ご質問内容', 'メッセージ', '内容', 'ご用件', 'ご要望', 'ご相談']
+            }
+        };
+
         const result = {};
-        for (const [field, patterns] of Object.entries(selectors)) {
-            for (const pattern of patterns) {
-                const el = document.querySelector(pattern);
-                if (el && el.offsetParent !== null) {  // is_visible相当
-                    result[field] = el.name || el.id || pattern;
-                    break;
+        const usedElements = new Set();
+
+        // ヘルパー: 要素が可視かチェック
+        function isVisible(el) {
+            if (!el) return false;
+            const style = window.getComputedStyle(el);
+            return el.offsetParent !== null && 
+                   style.display !== 'none' && 
+                   style.visibility !== 'hidden' &&
+                   style.opacity !== '0';
+        }
+
+        // ヘルパー: 文字列にパターンが含まれるかチェック（大文字小文字無視）
+        function matchesPattern(text, patterns) {
+            if (!text) return false;
+            const lowerText = text.toLowerCase();
+            return patterns.some(p => lowerText.includes(p.toLowerCase()));
+        }
+
+        // ヘルパー: ユニークなセレクタを生成
+        function getSelector(el) {
+            if (el.id) return '#' + el.id;
+            if (el.name) return '[name="' + el.name + '"]';
+            // フォールバック: タグ + 属性の組み合わせ
+            const tag = el.tagName.toLowerCase();
+            if (el.type) return tag + '[type="' + el.type + '"]';
+            return tag;
+        }
+
+        // 戦略1: name/id属性でマッチ
+        function findByNameOrId(fieldName, config) {
+            const inputs = document.querySelectorAll('input, textarea, select');
+            for (const input of inputs) {
+                if (usedElements.has(input) || !isVisible(input)) continue;
+                const name = (input.name || '').toLowerCase();
+                const id = (input.id || '').toLowerCase();
+                if (matchesPattern(name, config.namePatterns) || matchesPattern(id, config.namePatterns)) {
+                    usedElements.add(input);
+                    return getSelector(input);
                 }
             }
+            return null;
         }
-        return JSON.stringify(result);
+
+        // 戦略2: type属性でマッチ（email用）
+        function findByType(fieldName, config) {
+            if (!config.typePatterns) return null;
+            for (const type of config.typePatterns) {
+                const input = document.querySelector('input[type="' + type + '"]');
+                if (input && !usedElements.has(input) && isVisible(input)) {
+                    usedElements.add(input);
+                    return getSelector(input);
+                }
+            }
+            return null;
+        }
+
+        // 戦略3: placeholder属性でマッチ
+        function findByPlaceholder(fieldName, config) {
+            const inputs = document.querySelectorAll('input, textarea');
+            for (const input of inputs) {
+                if (usedElements.has(input) || !isVisible(input)) continue;
+                const placeholder = input.placeholder || '';
+                if (matchesPattern(placeholder, config.placeholderPatterns)) {
+                    usedElements.add(input);
+                    return getSelector(input);
+                }
+            }
+            return null;
+        }
+
+        // 戦略4: label要素から特定
+        function findByLabel(fieldName, config) {
+            const labels = document.querySelectorAll('label');
+            for (const label of labels) {
+                const labelText = label.textContent || '';
+                if (!matchesPattern(labelText, config.labelPatterns)) continue;
+
+                // for属性から検索
+                if (label.htmlFor) {
+                    const input = document.getElementById(label.htmlFor);
+                    if (input && !usedElements.has(input) && isVisible(input)) {
+                        usedElements.add(input);
+                        return getSelector(input);
+                    }
+                }
+
+                // label内の入力要素を検索
+                const innerInput = label.querySelector('input, textarea, select');
+                if (innerInput && !usedElements.has(innerInput) && isVisible(innerInput)) {
+                    usedElements.add(innerInput);
+                    return getSelector(innerInput);
+                }
+
+                // labelの次の兄弟要素を検索
+                let sibling = label.nextElementSibling;
+                while (sibling) {
+                    if (['INPUT', 'TEXTAREA', 'SELECT'].includes(sibling.tagName)) {
+                        if (!usedElements.has(sibling) && isVisible(sibling)) {
+                            usedElements.add(sibling);
+                            return getSelector(sibling);
+                        }
+                        break;
+                    }
+                    // div/span等に包まれてる場合
+                    const nestedInput = sibling.querySelector('input, textarea, select');
+                    if (nestedInput && !usedElements.has(nestedInput) && isVisible(nestedInput)) {
+                        usedElements.add(nestedInput);
+                        return getSelector(nestedInput);
+                    }
+                    sibling = sibling.nextElementSibling;
+                }
+            }
+            return null;
+        }
+
+        // 戦略5: aria-label属性でマッチ
+        function findByAriaLabel(fieldName, config) {
+            const inputs = document.querySelectorAll('input, textarea');
+            for (const input of inputs) {
+                if (usedElements.has(input) || !isVisible(input)) continue;
+                const ariaLabel = input.getAttribute('aria-label') || '';
+                if (matchesPattern(ariaLabel, config.labelPatterns)) {
+                    usedElements.add(input);
+                    return getSelector(input);
+                }
+            }
+            return null;
+        }
+
+        // messageフィールドは特別扱い（textareaを優先）
+        function findMessageField(config) {
+            // 最初にtextareaを探す
+            const textareas = document.querySelectorAll('textarea');
+            for (const ta of textareas) {
+                if (!usedElements.has(ta) && isVisible(ta)) {
+                    usedElements.add(ta);
+                    return getSelector(ta);
+                }
+            }
+            // textareaがなければ通常の検索
+            return findByNameOrId('message', config) || 
+                   findByPlaceholder('message', config) || 
+                   findByLabel('message', config);
+        }
+
+        // 各フィールドを検出（優先度順）
+        for (const [fieldName, config] of Object.entries(patterns)) {
+            if (fieldName === 'message') {
+                result[fieldName] = findMessageField(config);
+            } else {
+                // 複数の戦略を順に試す
+                result[fieldName] = 
+                    findByNameOrId(fieldName, config) ||
+                    findByType(fieldName, config) ||
+                    findByPlaceholder(fieldName, config) ||
+                    findByLabel(fieldName, config) ||
+                    findByAriaLabel(fieldName, config);
+            }
+        }
+
+        // メッセージフィールドがない場合はnull
+        if (!result.message) {
+            return JSON.stringify(null);
+        }
+
+        // nullのフィールドを除外
+        const cleanResult = {};
+        for (const [k, v] of Object.entries(result)) {
+            if (v !== null) cleanResult[k] = v;
+        }
+
+        return JSON.stringify(cleanResult);
     })()
     """
 
     result_str = browser_evaluate(port, script)
-    if not result_str:
+    if not result_str or result_str == 'null':
         return None
 
     try:
         result = json.loads(result_str)
-        # 最低限messageフィールドが必要
-        if not result.get('message'):
+        if not result or not result.get('message'):
             return None
         return result
     except:
@@ -68,7 +256,7 @@ def detect_form_fields(port: int, url: str) -> Optional[Dict[str, str]]:
 
 def detect_captcha(port: int) -> bool:
     """
-    CAPTCHA存在を検出（reCAPTCHA/hCaptcha）
+    CAPTCHA存在を検出（reCAPTCHA/hCaptcha/Turnstile）
 
     Args:
         port: ブラウザコンテナのポート
@@ -79,11 +267,20 @@ def detect_captcha(port: int) -> bool:
     script = """
     (function() {
         return !!(
+            // reCAPTCHA
             document.querySelector('.g-recaptcha') ||
-            document.querySelector('.h-captcha') ||
             document.querySelector('[data-sitekey]') ||
             document.querySelector('iframe[src*="recaptcha"]') ||
-            document.querySelector('iframe[src*="hcaptcha"]')
+            document.querySelector('iframe[src*="google.com/recaptcha"]') ||
+            // hCaptcha
+            document.querySelector('.h-captcha') ||
+            document.querySelector('iframe[src*="hcaptcha"]') ||
+            // Cloudflare Turnstile
+            document.querySelector('.cf-turnstile') ||
+            document.querySelector('iframe[src*="turnstile"]') ||
+            // 一般的なCAPTCHA
+            document.querySelector('img[src*="captcha"]') ||
+            document.querySelector('input[name*="captcha"]')
         );
     })()
     """
@@ -96,76 +293,89 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
                          form_data: Dict[str, str],
                          timeout: int = 120) -> Dict[str, Any]:
     """
-    フォーム入力・送信
-
-    移植元: koumuten/auto_contact.py 行86-134
-    変換: Playwright fill() → JavaScript .value =
-    変換: Playwright click() → JavaScript .click()
+    フォーム入力・送信（v2: 確認画面対応版）
 
     Args:
         port: ブラウザコンテナのポート
         form_fields: detect_form_fields() で取得したフィールド情報
-        form_data: 入力データ {'company': ..., 'name': ..., 'email': ..., 'phone': ..., 'message': ...}
+        form_data: 入力データ
         timeout: タイムアウト（秒）
 
     Returns:
         {'status': 'success'|'failed'|'skipped', 'error': str, 'screenshot': str}
     """
-    # JSONエスケープ処理
     fields_json = json.dumps(form_fields)
     data_json = json.dumps(form_data)
 
     script = f"""
     (function() {{
         try {{
-            // 各フィールドに値を設定（auto_contact.py 行90-94の変換）
             const fields = {fields_json};
             const data = {data_json};
 
+            // 1. フォーム入力
             for (const [field, selector] of Object.entries(fields)) {{
-                // name属性またはid属性で要素を検索
-                const el = document.querySelector('[name="' + selector + '"]') ||
-                           document.querySelector('#' + selector) ||
-                           document.querySelector(selector);
+                if (!data[field]) continue;
 
-                if (el && data[field] !== undefined) {{
+                // 複数の方法で要素を検索
+                let el = document.querySelector(selector);
+                if (!el && selector.startsWith('[name=')) {{
+                    const name = selector.match(/\\[name="([^"]+)"\\]/)?.[1];
+                    if (name) el = document.querySelector('[name="' + name + '"]');
+                }}
+                if (!el && selector.startsWith('#')) {{
+                    el = document.getElementById(selector.slice(1));
+                }}
+
+                if (el) {{
                     el.value = data[field];
-                    // イベント発火（バリデーション対応）
                     el.dispatchEvent(new Event('input', {{ bubbles: true }}));
                     el.dispatchEvent(new Event('change', {{ bubbles: true }}));
+                    el.dispatchEvent(new Event('blur', {{ bubbles: true }}));
                 }}
             }}
 
-            // 送信ボタン検出（auto_contact.py 行110-127の変換）
-            const submitSelectors = [
+            // 2. 送信ボタン検出（拡充版）
+            const submitPatterns = [
+                // type属性
                 'button[type="submit"]',
                 'input[type="submit"]',
-                'button:has-text("送信")',
-                'button:has-text("確認")',
+                // value属性
                 'input[value*="送信"]',
-                'button:contains("送信")',
-                'input[value*="確認"]'
+                'input[value*="確認"]',
+                'input[value*="問い合わせ"]',
+                'input[value*="申し込"]',
+                'input[value*="完了"]',
+                'input[value*="Submit"]',
+                'input[value*="Send"]',
             ];
 
-            for (const sel of submitSelectors) {{
-                // :has-text, :contains は標準セレクタでないため、代替検索
-                let btn;
-                if (sel.includes(':has-text') || sel.includes(':contains')) {{
-                    const buttons = document.querySelectorAll('button');
-                    for (const b of buttons) {{
-                        const buttonText = b.textContent.trim();
-                        if (buttonText === '送信' || buttonText === '確認' || buttonText === '送信する' || buttonText === '確認する') {{
-                            btn = b;
-                            break;
-                        }}
-                    }}
-                }} else {{
-                    btn = document.querySelector(sel);
-                }}
+            const buttonTexts = [
+                '送信', '送信する', '確認', '確認する', '確認画面へ', '次へ',
+                '問い合わせ', 'お問い合わせ', '問い合わせる', '申し込む', '申込',
+                '完了', '完了する', '入力内容を確認', '内容を確認',
+                'Submit', 'Send', 'Confirm', 'Next'
+            ];
 
+            // セレクタでボタン検索
+            for (const sel of submitPatterns) {{
+                const btn = document.querySelector(sel);
                 if (btn && btn.offsetParent !== null) {{
                     btn.click();
-                    return JSON.stringify({{status: 'success'}});
+                    return JSON.stringify({{status: 'success', step: 'first'}});
+                }}
+            }}
+
+            // テキスト内容でボタン検索
+            const allButtons = document.querySelectorAll('button, input[type="button"], a.btn, a.button, [role="button"]');
+            for (const btn of allButtons) {{
+                if (btn.offsetParent === null) continue;
+                const text = (btn.textContent || btn.value || '').trim();
+                for (const pattern of buttonTexts) {{
+                    if (text === pattern || text.includes(pattern)) {{
+                        btn.click();
+                        return JSON.stringify({{status: 'success', step: 'first'}});
+                    }}
                 }}
             }}
 
@@ -182,6 +392,39 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
 
     try:
         result = json.loads(result_str)
+
+        # 確認画面対応: firstステップの場合、次の送信ボタンも押す
+        if result.get('status') == 'success' and result.get('step') == 'first':
+            # 2秒待って確認画面の送信ボタンを押す
+            confirm_script = """
+            (function() {
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        const confirmTexts = ['送信', '送信する', '完了', 'Submit', 'Send'];
+                        const buttons = document.querySelectorAll('button, input[type="submit"], input[type="button"]');
+                        for (const btn of buttons) {
+                            if (btn.offsetParent === null) continue;
+                            const text = (btn.textContent || btn.value || '').trim();
+                            for (const pattern of confirmTexts) {
+                                if (text === pattern || text.includes(pattern)) {
+                                    btn.click();
+                                    resolve(JSON.stringify({status: 'success', step: 'confirmed'}));
+                                    return;
+                                }
+                            }
+                        }
+                        resolve(JSON.stringify({status: 'success', step: 'first_only'}));
+                    }, 2000);
+                });
+            })()
+            """
+            confirm_result = browser_evaluate(port, confirm_script, timeout=30)
+            if confirm_result:
+                try:
+                    result = json.loads(confirm_result)
+                except:
+                    pass
+
         result['screenshot'] = None
         return result
     except:
@@ -192,10 +435,8 @@ def take_screenshot(port: int, output_path: str) -> bool:
     """
     エラー時のスクリーンショット保存
 
-    移植元: koumuten/auto_contact.py 行104-107
-
     Note: ブラウザAPIにスクリーンショット機能がないため、
-    現在は未実装。将来的にAPIが追加された場合に実装可能。
+    現在は未実装。
 
     Args:
         port: ブラウザコンテナのポート
@@ -204,6 +445,4 @@ def take_screenshot(port: int, output_path: str) -> bool:
     Returns:
         True if successful, False otherwise
     """
-    # TODO: ブラウザAPIの/browser/screenshotエンドポイントを使用（あれば）
-    # 現時点では browser.py にスクリーンショット機能がないため未実装
     return False
