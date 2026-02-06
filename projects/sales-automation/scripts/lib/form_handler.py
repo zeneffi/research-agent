@@ -195,9 +195,18 @@ def detect_form_fields(port: int, url: str) -> Optional[Dict[str, str]]:
             return null;
         }
 
-        // messageフィールドは特別扱い（textareaを優先）
+        // messageフィールドは特別扱い（パターンマッチを優先、textareaはフォールバック）
         function findMessageField(config) {
-            // 最初にtextareaを探す
+            // まずパターンマッチで検索
+            const patternResult = 
+                findByNameOrId('message', config) || 
+                findByPlaceholder('message', config) || 
+                findByLabel('message', config) ||
+                findByAriaLabel('message', config);
+            
+            if (patternResult) return patternResult;
+            
+            // パターンマッチで見つからなければtextareaをフォールバック
             const textareas = document.querySelectorAll('textarea');
             for (const ta of textareas) {
                 if (!usedElements.has(ta) && isVisible(ta)) {
@@ -205,10 +214,7 @@ def detect_form_fields(port: int, url: str) -> Optional[Dict[str, str]]:
                     return getSelector(ta);
                 }
             }
-            // textareaがなければ通常の検索
-            return findByNameOrId('message', config) || 
-                   findByPlaceholder('message', config) || 
-                   findByLabel('message', config);
+            return null;
         }
 
         // 各フィールドを検出（優先度順）
@@ -250,7 +256,8 @@ def detect_form_fields(port: int, url: str) -> Optional[Dict[str, str]]:
         if not result or not result.get('message'):
             return None
         return result
-    except:
+    except json.JSONDecodeError as e:
+        print(f"[WARN] Form fields response parse failed: {e}")
         return None
 
 
@@ -317,15 +324,8 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
             for (const [field, selector] of Object.entries(fields)) {{
                 if (!data[field]) continue;
 
-                // 複数の方法で要素を検索
-                let el = document.querySelector(selector);
-                if (!el && selector.startsWith('[name=')) {{
-                    const name = selector.match(/\\[name="([^"]+)"\\]/)?.[1];
-                    if (name) el = document.querySelector('[name="' + name + '"]');
-                }}
-                if (!el && selector.startsWith('#')) {{
-                    el = document.getElementById(selector.slice(1));
-                }}
+                // セレクタで要素を検索（detect_form_fieldsが正しいセレクタを返す前提）
+                const el = document.querySelector(selector);
 
                 if (el) {{
                     el.value = data[field];
@@ -422,13 +422,14 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
             if confirm_result:
                 try:
                     result = json.loads(confirm_result)
-                except:
-                    pass
+                except json.JSONDecodeError as e:
+                    # 確認画面のレスポンス解析失敗はログして続行
+                    print(f"[WARN] Confirm screen response parse failed: {e}")
 
         result['screenshot'] = None
         return result
-    except:
-        return {'status': 'failed', 'error': 'Failed to parse response', 'screenshot': None}
+    except json.JSONDecodeError as e:
+        return {'status': 'failed', 'error': f'Failed to parse response: {e}', 'screenshot': None}
 
 
 def take_screenshot(port: int, output_path: str) -> bool:
