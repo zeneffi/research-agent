@@ -50,6 +50,11 @@ SKIP_DOMAINS = {
     'wordpress.com', 'wix', 'jimdo', 'weebly',
     # 開発者向け（企業サイトではない）
     'github', 'gitlab', 'bitbucket', 'stackoverflow',
+    # 追加（テストで検出）
+    'salesnow',  # SalesNow DB
+    'shukatu-kyokasho', 'syukatu',  # 就活系
+    'emeao',  # EMEAO
+    'consul-go', 'consulgo',  # コンサルGO
 }
 
 
