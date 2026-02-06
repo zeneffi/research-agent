@@ -38,8 +38,8 @@ SKIP_DOMAINS = {
     'proni', 'imitsu', 'imi-tsuite',  # アイミツ/PRONI
     'system-kanji',  # システム幹事
     'hacchu-lounge', 'hacchulounge',  # 発注ラウンジ
-    'itcapital',  # ITキャピタル
-    '発注ナビ', 'haccyu-navi', '発注navi',
+    'itcapital', '1st-net',  # ITキャピタル
+    '発注ナビ', 'haccyu-navi', '発注navi', 'hnavi',  # 発注ナビ
     'rekaizen', 'compare-biz', 'comparebiz',  # 比較ビズ
     'web-kanji', 'webkanji',  # Web幹事
     'meetsmore', 'ミツモア',
@@ -55,7 +55,42 @@ SKIP_DOMAINS = {
     'shukatu-kyokasho', 'syukatu',  # 就活系
     'emeao',  # EMEAO
     'consul-go', 'consulgo',  # コンサルGO
+    # 追加（2026-02-06: まとめサイト混入対策）
+    'andmedia', 'itpark',  # IT PARK
+    'gicp',  # GICP まとめ記事
+    'digima',  # Digima
+    '発注先探し', 'sourcing',
+    'web-production-navigator',  # Web制作ナビ
+    'lp-maker', 'lpmaker',  # LP系まとめ
+    'system-kanji', 'systemkanji',  # システム幹事
+    'dx-navi', 'dxnavi',  # DXナビ
 }
+
+# まとめ記事を示すURLパスパターン（正規表現）
+SKIP_URL_PATTERNS = [
+    r'/おすすめ',
+    r'/オススメ',
+    r'/recommend',
+    r'/比較',
+    r'/hikaku',
+    r'/ランキング',
+    r'/ranking',
+    r'/\d+選',  # 10選、20選など
+    r'/top-?\d+',  # top10, top-20など
+    r'/best-?\d+',
+    r'/まとめ',
+    r'/matome',
+    r'/一覧',
+    r'/list/',
+    r'/companies?/',  # /company/, /companies/
+    r'/blog/',  # ブログ記事
+    r'/column/',  # コラム記事
+    r'/knowledge/',  # ナレッジ記事
+    r'/contents?/',  # コンテンツ記事
+    r'/article/',  # 記事
+    r'/news/',  # ニュース
+    r'/magazine/',  # マガジン
+]
 
 
 def search_duckduckgo(port: int, query: str, max_results: int = 10, scroll_pages: int = 3) -> List[Dict[str, str]]:
@@ -162,17 +197,15 @@ def search_duckduckgo(port: int, query: str, max_results: int = 10, scroll_pages
             browser_evaluate(port, scroll_script)
             time.sleep(2)  # 読み込み待機
 
-    # 除外ドメインのフィルタリング
+    # 除外ドメイン・URLパターンのフィルタリング
     filtered_results = []
     for r in all_results:
         url = r.get('url', '')
-        domain = urlparse(url).netloc.lower()
-
-        # 除外ドメインチェック
-        if any(skip in domain for skip in SKIP_DOMAINS):
+        
+        # is_valid_company_url で総合判定
+        if not is_valid_company_url(url):
             continue
 
-        # 日本語ドメイン優先（.co.jp, .jp）
         filtered_results.append(r)
 
     return filtered_results[:max_results]
@@ -240,10 +273,16 @@ def is_valid_company_url(url: str) -> bool:
     try:
         parsed = urlparse(url)
         domain = parsed.netloc.lower()
+        path = parsed.path.lower()
 
         # 除外ドメイン
         if any(skip in domain for skip in SKIP_DOMAINS):
             return False
+
+        # まとめ記事URLパターン除外
+        for pattern in SKIP_URL_PATTERNS:
+            if re.search(pattern, path):
+                return False
 
         # 企業サイトらしいドメイン
         if '.co.jp' in domain or '.jp' in domain or '.com' in domain:
