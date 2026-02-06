@@ -8,24 +8,65 @@ from typing import List, Dict, Optional
 from .browser import browser_navigate, browser_evaluate
 
 
-# 除外ドメイン（検索結果から除外するサイト）
-SKIP_DOMAINS = [
+# 除外ドメイン（検索結果から除外するサイト）- setでO(1)検索
+SKIP_DOMAINS = {
+    # 検索エンジン
     'duckduckgo', 'google', 'bing', 'yahoo',
-    'facebook', 'twitter', 'instagram', 'youtube', 'linkedin',
+    # SNS
+    'facebook', 'twitter', 'instagram', 'youtube', 'linkedin', 'tiktok',
+    # 大手サイト
     'wikipedia', 'amazon', 'rakuten',
-    'indeed', 'wantedly', 'mynavi', 'rikunabi',
-    'cloudflare', 'jsdelivr', 'googleapis', 'gstatic'
-]
+    # 求人サイト
+    'indeed', 'wantedly', 'mynavi', 'rikunabi', 'doda', 'en-japan', 'type',
+    'green-japan', 'bizreach', 'careerconnection',
+    # CDN/インフラ
+    'cloudflare', 'jsdelivr', 'googleapis', 'gstatic',
+    # IT系比較・まとめサイト
+    'itmedia', 'ferret-plus', 'boxil', 'itreview', 'saasus', 'bcnretail',
+    'ascii', 'impress', 'zdnet', 'cnet', 'techcrunch', 'gizmodo',
+    # 企業DB・まとめサイト
+    'baseconnect', 'musubu', 'biz-maps', 'tdb', 'tsr-net',
+    'en-hyouban', 'jobtalk', 'openwork', 'vorkers', 'lighthouse',
+    # フリーランス・クラウドソーシング
+    'crowdworks', 'lancers', 'coconala', 'freenance',
+    # ニュース・メディア
+    'prtimes', 'atpress', 'dreamnews', 'jiji', 'nikkei', 'asahi', 'yomiuri',
+    # その他まとめ系
+    'matome', 'naver', 'qiita', 'zenn', 'note.com', 'medium',
+    'hatena', 'livedoor', 'seesaa', 'fc2', 'ameblo',
+    # 発注・比較サイト（営業リストに不適切）
+    'proni', 'imitsu', 'imi-tsuite',  # アイミツ/PRONI
+    'system-kanji',  # システム幹事
+    'hacchu-lounge', 'hacchulounge',  # 発注ラウンジ
+    'itcapital',  # ITキャピタル
+    '発注ナビ', 'haccyu-navi', '発注navi',
+    'rekaizen', 'compare-biz', 'comparebiz',  # 比較ビズ
+    'web-kanji', 'webkanji',  # Web幹事
+    'meetsmore', 'ミツモア',
+    'kakaku', '価格.com',
+    'kakutoku',  # カクトク
+    'saleshub',  # セールスハブ
+    # ブログプラットフォーム
+    'wordpress.com', 'wix', 'jimdo', 'weebly',
+    # 開発者向け（企業サイトではない）
+    'github', 'gitlab', 'bitbucket', 'stackoverflow',
+    # 追加（テストで検出）
+    'salesnow',  # SalesNow DB
+    'shukatu-kyokasho', 'syukatu',  # 就活系
+    'emeao',  # EMEAO
+    'consul-go', 'consulgo',  # コンサルGO
+}
 
 
-def search_duckduckgo(port: int, query: str, max_results: int = 10) -> List[Dict[str, str]]:
+def search_duckduckgo(port: int, query: str, max_results: int = 10, scroll_pages: int = 3) -> List[Dict[str, str]]:
     """
-    DuckDuckGoで検索して結果を取得
+    DuckDuckGoで検索して結果を取得（スクロールで追加結果も取得）
 
     Args:
         port: ブラウザコンテナのポート
         query: 検索クエリ
         max_results: 最大取得件数
+        scroll_pages: スクロール回数（追加読み込み回数）
 
     Returns:
         [{title: str, url: str, snippet: str}, ...]
@@ -39,8 +80,11 @@ def search_duckduckgo(port: int, query: str, max_results: int = 10) -> List[Dict
     # ページロード待機
     time.sleep(3)
 
+    all_results = []
+    seen_urls = set()
+
     # 検索結果を抽出するJavaScript
-    script = """(function() {
+    extract_script = """(function() {
         const results = [];
         const seen = new Set();
 
@@ -80,30 +124,107 @@ def search_duckduckgo(port: int, query: str, max_results: int = 10) -> List[Dict
         return JSON.stringify(results);
     })()"""
 
-    result = browser_evaluate(port, script)
-    if not result:
-        return []
+    # スクロールして追加結果を取得
+    scroll_script = """(function() {
+        // ページ最下部にスクロール
+        window.scrollTo(0, document.body.scrollHeight);
+        
+        // 「もっと見る」ボタンがあればクリック
+        const moreButton = document.querySelector('button[data-testid="more-results"], button.result--more__btn');
+        if (moreButton) {
+            moreButton.click();
+            return true;
+        }
+        return false;
+    })()"""
 
-    try:
-        import json
-        all_results = json.loads(result)
+    for page in range(scroll_pages + 1):
+        # 結果を抽出
+        result = browser_evaluate(port, extract_script)
+        if result:
+            try:
+                import json
+                page_results = json.loads(result)
+                for r in page_results:
+                    url = r.get('url', '')
+                    if url and url not in seen_urls:
+                        seen_urls.add(url)
+                        all_results.append(r)
+            except:
+                pass
 
-        # 除外ドメインのフィルタリング
-        filtered_results = []
-        for r in all_results:
-            url = r.get('url', '')
-            domain = urlparse(url).netloc.lower()
+        # 十分な結果が集まったら終了
+        if len(all_results) >= max_results * 2:  # フィルタリング後を考慮
+            break
 
-            # 除外ドメインチェック
-            if any(skip in domain for skip in SKIP_DOMAINS):
-                continue
+        # 次のページをロード（最後のページ以外）
+        if page < scroll_pages:
+            browser_evaluate(port, scroll_script)
+            time.sleep(2)  # 読み込み待機
 
-            # 日本語ドメイン優先（.co.jp, .jp）
-            filtered_results.append(r)
+    # 除外ドメインのフィルタリング
+    filtered_results = []
+    for r in all_results:
+        url = r.get('url', '')
+        domain = urlparse(url).netloc.lower()
 
-        return filtered_results[:max_results]
-    except:
-        return []
+        # 除外ドメインチェック
+        if any(skip in domain for skip in SKIP_DOMAINS):
+            continue
+
+        # 日本語ドメイン優先（.co.jp, .jp）
+        filtered_results.append(r)
+
+    return filtered_results[:max_results]
+
+
+def generate_query_variations(base_query: str) -> List[str]:
+    """
+    基本クエリから検索バリエーションを生成
+
+    Args:
+        base_query: 基本クエリ（例: "東京 システム開発会社"）
+
+    Returns:
+        クエリのリスト
+    """
+    variations = [base_query]
+
+    # 地域を抽出
+    regions = ['東京', '大阪', '名古屋', '福岡', '横浜', '札幌', '仙台', '神戸', '京都', '広島']
+    found_region = None
+    for region in regions:
+        if region in base_query:
+            found_region = region
+            break
+
+    # 業種キーワードのバリエーション
+    it_variations = [
+        'システム開発', 'Web制作', 'アプリ開発', 'IT企業', 'ソフトウェア開発',
+        'Webサービス', 'SaaS', 'Webシステム', 'DX支援'
+    ]
+
+    # 基本クエリから業種キーワードを特定して、バリエーションを追加
+    for kw in it_variations:
+        if kw in base_query:
+            # 同じ業種の別表現を追加
+            for alt_kw in it_variations:
+                if alt_kw != kw:
+                    if found_region:
+                        new_query = f"{found_region} {alt_kw}"
+                    else:
+                        new_query = alt_kw
+                    if new_query not in variations:
+                        variations.append(new_query)
+            break
+
+    # 会社/企業の表現バリエーション
+    if '会社' in base_query:
+        variations.append(base_query.replace('会社', '企業'))
+    if '企業' in base_query:
+        variations.append(base_query.replace('企業', '会社'))
+
+    return variations[:5]  # 最大5バリエーション
 
 
 def is_valid_company_url(url: str) -> bool:
