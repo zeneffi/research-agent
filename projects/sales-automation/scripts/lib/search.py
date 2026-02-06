@@ -10,11 +10,30 @@ from .browser import browser_navigate, browser_evaluate
 
 # 除外ドメイン（検索結果から除外するサイト）
 SKIP_DOMAINS = [
+    # 検索エンジン
     'duckduckgo', 'google', 'bing', 'yahoo',
-    'facebook', 'twitter', 'instagram', 'youtube', 'linkedin',
+    # SNS
+    'facebook', 'twitter', 'instagram', 'youtube', 'linkedin', 'tiktok',
+    # 大手サイト
     'wikipedia', 'amazon', 'rakuten',
-    'indeed', 'wantedly', 'mynavi', 'rikunabi',
-    'cloudflare', 'jsdelivr', 'googleapis', 'gstatic'
+    # 求人サイト
+    'indeed', 'wantedly', 'mynavi', 'rikunabi', 'doda', 'en-japan', 'type',
+    'green-japan', 'bizreach', 'careerconnection',
+    # CDN/インフラ
+    'cloudflare', 'jsdelivr', 'googleapis', 'gstatic',
+    # IT系比較・まとめサイト
+    'itmedia', 'ferret-plus', 'boxil', 'itreview', 'saasus', 'bcnretail',
+    'ascii', 'impress', 'zdnet', 'cnet', 'techcrunch', 'gizmodo',
+    # 企業DB・まとめサイト
+    'baseconnect', 'musubu', 'biz-maps', 'tdb', 'tsr-net',
+    'en-hyouban', 'jobtalk', 'openwork', 'vorkers', 'lighthouse',
+    # フリーランス・クラウドソーシング
+    'crowdworks', 'lancers', 'coconala', 'freenance',
+    # ニュース・メディア
+    'prtimes', 'atpress', 'dreamnews', 'jiji', 'nikkei', 'asahi', 'yomiuri',
+    # その他まとめ系
+    'matome', 'naver', 'qiita', 'zenn', 'note.com', 'medium',
+    'hatena', 'livedoor', 'seesaa', 'fc2', 'ameblo',
 ]
 
 

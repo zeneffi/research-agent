@@ -11,14 +11,35 @@ from .browser import browser_navigate, browser_evaluate
 
 # よくある問い合わせフォームパス
 COMMON_CONTACT_PATHS = [
+    # 英語系
     '/contact',
+    '/contact/',
     '/contact-us',
+    '/contactus',
     '/inquiry',
-    '/toiawase',
-    '/お問い合わせ',
+    '/inquiry/',
     '/form',
+    '/form/',
+    '/support',
+    '/support/',
     '/contact.html',
     '/inquiry.html',
+    '/contact.php',
+    # 日本語系
+    '/toiawase',
+    '/otoiawase',
+    '/お問い合わせ',
+    '/お問合せ',
+    '/問い合わせ',
+    '/問合せ',
+    '/お問い合わせ/',
+    '/contact/form',
+    '/inquiry/form',
+    # その他よくあるパターン
+    '/info',
+    '/info/',
+    '/ask',
+    '/request',
 ]
 
 
@@ -33,44 +54,36 @@ def find_contact_form_url(port: int, base_url: str) -> str:
     Returns:
         問い合わせフォームURL（見つからない場合は空文字列）
     """
-    # === 方法1: よくあるパスを直接試す ===
+    # === 方法1: よくあるパスを直接試す（キーワード + HTML構造を同時チェック）===
     for path in COMMON_CONTACT_PATHS:
         candidate_url = urljoin(base_url, path)
         if browser_navigate(port, candidate_url, timeout=10):
-            time.sleep(2)  # JavaScript読み込み待機を延長
-            # ページタイトル・本文で確認（キーワード検証を緩和）
-            script = """(function() {
+            time.sleep(2)  # JavaScript読み込み待機
+            # キーワード検証とHTML構造検証を同時に実行（効率化）
+            combined_script = """(function() {
                 const title = document.title.toLowerCase();
                 const body = document.body.innerText.toLowerCase();
+
+                // キーワード検証
                 const hasContactKeyword = title.includes('contact') || title.includes('問い合わせ') ||
                                          title.includes('お問い合わせ') || title.includes('inquiry') ||
                                          body.includes('お問い合わせ') || body.includes('contact') ||
-                                         body.includes('問い合わせ') || body.includes('form');
-                return hasContactKeyword;
-            })()"""
-            result = browser_evaluate(port, script, timeout=10)
-            if result == 'true':
-                print(f"  [DEBUG] Method 1 (common paths + keywords): {candidate_url}")
-                return candidate_url
+                                         body.includes('問い合わせ') || body.includes('form') ||
+                                         body.includes('ご相談') || body.includes('資料請求');
 
-    # === 方法1.5: HTML構造で検出（フォーム要素の存在確認）===
-    for path in COMMON_CONTACT_PATHS:
-        candidate_url = urljoin(base_url, path)
-        if browser_navigate(port, candidate_url, timeout=10):
-            time.sleep(2)
-            # HTML要素で判定
-            html_check_script = """(function() {
+                // HTML構造検証
                 const hasForm = !!document.querySelector('form');
                 const hasEmailInput = !!document.querySelector('input[type="email"]');
                 const hasSubmitButton = !!document.querySelector('button[type="submit"], input[type="submit"]');
                 const hasTextarea = !!document.querySelector('textarea');
+                const hasFormStructure = (hasForm && hasSubmitButton) || (hasEmailInput && hasTextarea && hasSubmitButton);
 
-                // フォーム要素が揃っていれば、問い合わせフォームと判定
-                return (hasForm && hasSubmitButton) || (hasEmailInput && hasTextarea && hasSubmitButton);
+                // いずれかがtrueなら問い合わせフォームと判定
+                return hasContactKeyword || hasFormStructure;
             })()"""
-            result = browser_evaluate(port, html_check_script, timeout=10)
+            result = browser_evaluate(port, combined_script, timeout=10)
             if result == 'true':
-                print(f"  [DEBUG] Method 1.5 (HTML structure): {candidate_url}")
+                print(f"  [DEBUG] Method 1 (common paths): {candidate_url}")
                 return candidate_url
 
     # === 方法2: トップページからリンクを探す ===
@@ -88,7 +101,12 @@ def find_contact_form_url(port: int, base_url: str) -> str:
             /inquiry/i,
             /ご相談/i,
             /資料請求/i,
+            /お見積/i,
+            /無料相談/i,
         ];
+
+        // ベースドメイン取得（サブドメイン許可用）
+        const baseDomain = window.location.hostname.split('.').slice(-2).join('.');
 
         for (const link of links) {
             const text = link.textContent.trim();
@@ -97,9 +115,14 @@ def find_contact_form_url(port: int, base_url: str) -> str:
             // パターンマッチ
             for (const pattern of contactPatterns) {
                 if (pattern.test(text) || pattern.test(href)) {
-                    // 外部リンクは除外
-                    if (href && href.startsWith(window.location.origin)) {
-                        return href;
+                    // 同一ドメイン or サブドメインなら許可（例: form.company.com）
+                    try {
+                        const linkDomain = new URL(href).hostname;
+                        if (linkDomain.endsWith(baseDomain)) {
+                            return href;
+                        }
+                    } catch(e) {
+                        // URL解析エラーは無視
                     }
                 }
             }
@@ -127,8 +150,12 @@ def find_contact_form_url(port: int, base_url: str) -> str:
     footer_script = """(function() {
         const footer = document.querySelector('footer, .footer, #footer');
         const header = document.querySelector('header, .header, #header');
+        const nav = document.querySelector('nav, .nav, #nav, .navigation');
 
-        const searchIn = [footer, header].filter(x => x);
+        const searchIn = [footer, header, nav].filter(x => x);
+
+        // ベースドメイン取得（サブドメイン許可用）
+        const baseDomain = window.location.hostname.split('.').slice(-2).join('.');
 
         for (const section of searchIn) {
             if (!section) continue;
@@ -138,9 +165,17 @@ def find_contact_form_url(port: int, base_url: str) -> str:
                 const text = link.textContent.toLowerCase();
                 const href = link.href;
 
-                if ((text.includes('contact') || text.includes('問い合わせ') || text.includes('お問い合わせ')) &&
-                    href && href.startsWith(window.location.origin)) {
-                    return href;
+                if ((text.includes('contact') || text.includes('問い合わせ') || text.includes('お問い合わせ') ||
+                     text.includes('お問合せ') || text.includes('ご相談') || text.includes('資料請求'))) {
+                    // 同一ドメイン or サブドメインなら許可
+                    try {
+                        const linkDomain = new URL(href).hostname;
+                        if (linkDomain.endsWith(baseDomain)) {
+                            return href;
+                        }
+                    } catch(e) {
+                        // URL解析エラーは無視
+                    }
                 }
             }
         }
