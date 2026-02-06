@@ -13,7 +13,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # ライブラリのインポート
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib.browser import get_container_ports, browser_navigate, browser_evaluate
-from lib.search import search_duckduckgo, determine_search_context
+from lib.search import search_duckduckgo, determine_search_context, generate_query_variations
 from lib.extractor import extract_company_info
 from lib.contact_finder import find_contact_form_url
 from lib.normalizer import deduplicate_companies, validate_company_data
@@ -22,7 +22,7 @@ from lib.output import generate_json_output, generate_csv_output, generate_markd
 
 def collect_search_results(ports, query, max_results=50):
     """
-    複数コンテナで並列検索してURLを収集
+    複数コンテナで並列検索してURLを収集（クエリバリエーション対応）
 
     Args:
         ports: ブラウザコンテナのポートリスト
@@ -32,28 +32,44 @@ def collect_search_results(ports, query, max_results=50):
     Returns:
         [{title, url, snippet}, ...]
     """
+    # クエリバリエーションを生成
+    query_variations = generate_query_variations(query)
     print(f"  検索クエリ: {query}")
+    print(f"  バリエーション: {len(query_variations)}個")
+
     all_results = []
     seen_urls = set()
 
-    # 各コンテナで検索（並列）
-    with ThreadPoolExecutor(max_workers=len(ports)) as executor:
-        futures = {}
-        for i, port in enumerate(ports):
-            # ページを分散
-            futures[executor.submit(search_duckduckgo, port, query, max_results=10)] = port
+    # 各バリエーションで検索
+    for q_idx, q in enumerate(query_variations):
+        if len(all_results) >= max_results:
+            break
 
-        for future in as_completed(futures):
-            port = futures[future]
-            try:
-                results = future.result()
-                for r in results:
-                    url = r.get('url', '')
-                    if url and url not in seen_urls:
-                        seen_urls.add(url)
-                        all_results.append(r)
-            except Exception as e:
-                print(f"    ポート{port}での検索エラー: {e}")
+        print(f"    [{q_idx + 1}/{len(query_variations)}] {q}")
+
+        # コンテナを分割して並列検索
+        ports_per_query = max(1, len(ports) // len(query_variations))
+        query_ports = ports[q_idx * ports_per_query:(q_idx + 1) * ports_per_query]
+        if not query_ports:
+            query_ports = [ports[q_idx % len(ports)]]
+
+        with ThreadPoolExecutor(max_workers=len(query_ports)) as executor:
+            futures = {}
+            for port in query_ports:
+                # スクロールで追加結果も取得
+                futures[executor.submit(search_duckduckgo, port, q, max_results=20, scroll_pages=2)] = port
+
+            for future in as_completed(futures):
+                port = futures[future]
+                try:
+                    results = future.result()
+                    for r in results:
+                        url = r.get('url', '')
+                        if url and url not in seen_urls:
+                            seen_urls.add(url)
+                            all_results.append(r)
+                except Exception as e:
+                    print(f"      ポート{port}での検索エラー: {e}")
 
     print(f"  検索結果: {len(all_results)}件のユニークURL")
     return all_results[:max_results]
