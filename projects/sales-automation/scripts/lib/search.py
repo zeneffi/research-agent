@@ -8,8 +8,8 @@ from typing import List, Dict, Optional
 from .browser import browser_navigate, browser_evaluate
 
 
-# 除外ドメイン（検索結果から除外するサイト）
-SKIP_DOMAINS = [
+# 除外ドメイン（検索結果から除外するサイト）- setでO(1)検索
+SKIP_DOMAINS = {
     # 検索エンジン
     'duckduckgo', 'google', 'bing', 'yahoo',
     # SNS
@@ -34,7 +34,7 @@ SKIP_DOMAINS = [
     # その他まとめ系
     'matome', 'naver', 'qiita', 'zenn', 'note.com', 'medium',
     'hatena', 'livedoor', 'seesaa', 'fc2', 'ameblo',
-]
+}
 
 
 def search_duckduckgo(port: int, query: str, max_results: int = 10) -> List[Dict[str, str]]:

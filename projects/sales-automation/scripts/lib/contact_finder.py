@@ -105,8 +105,8 @@ def find_contact_form_url(port: int, base_url: str) -> str:
             /無料相談/i,
         ];
 
-        // ベースドメイン取得（サブドメイン許可用）
-        const baseDomain = window.location.hostname.split('.').slice(-2).join('.');
+        // ベースドメイン取得（www.を除去、.co.jp等のTLD対応）
+        const baseDomain = window.location.hostname.replace(/^www\./, '');
 
         for (const link of links) {
             const text = link.textContent.trim();
@@ -118,7 +118,7 @@ def find_contact_form_url(port: int, base_url: str) -> str:
                     // 同一ドメイン or サブドメインなら許可（例: form.company.com）
                     try {
                         const linkDomain = new URL(href).hostname;
-                        if (linkDomain.endsWith(baseDomain)) {
+                        if (linkDomain === baseDomain || linkDomain.endsWith('.' + baseDomain)) {
                             return href;
                         }
                     } catch(e) {
@@ -154,8 +154,8 @@ def find_contact_form_url(port: int, base_url: str) -> str:
 
         const searchIn = [footer, header, nav].filter(x => x);
 
-        // ベースドメイン取得（サブドメイン許可用）
-        const baseDomain = window.location.hostname.split('.').slice(-2).join('.');
+        // ベースドメイン取得（www.を除去、.co.jp等のTLD対応）
+        const baseDomain = window.location.hostname.replace(/^www\./, '');
 
         for (const section of searchIn) {
             if (!section) continue;
@@ -170,7 +170,7 @@ def find_contact_form_url(port: int, base_url: str) -> str:
                     // 同一ドメイン or サブドメインなら許可
                     try {
                         const linkDomain = new URL(href).hostname;
-                        if (linkDomain.endsWith(baseDomain)) {
+                        if (linkDomain === baseDomain || linkDomain.endsWith('.' + baseDomain)) {
                             return href;
                         }
                     } catch(e) {
