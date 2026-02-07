@@ -1,5 +1,5 @@
 """
-企業情報抽出機能
+企業情報抽出機能（v2 - 会社名抽出強化版）
 """
 import re
 import time
@@ -94,82 +94,172 @@ def extract_company_info(port: int, url: str, search_context: str = 'General') -
     # ページロード待機
     time.sleep(2)
 
-    # 基本情報抽出スクリプト
+    # 基本情報抽出スクリプト（v2: 会社名抽出を大幅強化）
     script = f"""(function() {{
         const body = document.body.innerText;
         const title = document.title;
+        const hostname = window.location.hostname;
+
+        // === 会社名抽出のヘルパー関数 ===
+        
+        // 法人格を含むかチェック
+        function hasCorpSuffix(name) {{
+            return /(?:株式会社|有限会社|合同会社|合資会社|一般社団法人|一般財団法人)/.test(name);
+        }}
+        
+        // 無効な会社名パターンをチェック
+        function isInvalidName(name) {{
+            if (!name || name.length < 2) return true;
+            
+            const invalidPatterns = [
+                /^(採用情報|会社概要|事業内容|お問い合わせ|アクセス|ニュース|ブログ)/,
+                /^(会社名|商号|運営会社|社名)/,
+                /^(トップ|ホーム|TOP|HOME|Menu|サービス|事例|実績|概要)/i,
+                /^\\d{{2,4}}\\s*(株式会社|有限会社|合同会社)/,  // 「21 株式会社」「2026 株式会社」等
+                /^(送信|確認|入力|完了|登録)\\s*(株式会社|有限会社|合同会社)/,
+                /(様|御中|殿)\\s*(株式会社|有限会社|合同会社)/,
+                /^[A-Z]{{2,5}}$/,  // 単なる略語（ABC等）
+                /ここに.*(?:入り|入力|記載)/,  // プレースホルダー
+                /\\(.*説明.*\\)/,  // (ここにサイトの説明が入ります)等
+                /^\\s*$/,
+                /^(Movie|Video|Photo|Image|News|Blog|Contact)\\s*(株式会社)?$/i,
+            ];
+            
+            for (const pattern of invalidPatterns) {{
+                if (pattern.test(name)) return true;
+            }}
+            return false;
+        }}
+        
+        // 会社名をクリーンアップ
+        function cleanCompanyName(name) {{
+            if (!name) return '';
+            
+            // 前後の空白除去
+            name = name.trim();
+            
+            // パイプ・ダッシュ以降を削除（会社名が先頭にある場合）
+            if (hasCorpSuffix(name.split(/[｜|\\-–—]/)[0])) {{
+                name = name.split(/[｜|\\-–—]/)[0].trim();
+            }}
+            
+            // 括弧内の余分なテキストを削除（ただし社名の一部っぽい場合は残す）
+            name = name.replace(/\\s*[（(][^）)]*(?:説明|ここに|サイト|ページ)[^）)]*[）)]\\s*/g, '');
+            
+            // 「会社名」「商号」等のラベルを除去
+            name = name.replace(/^(?:会社名|商号|社名|運営会社)[：:・\\s]*/g, '');
+            
+            // 【公式】等を除去
+            name = name.replace(/^【[^】]*】\\s*/, '');
+            
+            // 連続空白を1つに
+            name = name.replace(/[\\s　]+/g, ' ').trim();
+            
+            // 末尾のゴミを除去
+            name = name.replace(/\\s*[-–—]\\s*$/, '').trim();
+            name = name.replace(/\\s*[｜|]\\s*$/, '').trim();
+            
+            return name;
+        }}
+        
+        // ドメインから会社名を推測
+        function guessNameFromDomain() {{
+            // www. と .co.jp/.jp/.com 等を除去
+            let domain = hostname.replace(/^www\\./, '').replace(/\\.(co\\.jp|or\\.jp|ne\\.jp|ac\\.jp|jp|com|net|org)$/, '');
+            
+            // ハイフンをスペースに、キャメルケースを分割
+            domain = domain.replace(/-/g, ' ');
+            domain = domain.replace(/([a-z])([A-Z])/g, '$1 $2');
+            
+            // 頭文字大文字化
+            domain = domain.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+            
+            return domain;
+        }}
 
         // === 企業名抽出（優先度順） ===
         let companyName = '';
+        let candidates = [];
 
         // 1. meta要素から取得（最も信頼性が高い）
         const ogSiteName = document.querySelector('meta[property="og:site_name"]')?.content;
-        if (ogSiteName && ogSiteName.length > 2 && ogSiteName.length < 50) {{
-            companyName = ogSiteName.trim();
+        if (ogSiteName && ogSiteName.length > 2 && ogSiteName.length < 60) {{
+            candidates.push({{ name: ogSiteName.trim(), source: 'og:site_name', priority: 1 }});
         }}
 
-        // 2. 明示的な「会社名：〇〇」形式
-        if (!companyName) {{
-            const explicitPatterns = [
-                /(?:会社名|社名|商号|運営会社)[：:・\\s]+([^\\n、,（(]+)/,
-            ];
-            for (const pattern of explicitPatterns) {{
-                const match = body.match(pattern);
-                if (match && match[1].trim().length > 1) {{
-                    companyName = match[1].trim();
+        // 2. 構造化データ（JSON-LD）から取得
+        const jsonLd = document.querySelector('script[type="application/ld+json"]');
+        if (jsonLd) {{
+            try {{
+                const data = JSON.parse(jsonLd.textContent);
+                if (data.name) {{
+                    candidates.push({{ name: data.name, source: 'json-ld', priority: 2 }});
+                }}
+                if (data.legalName) {{
+                    candidates.push({{ name: data.legalName, source: 'json-ld-legal', priority: 1 }});
+                }}
+            }} catch(e) {{}}
+        }}
+
+        // 3. 明示的な「会社名：〇〇」形式（本文から）
+        const explicitMatch = body.match(/(?:会社名|社名|商号|運営会社)[：:・\\s]+([^\\n、,（(｜|]+)/);
+        if (explicitMatch && explicitMatch[1].trim().length > 2) {{
+            candidates.push({{ name: explicitMatch[1].trim(), source: 'explicit', priority: 1 }});
+        }}
+
+        // 4. タイトルから法人格を含む形式を抽出
+        // 前株パターン
+        const titlePrefixMatch = title.match(/((?:株式会社|有限会社|合同会社|合資会社)[^｜|\\-–—\\n]+)/);
+        if (titlePrefixMatch) {{
+            candidates.push({{ name: titlePrefixMatch[1].trim(), source: 'title-prefix', priority: 3 }});
+        }}
+        // 後株パターン
+        const titlePostfixMatch = title.match(/([^｜|\\-–—\\n]+(?:株式会社|有限会社|合同会社|合資会社))/);
+        if (titlePostfixMatch) {{
+            candidates.push({{ name: titlePostfixMatch[1].trim(), source: 'title-postfix', priority: 3 }});
+        }}
+
+        // 5. タイトルの区切り文字前
+        const titleFirstPart = title.split(/[｜|\\-–—]/)[0].trim();
+        if (titleFirstPart && titleFirstPart.length > 2 && titleFirstPart.length < 60) {{
+            candidates.push({{ name: titleFirstPart, source: 'title-first', priority: 5 }});
+        }}
+
+        // 6. ドメインからの推測（最終手段）
+        const domainGuess = guessNameFromDomain();
+        if (domainGuess && domainGuess.length > 2) {{
+            candidates.push({{ name: domainGuess, source: 'domain', priority: 10 }});
+        }}
+
+        // === 候補を評価して最適なものを選択 ===
+        // 優先度でソート（低い方が高優先）
+        candidates.sort((a, b) => a.priority - b.priority);
+        
+        for (const candidate of candidates) {{
+            const cleaned = cleanCompanyName(candidate.name);
+            if (!isInvalidName(cleaned)) {{
+                // 法人格を含む候補を優先
+                if (hasCorpSuffix(cleaned)) {{
+                    companyName = cleaned;
                     break;
+                }}
+                // 法人格なしでも、他に候補がなければ採用
+                if (!companyName) {{
+                    companyName = cleaned;
                 }}
             }}
         }}
-
-        // 3. 法人格パターン（前株・後株両対応）
-        if (!companyName) {{
-            // 後株：「ABC株式会社」「ゼネフィ合同会社」
-            const postfixMatch = body.match(/([ァ-ヶー一-龥a-zA-Zａ-ｚＡ-Ｚ0-9０-９]+?)\\s*(?:株式会社|有限会社|合同会社|合資会社)/);
-            if (postfixMatch && postfixMatch[1].trim().length > 1) {{
-                companyName = postfixMatch[0].trim();
-            }}
+        
+        // 最終フォールバック
+        if (!companyName || isInvalidName(companyName)) {{
+            companyName = guessNameFromDomain() + '（推定）';
         }}
 
-        if (!companyName) {{
-            // 前株：「株式会社ABC」
-            const prefixMatch = body.match(/(?:株式会社|有限会社|合同会社|合資会社)\\s*([ァ-ヶー一-龥a-zA-Zａ-ｚＡ-Ｚ0-9０-９]+)/);
-            if (prefixMatch && prefixMatch[1].trim().length > 1) {{
-                companyName = prefixMatch[0].trim();
-            }}
-        }}
-
-        // 4. タイトルからフォールバック（法人格含む形式）
-        if (!companyName) {{
-            // タイトルに法人格が含まれている場合
-            const titleCorpMatch = title.match(/((?:株式会社|有限会社|合同会社)[^｜|\\n]+|[^｜|\\n]+(?:株式会社|有限会社|合同会社))/);
-            if (titleCorpMatch) {{
-                companyName = titleCorpMatch[1].trim();
-            }}
-        }}
-
-        // 5. タイトルから区切り文字前を取得
-        if (!companyName) {{
-            const titleMatch = title.match(/(.+?)(?:｜|\\||\\s*-\\s*|のホームページ|公式サイト|公式)/);
-            if (titleMatch && titleMatch[1].trim().length > 1) {{
-                companyName = titleMatch[1].trim();
-            }}
-        }}
-
-        // 6. 最終フォールバック：タイトルそのまま
-        if (!companyName) {{
-            companyName = title.substring(0, 50);
-        }}
-
-        // 不要な文字を除去
-        companyName = companyName.replace(/[\\s　]+/g, ' ').trim();
-        companyName = companyName.replace(/^【[^】]*】/, '').trim();  // 【公式】等を除去
-
-        // 所在地抽出
+        // === 所在地抽出 ===
         let location = '';
         const locationPatterns = [
-            /(?:本社|所在地|住所)[：:・\\s]*([^\\n]+)/,
-            /(?:〒|&#12306;)\\s*[0-9-]+\\s*([^\\n]+)/,
+            /(?:本社所在地|所在地|住所|本社)[：:・\\s]*([^\\n]+)/,
+            /〒\\s*[0-9\\-]+\\s*([^\\n]+)/,
         ];
         for (const pattern of locationPatterns) {{
             const match = body.match(pattern);
@@ -179,7 +269,7 @@ def extract_company_info(port: int, url: str, search_context: str = 'General') -
             }}
         }}
 
-        // 事業内容抽出
+        // === 事業内容抽出 ===
         let business = '';
         const businessPatterns = [
             /(?:事業内容|業務内容|サービス内容)[：:・\\s]*([^\\n]+)/,
@@ -193,58 +283,23 @@ def extract_company_info(port: int, url: str, search_context: str = 'General') -
             }}
         }}
 
-        // カスタム項目抽出（業種別）
+        // === カスタム項目抽出（業種別） ===
         let custom1 = '', custom2 = '', custom3 = '';
-
         const searchContext = '{search_context}';
 
         if (searchContext === 'IT') {{
-            // IT: 技術スタック
             const techMatch = body.match(/(?:使用技術|技術スタック|Tech Stack)[：:・\\s]*([^\\n]+)/);
             if (techMatch) custom1 = techMatch[1].trim().substring(0, 200);
-
-            // エンジニア数
+            
             const engMatch = body.match(/エンジニア[：:・\\s]*(\\d+)[名人]/);
             if (engMatch) custom2 = engMatch[1] + '名';
-
-            // 開発実績
+            
             const devMatch = body.match(/(?:開発実績|実績)[：:・\\s]*([^\\n]+)/);
             if (devMatch) custom3 = devMatch[1].trim().substring(0, 200);
-
-        }} else if (searchContext === 'Manufacturing') {{
-            // 製造業: 主要製品
-            const prodMatch = body.match(/(?:主要製品|製品)[：:・\\s]*([^\\n]+)/);
-            if (prodMatch) custom1 = prodMatch[1].trim().substring(0, 200);
-
-            // 工場所在地
-            const factMatch = body.match(/(?:工場|生産拠点)[：:・\\s]*([^\\n]+)/);
-            if (factMatch) custom2 = factMatch[1].trim().substring(0, 100);
-
-            // ISO認証
-            const isoMatch = body.match(/(ISO\\s*\\d+)/);
-            if (isoMatch) custom3 = isoMatch[1];
-
-        }} else if (searchContext === 'Startup') {{
-            // スタートアップ: 調達ラウンド
-            const roundPatterns = ['プレシリーズA', 'シリーズA', 'シリーズB', 'シリーズC', 'シード'];
-            for (const round of roundPatterns) {{
-                if (body.includes(round)) {{
-                    custom1 = round;
-                    break;
-                }}
-            }}
-
-            // 調達額
-            const amountMatch = body.match(/(\\d+(?:\\.\\d+)?)[\\s]*億円[のを]*(?:資金)?調達/);
-            if (amountMatch) custom2 = amountMatch[1] + '億円';
-
-            // 調達日
-            const dateMatch = body.match(/(\\d{{4}})年(\\d{{1,2}})月/);
-            if (dateMatch) custom3 = dateMatch[0];
         }}
 
         return JSON.stringify({{
-            company_name: companyName || title.substring(0, 50),
+            company_name: companyName,
             company_url: window.location.href,
             location: location,
             business: business,
@@ -267,73 +322,3 @@ def extract_company_info(port: int, url: str, search_context: str = 'General') -
         return data
     except:
         return None
-
-
-def extract_custom_fields(page_text: str, search_context: str) -> Dict[str, str]:
-    """
-    カスタム項目を業種に応じて動的に抽出
-
-    Args:
-        page_text: ページテキスト
-        search_context: 業種コンテキスト
-
-    Returns:
-        {custom_field_1: str, custom_field_2: str, custom_field_3: str}
-    """
-    custom_fields = {
-        'custom_field_1': '',
-        'custom_field_2': '',
-        'custom_field_3': ''
-    }
-
-    if search_context == 'IT':
-        # 技術スタック
-        tech_match = re.search(r'(?:使用技術|技術スタック|Tech Stack)[：:・\s]*([^\n]+)', page_text)
-        if tech_match:
-            custom_fields['custom_field_1'] = tech_match.group(1).strip()[:200]
-
-        # エンジニア数
-        eng_match = re.search(r'エンジニア[：:・\s]*(\d+)[名人]', page_text)
-        if eng_match:
-            custom_fields['custom_field_2'] = eng_match.group(1) + '名'
-
-        # 開発実績
-        dev_match = re.search(r'(?:開発実績|実績)[：:・\s]*([^\n]+)', page_text)
-        if dev_match:
-            custom_fields['custom_field_3'] = dev_match.group(1).strip()[:200]
-
-    elif search_context == 'Manufacturing':
-        # 主要製品
-        prod_match = re.search(r'(?:主要製品|製品)[：:・\s]*([^\n]+)', page_text)
-        if prod_match:
-            custom_fields['custom_field_1'] = prod_match.group(1).strip()[:200]
-
-        # 工場所在地
-        fact_match = re.search(r'(?:工場|生産拠点)[：:・\s]*([^\n]+)', page_text)
-        if fact_match:
-            custom_fields['custom_field_2'] = fact_match.group(1).strip()[:100]
-
-        # ISO認証
-        iso_match = re.search(r'(ISO\s*\d+)', page_text)
-        if iso_match:
-            custom_fields['custom_field_3'] = iso_match.group(1)
-
-    elif search_context == 'Startup':
-        # 調達ラウンド
-        round_patterns = ['プレシリーズA', 'シリーズA', 'シリーズB', 'シリーズC', 'シード']
-        for round_name in round_patterns:
-            if round_name in page_text:
-                custom_fields['custom_field_1'] = round_name
-                break
-
-        # 調達額
-        amount_match = re.search(r'(\d+(?:\.\d+)?)\s*億円[のを]*(?:資金)?調達', page_text)
-        if amount_match:
-            custom_fields['custom_field_2'] = amount_match.group(1) + '億円'
-
-        # 調達日
-        date_match = re.search(r'(\d{4})年(\d{1,2})月', page_text)
-        if date_match:
-            custom_fields['custom_field_3'] = date_match.group(0)
-
-    return custom_fields

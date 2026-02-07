@@ -9,7 +9,6 @@ import sys
 import time
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from urllib.parse import urlparse
 
 # ライブラリのインポート
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +20,7 @@ from lib.normalizer import deduplicate_companies, validate_company_data
 from lib.output import generate_json_output, generate_csv_output, generate_markdown_report
 
 
-def collect_search_results(ports, query, max_results=50, num_variations=10, scroll_pages=5):
+def collect_search_results(ports, query, max_results=50):
     """
     複数コンテナで並列検索してURLを収集（クエリバリエーション対応）
 
@@ -29,14 +28,12 @@ def collect_search_results(ports, query, max_results=50, num_variations=10, scro
         ports: ブラウザコンテナのポートリスト
         query: 検索クエリ
         max_results: 最大収集件数
-        num_variations: クエリバリエーション数
-        scroll_pages: 各検索でのスクロール回数
 
     Returns:
         [{title, url, snippet}, ...]
     """
     # クエリバリエーションを生成
-    query_variations = generate_query_variations(query, num_variations)
+    query_variations = generate_query_variations(query)
     print(f"  検索クエリ: {query}")
     print(f"  バリエーション: {len(query_variations)}個")
 
@@ -60,7 +57,8 @@ def collect_search_results(ports, query, max_results=50, num_variations=10, scro
             futures = {}
             for port in query_ports:
                 # スクロールで追加結果も取得
-                futures[executor.submit(search_duckduckgo, port, q, max_results=20, scroll_pages=scroll_pages)] = port
+                # site:co.jpで企業サイトに限定（まとめサイト除外に効果大）
+                futures[executor.submit(search_duckduckgo, port, q, max_results=20, scroll_pages=3, use_site_operator=True)] = port
 
             for future in as_completed(futures):
                 port = futures[future]
@@ -124,18 +122,6 @@ def collect_company_info(ports, search_results, search_context, max_companies=10
     return companies
 
 
-def get_domain(url: str) -> str:
-    """URLからドメインを抽出（www.を除去）"""
-    try:
-        parsed = urlparse(url)
-        domain = parsed.netloc.lower()
-        if domain.startswith('www.'):
-            domain = domain[4:]
-        return domain
-    except Exception:
-        return ''
-
-
 def collect_contact_forms(ports, companies):
     """
     問い合わせフォームURLを並列検出
@@ -163,18 +149,6 @@ def collect_contact_forms(ports, companies):
                 company = futures[future]
                 try:
                     contact_url = future.result()
-                    
-                    # ドメイン検証: 会社URLとフォームURLのドメインが一致するか
-                    if contact_url:
-                        company_domain = get_domain(company.get('company_url', ''))
-                        form_domain = get_domain(contact_url)
-                        
-                        # 完全一致 or サブドメイン（form.company.com等）を許可
-                        if company_domain and form_domain:
-                            if form_domain != company_domain and not form_domain.endswith('.' + company_domain):
-                                print(f"    ⚠ {company.get('company_name', '')[:30]} - ドメイン不一致（{form_domain} != {company_domain}）")
-                                contact_url = ''  # ドメイン不一致なので無効化
-                    
                     company['contact_form_url'] = contact_url
                     if contact_url:
                         print(f"    ✓ {company.get('company_name', '')[:30]} - フォーム検出")
@@ -190,59 +164,13 @@ def main():
     parser = argparse.ArgumentParser(description='営業リスト作成スクリプト')
     parser.add_argument('query', help='検索クエリ（例: "東京 IT企業"）')
     parser.add_argument('--max-companies', type=int, default=100, help='最大収集企業数（デフォルト: 100）')
-    parser.add_argument('--query-variations', type=int, default=10, help='検索クエリのバリエーション数（デフォルト: 10）')
-    parser.add_argument('--scroll-pages', type=int, default=5, help='各検索でのスクロール回数（デフォルト: 5）')
     parser.add_argument('--skip-contact-forms', action='store_true', help='問い合わせフォーム検出をスキップ')
-    parser.add_argument('--additional-queries', '-q', nargs='+', default=[], 
-                        help='追加の検索クエリ（例: -q "システム開発 東京" "Web制作会社"）')
     args = parser.parse_args()
-
-    # メインクエリ + 追加クエリを結合
-    all_queries = [args.query] + args.additional_queries
-    
-    # 業種コンテキスト判定して関連クエリを自動追加（LLMで生成）
-    search_context = determine_search_context(args.query)
-    if len(all_queries) == 1:
-        # 地域を抽出
-        regions = ['東京', '大阪', '名古屋', '福岡', '横浜', '札幌', '仙台', '神戸', '京都', '広島']
-        found_region = None
-        for region in regions:
-            if region in args.query:
-                found_region = region
-                break
-        
-        if found_region:
-            # LLMで関連クエリを生成
-            try:
-                from lib.llm_helper import generate_base_queries
-                additional_queries = generate_base_queries(args.query, max_queries=8)
-                for q in additional_queries:
-                    if q not in all_queries:
-                        all_queries.append(q)
-                print(f"[LLM] {len(all_queries)}個のベースクエリを使用")
-            except Exception as e:
-                print(f"[LLM] フォールバック: {e}")
-                # フォールバック: ITコンテキストの場合のみハードコード
-                if search_context == 'IT':
-                    additional_it_queries = [
-                        f"{found_region} システム開発会社",
-                        f"{found_region} Web制作会社",
-                        f"{found_region} アプリ開発",
-                        f"{found_region} ソフトウェア開発",
-                        f"{found_region} IT企業",
-                        f"{found_region} DX支援",
-                        f"{found_region} AI開発",
-                        f"{found_region} クラウド開発",
-                    ]
-                    for q in additional_it_queries:
-                        if q not in all_queries:
-                            all_queries.append(q)
-                    print(f"ITコンテキスト検出: {len(all_queries)}個のクエリを使用")
 
     print("=" * 60)
     print("営業リスト作成スクリプト")
     print("=" * 60)
-    print(f"検索クエリ: {', '.join(all_queries)}")
+    print(f"検索クエリ: {args.query}")
     print(f"目標企業数: {args.max_companies}社")
     print()
 
@@ -261,28 +189,9 @@ def main():
     print(f"業種コンテキスト: {search_context}")
     print()
 
-    # ステップ1: 検索結果を収集（複数クエリ対応）
+    # ステップ1: 検索結果を収集
     print("[1/4] 検索結果を収集中...")
-    all_search_results = []
-    seen_urls = set()
-    
-    for query_idx, query in enumerate(all_queries):
-        print(f"  クエリ {query_idx + 1}/{len(all_queries)}: {query}")
-        results = collect_search_results(
-            ports, query,
-            max_results=args.max_companies * 2 // len(all_queries),
-            num_variations=args.query_variations,
-            scroll_pages=args.scroll_pages
-        )
-        # 重複排除しながら追加
-        for r in results:
-            url = r.get('url', '')
-            if url and url not in seen_urls:
-                seen_urls.add(url)
-                all_search_results.append(r)
-    
-    search_results = all_search_results
-    print(f"  合計検索結果: {len(search_results)}件のユニークURL")
+    search_results = collect_search_results(ports, args.query, max_results=args.max_companies * 2)
     print()
 
     # ステップ2: 企業情報を収集
