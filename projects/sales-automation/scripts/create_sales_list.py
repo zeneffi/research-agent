@@ -57,7 +57,8 @@ def collect_search_results(ports, query, max_results=50):
             futures = {}
             for port in query_ports:
                 # スクロールで追加結果も取得
-                futures[executor.submit(search_duckduckgo, port, q, max_results=20, scroll_pages=2)] = port
+                # site:co.jpで企業サイトに限定（まとめサイト除外に効果大）
+                futures[executor.submit(search_duckduckgo, port, q, max_results=20, scroll_pages=3, use_site_operator=True)] = port
 
             for future in as_completed(futures):
                 port = futures[future]

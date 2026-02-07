@@ -64,7 +64,36 @@ SKIP_DOMAINS = {
     'lp-maker', 'lpmaker',  # LP系まとめ
     'system-kanji', 'systemkanji',  # システム幹事
     'dx-navi', 'dxnavi',  # DXナビ
+    # 追加（2026-02-07: 検索テストで検出）
+    'genee',  # GeNEE まとめ記事
+    'liginc', 'lig',  # LIG ブログ
+    'crexgroup',  # CREX まとめ
+    'sidebiz-recipe',  # 副業レシピ
+    'techpartner',  # テックパートナー
+    'webtan',  # Web担当者Forum
+    'markezine',  # MarkeZine
+    'liskul',  # LISKUL
+    'seleck',  # SELECK
+    'fastgrow',  # FastGrow
+    'thebridge',  # The Bridge
+    'bridgewriters',  # ブリッジライターズ
 }
+
+# まとめ記事を示すタイトルキーワード（タイトルにこれらが含まれる場合は除外）
+SKIP_TITLE_KEYWORDS = [
+    'おすすめ',
+    'オススメ',
+    '選',  # ○選
+    '比較',
+    'ランキング',
+    'まとめ',
+    '一覧',
+    '厳選',
+    '徹底解説',
+    '完全ガイド',
+    'TOP',
+    'Best',
+]
 
 # まとめ記事を示すURLパスパターン（正規表現）
 SKIP_URL_PATTERNS = [
@@ -93,7 +122,7 @@ SKIP_URL_PATTERNS = [
 ]
 
 
-def search_duckduckgo(port: int, query: str, max_results: int = 10, scroll_pages: int = 3) -> List[Dict[str, str]]:
+def search_duckduckgo(port: int, query: str, max_results: int = 10, scroll_pages: int = 3, exclude_matome: bool = True, use_site_operator: bool = False) -> List[Dict[str, str]]:
     """
     DuckDuckGoで検索して結果を取得（スクロールで追加結果も取得）
 
@@ -102,10 +131,22 @@ def search_duckduckgo(port: int, query: str, max_results: int = 10, scroll_pages
         query: 検索クエリ
         max_results: 最大取得件数
         scroll_pages: スクロール回数（追加読み込み回数）
+        exclude_matome: まとめサイト除外キーワードをクエリに追加するか
+        use_site_operator: site:co.jp / site:.jp を使用して企業サイトに限定するか
 
     Returns:
         [{title: str, url: str, snippet: str}, ...]
     """
+    # site:オペレータで企業ドメインに限定（まとめサイト排除に効果大）
+    if use_site_operator:
+        # co.jpドメインに限定（日本企業の公式サイト率が高い）
+        query = f'site:co.jp {query}'
+    
+    # まとめサイト除外キーワードを追加
+    if exclude_matome:
+        exclude_terms = '-おすすめ -比較 -ランキング -まとめ -一覧 -選び方'
+        query = f'{query} {exclude_terms}'
+    
     encoded_query = quote(query)
     url = f"https://duckduckgo.com/?q={encoded_query}"
 
@@ -197,13 +238,18 @@ def search_duckduckgo(port: int, query: str, max_results: int = 10, scroll_pages
             browser_evaluate(port, scroll_script)
             time.sleep(2)  # 読み込み待機
 
-    # 除外ドメイン・URLパターンのフィルタリング
+    # 除外ドメイン・URLパターン・タイトルキーワードのフィルタリング
     filtered_results = []
     for r in all_results:
         url = r.get('url', '')
+        title = r.get('title', '')
         
         # is_valid_company_url で総合判定
         if not is_valid_company_url(url):
+            continue
+        
+        # タイトルにまとめ記事キーワードが含まれる場合は除外
+        if is_matome_title(title):
             continue
 
         filtered_results.append(r)
@@ -213,7 +259,7 @@ def search_duckduckgo(port: int, query: str, max_results: int = 10, scroll_pages
 
 def generate_query_variations(base_query: str) -> List[str]:
     """
-    基本クエリから検索バリエーションを生成
+    基本クエリから検索バリエーションを生成（公式サイト発見率を高める戦略）
 
     Args:
         base_query: 基本クエリ（例: "東京 システム開発会社"）
@@ -221,7 +267,7 @@ def generate_query_variations(base_query: str) -> List[str]:
     Returns:
         クエリのリスト
     """
-    variations = [base_query]
+    variations = []
 
     # 地域を抽出
     regions = ['東京', '大阪', '名古屋', '福岡', '横浜', '札幌', '仙台', '神戸', '京都', '広島']
@@ -231,33 +277,96 @@ def generate_query_variations(base_query: str) -> List[str]:
             found_region = region
             break
 
-    # 業種キーワードのバリエーション
-    it_variations = [
+    # 基本クエリから業種キーワードを抽出
+    industry_keyword = None
+    it_keywords = [
         'システム開発', 'Web制作', 'アプリ開発', 'IT企業', 'ソフトウェア開発',
-        'Webサービス', 'SaaS', 'Webシステム', 'DX支援'
+        'Webサービス', 'SaaS', 'Webシステム', 'DX支援', 'システム'
     ]
-
-    # 基本クエリから業種キーワードを特定して、バリエーションを追加
-    for kw in it_variations:
+    for kw in it_keywords:
         if kw in base_query:
-            # 同じ業種の別表現を追加
-            for alt_kw in it_variations:
-                if alt_kw != kw:
-                    if found_region:
-                        new_query = f"{found_region} {alt_kw}"
-                    else:
-                        new_query = alt_kw
-                    if new_query not in variations:
-                        variations.append(new_query)
+            industry_keyword = kw
             break
 
-    # 会社/企業の表現バリエーション
-    if '会社' in base_query:
-        variations.append(base_query.replace('会社', '企業'))
-    if '企業' in base_query:
-        variations.append(base_query.replace('企業', '会社'))
+    # === 戦略1: 公式ページを狙うキーワード ===
+    # 「会社概要」「事業内容」はまとめサイトには存在しない
+    official_page_keywords = ['会社概要', '事業内容', '企業情報']
+    
+    for official_kw in official_page_keywords:
+        if found_region and industry_keyword:
+            variations.append(f'"{official_kw}" {found_region} {industry_keyword}')
+        elif industry_keyword:
+            variations.append(f'"{official_kw}" {industry_keyword}')
+    
+    # === 戦略2: 法人格を明示 ===
+    # 「株式会社」「有限会社」を付けると公式サイトがヒットしやすい
+    corp_types = ['株式会社', '合同会社']
+    
+    for corp in corp_types:
+        if found_region and industry_keyword:
+            variations.append(f'{found_region} {corp} {industry_keyword}')
+        elif industry_keyword:
+            variations.append(f'{corp} {industry_keyword}')
 
-    return variations[:5]  # 最大5バリエーション
+    # === 戦略3: 基本クエリもバリエーションに追加 ===
+    if base_query not in variations:
+        variations.append(base_query)
+
+    # === 戦略4: 地域を細分化（東京の場合） ===
+    tokyo_areas = ['渋谷区', '港区', '新宿区', '千代田区', '品川区', '中央区']
+    if found_region == '東京' and industry_keyword:
+        for area in tokyo_areas[:3]:  # 上位3区のみ
+            variations.append(f'{area} {industry_keyword}')
+
+    # === 戦略5: 業種の言い換え ===
+    it_variations = {
+        'システム開発': ['受託開発', 'SI', 'システムインテグレーター'],
+        'Web制作': ['ホームページ制作', 'Webサイト制作'],
+        'アプリ開発': ['スマホアプリ開発', 'モバイルアプリ開発'],
+    }
+    
+    if industry_keyword and industry_keyword in it_variations:
+        for alt_kw in it_variations[industry_keyword][:2]:
+            if found_region:
+                variations.append(f'{found_region} {alt_kw}')
+            else:
+                variations.append(alt_kw)
+
+    # 重複除去して最大10バリエーション
+    seen = set()
+    unique_variations = []
+    for v in variations:
+        if v not in seen:
+            seen.add(v)
+            unique_variations.append(v)
+    
+    return unique_variations[:10]
+
+
+def is_matome_title(title: str) -> bool:
+    """
+    タイトルがまとめ記事っぽいかチェック
+
+    Args:
+        title: 検索結果のタイトル
+
+    Returns:
+        True: まとめ記事っぽい, False: 企業サイトっぽい
+    """
+    if not title:
+        return False
+    
+    title_lower = title.lower()
+    
+    for keyword in SKIP_TITLE_KEYWORDS:
+        if keyword.lower() in title_lower:
+            return True
+    
+    # 数字+選のパターン（10選、20選など）
+    if re.search(r'\d+選', title):
+        return True
+    
+    return False
 
 
 def is_valid_company_url(url: str) -> bool:
