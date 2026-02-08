@@ -88,7 +88,7 @@ SKIP_URL_PATTERNS = [
 ]
 
 
-def search_duckduckgo(port: int, query: str, max_results: int = 10, scroll_pages: int = 3) -> List[Dict[str, str]]:
+def search_duckduckgo(port: int, query: str, max_results: int = 10, scroll_pages: int = 5) -> List[Dict[str, str]]:
     """
     DuckDuckGoで検索して結果を取得（スクロールで追加結果も取得）
 
@@ -252,7 +252,7 @@ def generate_query_variations(base_query: str) -> List[str]:
     if '企業' in base_query:
         variations.append(base_query.replace('企業', '会社'))
 
-    return variations[:5]  # 最大5バリエーション
+    return variations[:10]  # 最大10バリエーション
 
 
 def is_valid_company_url(url: str) -> bool:
