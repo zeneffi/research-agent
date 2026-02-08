@@ -39,7 +39,7 @@ SKIP_DOMAINS = {
     'system-kanji',  # システム幹事
     'hacchu-lounge', 'hacchulounge',  # 発注ラウンジ
     'itcapital', '1st-net',  # ITキャピタル
-    '発注ナビ', 'haccyu-navi', '発注navi', 'hnavi',  # 発注ナビ
+    '発注ナビ', 'haccyu-navi', '発注navi',  # 発注ナビ（hnaviは企業サイトもあるので除外）
     'rekaizen', 'compare-biz', 'comparebiz',  # 比較ビズ
     'web-kanji', 'webkanji',  # Web幹事
     'meetsmore', 'ミツモア',
@@ -55,19 +55,10 @@ SKIP_DOMAINS = {
     'shukatu-kyokasho', 'syukatu',  # 就活系
     'emeao',  # EMEAO
     'consul-go', 'consulgo',  # コンサルGO
-    # 追加（2026-02-06: まとめサイト混入対策）
-    'andmedia', 'itpark',  # IT PARK
-    'gicp',  # GICP まとめ記事
-    'digima',  # Digima
-    '発注先探し', 'sourcing',
-    'web-production-navigator',  # Web制作ナビ
-    'lp-maker', 'lpmaker',  # LP系まとめ
-    'system-kanji', 'systemkanji',  # システム幹事
-    'dx-navi', 'dxnavi',  # DXナビ
-    # 2026-02-08追加（精度改善テストで検出）
-    'fallabs',  # 技術ブログ
-    'houjin.goo',  # 全国法人検索
-    'freeconsul',  # コンサルGO
+    # 2026-02-08: 企業コンテンツサイトは除外しない（URLパスで判定）
+    # 以下は削除: andmedia, gicp, hnavi（企業のメディア部門）
+    # 追加（テストで検出）
+    'houjin.goo',  # 全国法人検索（企業DBサイト）
 }
 
 # まとめ記事を示すURLパスパターン（正規表現）
