@@ -77,6 +77,13 @@ SKIP_DOMAINS = {
     'jcci',  # 日本商工会議所
     'jetro',  # JETRO
     'smrj',  # 中小機構
+    # 2026-02-09: エージェント・比較サイト追加
+    'mid-works', 'midworks',  # Midworks（エージェント）
+    'itpark', 'it-park',  # IT PARK（比較サイト）
+    'andmedia',  # andmedia（IT PARK運営元）
+    'geekly',  # ギークリー（エージェント）
+    'levtech',  # レバテック（エージェント）
+    'crowdtech',  # クラウドテック（エージェント）
 }
 
 # 行政・公共機関ドメイン（企業リストから除外）
