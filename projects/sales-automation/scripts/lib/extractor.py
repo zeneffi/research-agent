@@ -6,6 +6,34 @@ import time
 from typing import Optional, Dict, Any
 from .browser import browser_navigate, browser_evaluate
 
+# 企業名として不適切なパターン（スキップ対象）
+NG_TITLE_PATTERNS = {
+    # 法的ページ
+    '利用規約', 'プライバシーポリシー', '個人情報保護', '特定商取引法', 'お問い合わせ',
+    # まとめサイト・メディア
+    '全国法人検索', '就活の教科書', '懸賞生活', 'おすすめ', '比較', 'ランキング',
+    '選び方', '一覧', 'まとめ', '転職', '求人', 'Indeed', 'マイナビ', 'リクナビ',
+    # 非企業ページ
+    'サイトマップ', 'お知らせ', 'ニュース', 'ブログ', 'コラム', 'メディア',
+    '編集ポリシー', '解約', '退会', 'FAQ', 'ヘルプ',
+}
+
+def is_valid_company_name(name: str) -> bool:
+    """企業名として有効かチェック"""
+    if not name or len(name) < 2:
+        return False
+    # NGパターンを含むか
+    name_lower = name.lower()
+    for ng in NG_TITLE_PATTERNS:
+        if ng.lower() in name_lower:
+            return False
+    # 法人格を含むか（より信頼性が高い）
+    has_corp = any(corp in name for corp in ['株式会社', '有限会社', '合同会社', '合資会社', 'Inc', 'LLC', 'Ltd'])
+    # 法人格がなくても、NGでなければOK（ただし短すぎるのはNG）
+    if not has_corp and len(name) < 4:
+        return False
+    return True
+
 
 def extract_company_info(port: int, url: str, search_context: str = 'General') -> Optional[Dict[str, Any]]:
     """
@@ -199,7 +227,11 @@ def extract_company_info(port: int, url: str, search_context: str = 'General') -
 
     try:
         import json
-        return json.loads(result)
+        data = json.loads(result)
+        # 企業名のNG判定
+        if not is_valid_company_name(data.get('company_name', '')):
+            return None
+        return data
     except:
         return None
 

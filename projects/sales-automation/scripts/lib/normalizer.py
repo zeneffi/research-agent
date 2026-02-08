@@ -15,19 +15,38 @@ def normalize_company_name(name: str) -> str:
     Returns:
         正規化された企業名
     """
-    # 法人格を除去
     normalized = name
-    patterns = [
+
+    # 区切り文字以降を削除（「株式会社ABC｜サービス紹介」→「株式会社ABC」）
+    for sep in ['｜', '|', ' - ', '－', '―', '–']:
+        if sep in normalized:
+            normalized = normalized.split(sep)[0]
+
+    # 括弧内の補足を削除（「株式会社LIG(リグ)」→「株式会社LIG」）
+    normalized = re.sub(r'[（(][^）)]*[）)]', '', normalized)
+
+    # 法人格を除去
+    corp_patterns = [
         r'株式会社\s*',
         r'有限会社\s*',
         r'合同会社\s*',
+        r'合資会社\s*',
         r'一般社団法人\s*',
         r'公益財団法人\s*',
-        r'\s+',  # 複数の空白を1つに
+        r'\(株\)',
+        r'（株）',
     ]
-
-    for pattern in patterns:
+    for pattern in corp_patterns:
         normalized = re.sub(pattern, '', normalized)
+
+    # 全角英数→半角
+    normalized = normalized.translate(str.maketrans(
+        'ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ０１２３４５６７８９',
+        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+    ))
+
+    # 複数の空白を1つに
+    normalized = re.sub(r'\s+', ' ', normalized)
 
     # 小文字化（英語企業名の重複排除用）
     normalized = normalized.lower()

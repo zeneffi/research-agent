@@ -64,6 +64,10 @@ SKIP_DOMAINS = {
     'lp-maker', 'lpmaker',  # LP系まとめ
     'system-kanji', 'systemkanji',  # システム幹事
     'dx-navi', 'dxnavi',  # DXナビ
+    # 2026-02-08追加（精度改善テストで検出）
+    'fallabs',  # 技術ブログ
+    'houjin.goo',  # 全国法人検索
+    'freeconsul',  # コンサルGO
 }
 
 # まとめ記事を示すURLパスパターン（正規表現）

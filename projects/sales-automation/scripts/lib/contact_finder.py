@@ -57,8 +57,8 @@ def find_contact_form_url(port: int, base_url: str) -> str:
     # === 方法1: よくあるパスを直接試す（キーワード + HTML構造を同時チェック）===
     for path in COMMON_CONTACT_PATHS:
         candidate_url = urljoin(base_url, path)
-        if browser_navigate(port, candidate_url, timeout=10):
-            time.sleep(2)  # JavaScript読み込み待機
+        if browser_navigate(port, candidate_url, timeout=3):
+            time.sleep(1)  # JavaScript読み込み待機
             # キーワード検証とHTML構造検証を同時に実行（効率化）
             combined_script = """(function() {
                 const title = document.title.toLowerCase();
@@ -81,7 +81,7 @@ def find_contact_form_url(port: int, base_url: str) -> str:
                 // いずれかがtrueなら問い合わせフォームと判定
                 return hasContactKeyword || hasFormStructure;
             })()"""
-            result = browser_evaluate(port, combined_script, timeout=10)
+            result = browser_evaluate(port, combined_script, timeout=3)
             if result == 'true':
                 print(f"  [DEBUG] Method 1 (common paths): {candidate_url}")
                 return candidate_url
@@ -90,7 +90,7 @@ def find_contact_form_url(port: int, base_url: str) -> str:
     if not browser_navigate(port, base_url):
         return ''
 
-    time.sleep(5)  # JavaScript動的生成リンク対応のため待機延長
+    time.sleep(2)  # JavaScript動的生成リンク対応のため待機
 
     # 問い合わせリンクを検出するスクリプト
     script = """(function() {
@@ -131,7 +131,7 @@ def find_contact_form_url(port: int, base_url: str) -> str:
         return '';
     })()"""
 
-    result = browser_evaluate(port, script)
+    result = browser_evaluate(port, script, timeout=3)
     if result and result != '':
         # JSON文字列の場合はパース
         try:
@@ -183,7 +183,7 @@ def find_contact_form_url(port: int, base_url: str) -> str:
         return '';
     })()"""
 
-    result = browser_evaluate(port, footer_script)
+    result = browser_evaluate(port, footer_script, timeout=3)
     if result and result != '':
         try:
             parsed = json.loads(result)
