@@ -11,6 +11,12 @@ from .browser import browser_navigate, browser_evaluate
 
 # よくある問い合わせフォームパス
 COMMON_CONTACT_PATHS = [
+    # 営業・協業用（優先）
+    '/contact/others',
+    '/contact/business',
+    '/contact/sales',
+    '/contact/partnership',
+    '/inquiry/business',
     # 英語系
     '/contact',
     '/contact/',
