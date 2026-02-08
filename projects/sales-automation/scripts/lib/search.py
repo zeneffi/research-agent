@@ -59,6 +59,15 @@ SKIP_DOMAINS = {
     # 以下は削除: andmedia, gicp, hnavi（企業のメディア部門）
     # 追加（テストで検出）
     'houjin.goo',  # 全国法人検索（企業DBサイト）
+    # 2026-02-08: メディア・情報サイト追加
+    'fallabs',  # ITキャリアメディア
+    'hojokin-ouendan',  # 補助金情報メディア
+    'ikesai',  # いけてるサイト.com（Web制作比較）
+    'sakufuri',  # サクフリマーケ（マーケティングメディア）
+    'neeed',  # NeeeD（開発会社比較）
+    'qopo',  # Qopo:MEDIA（Web制作比較）
+    'freeconsul',  # コンサルGO
+    'tobus',  # 都バス
 }
 
 # 行政・公共機関ドメイン（企業リストから除外）
