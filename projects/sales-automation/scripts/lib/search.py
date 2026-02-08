@@ -61,6 +61,17 @@ SKIP_DOMAINS = {
     'houjin.goo',  # 全国法人検索（企業DBサイト）
 }
 
+# 行政・公共機関ドメイン（企業リストから除外）
+GOVERNMENT_DOMAINS = {
+    '.lg.jp',      # 地方自治体
+    '.go.jp',      # 政府機関
+    '.metro.tokyo',  # 東京都
+    '.city.',      # 市町村
+    '.pref.',      # 都道府県
+    'govtech',     # GovTech系
+    'e-tokyo',     # 東京都電子自治体
+}
+
 # まとめ記事を示すURLパスパターン（正規表現）
 SKIP_URL_PATTERNS = [
     r'/おすすめ',
@@ -273,6 +284,10 @@ def is_valid_company_url(url: str) -> bool:
 
         # 除外ドメイン
         if any(skip in domain for skip in SKIP_DOMAINS):
+            return False
+
+        # 行政・公共機関ドメイン除外
+        if any(gov in domain for gov in GOVERNMENT_DOMAINS):
             return False
 
         # まとめ記事URLパターン除外

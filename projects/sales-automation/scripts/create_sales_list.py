@@ -168,12 +168,17 @@ def main():
     parser.add_argument('--query-variations', type=int, default=10, help='検索クエリのバリエーション数（デフォルト: 10）')
     parser.add_argument('--scroll-pages', type=int, default=5, help='各検索でのスクロール回数（デフォルト: 5）')
     parser.add_argument('--skip-contact-forms', action='store_true', help='問い合わせフォーム検出をスキップ')
+    parser.add_argument('--additional-queries', '-q', nargs='+', default=[], 
+                        help='追加の検索クエリ（例: -q "システム開発 東京" "Web制作会社"）')
     args = parser.parse_args()
+
+    # メインクエリ + 追加クエリを結合
+    all_queries = [args.query] + args.additional_queries
 
     print("=" * 60)
     print("営業リスト作成スクリプト")
     print("=" * 60)
-    print(f"検索クエリ: {args.query}")
+    print(f"検索クエリ: {', '.join(all_queries)}")
     print(f"目標企業数: {args.max_companies}社")
     print()
 
@@ -192,14 +197,28 @@ def main():
     print(f"業種コンテキスト: {search_context}")
     print()
 
-    # ステップ1: 検索結果を収集
+    # ステップ1: 検索結果を収集（複数クエリ対応）
     print("[1/4] 検索結果を収集中...")
-    search_results = collect_search_results(
-        ports, args.query,
-        max_results=args.max_companies * 2,
-        num_variations=args.query_variations,
-        scroll_pages=args.scroll_pages
-    )
+    all_search_results = []
+    seen_urls = set()
+    
+    for query_idx, query in enumerate(all_queries):
+        print(f"  クエリ {query_idx + 1}/{len(all_queries)}: {query}")
+        results = collect_search_results(
+            ports, query,
+            max_results=args.max_companies * 2 // len(all_queries),
+            num_variations=args.query_variations,
+            scroll_pages=args.scroll_pages
+        )
+        # 重複排除しながら追加
+        for r in results:
+            url = r.get('url', '')
+            if url and url not in seen_urls:
+                seen_urls.add(url)
+                all_search_results.append(r)
+    
+    search_results = all_search_results
+    print(f"  合計検索結果: {len(search_results)}件のユニークURL")
     print()
 
     # ステップ2: 企業情報を収集
