@@ -1,10 +1,10 @@
 {
   "form_sales": {
-    "max_containers": 5,
+    "max_containers": 1,
     "timeout_seconds": 120,
     "rate_limit": {
       "daily_limit": 100,
-      "interval_seconds": 180
+      "interval_seconds": 10
     },
     "sender_info": {
       "company_name": "zeneffi合同会社",
