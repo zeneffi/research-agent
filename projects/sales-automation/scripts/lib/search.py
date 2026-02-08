@@ -282,25 +282,58 @@ def generate_query_variations(base_query: str, max_variations: int = 10) -> List
     it_variations = [
         'システム開発', 'Web制作', 'アプリ開発', 'IT企業', 'ソフトウェア開発',
         'Webサービス', 'SaaS', 'Webシステム', 'DX支援',
-        # 2026-02-09: バリエーション追加（件数UP）
         '受託開発', 'SI企業', 'システムインテグレーター', 'Webアプリ開発',
         'モバイルアプリ開発', 'クラウド開発', 'AWS構築', 'インフラ構築',
         'ノーコード開発', 'ローコード開発', 'AI開発', '機械学習',
         'データ分析', 'IoT開発', 'ブロックチェーン',
     ]
 
+    # 製造業バリエーション
+    manufacturing_variations = [
+        '製造業', 'メーカー', '工場', '金属加工', '精密機器', '電子部品',
+        '機械製造', '自動車部品', 'プラスチック成形', '板金加工', '切削加工',
+        'NC加工', '金型製作', '試作品', 'OEM', 'ODM',
+    ]
+
+    # 不動産バリエーション
+    realestate_variations = [
+        '不動産会社', '不動産', '賃貸', '売買仲介', '不動産管理',
+        'マンション販売', '住宅販売', 'ビル管理', '不動産投資', '土地活用',
+        'テナント', 'オフィス仲介', '商業施設', '物件管理',
+    ]
+
+    # 建設業バリエーション
+    construction_variations = [
+        '建設会社', '建築', '工務店', 'ゼネコン', 'リフォーム',
+        '施工', '設計事務所', '内装', '外壁', '塗装', '電気工事',
+        '設備工事', '土木', 'プラント',
+    ]
+
+    # 業種判定と適用
+    all_industry_variations = {
+        'it': it_variations,
+        'manufacturing': manufacturing_variations,
+        'realestate': realestate_variations,
+        'construction': construction_variations,
+    }
+
     # 基本クエリから業種キーワードを特定して、バリエーションを追加
-    for kw in it_variations:
-        if kw in base_query:
-            # 同じ業種の別表現を追加
-            for alt_kw in it_variations:
-                if alt_kw != kw:
-                    if found_region:
-                        new_query = f"{found_region} {alt_kw}"
-                    else:
-                        new_query = alt_kw
-                    if new_query not in variations:
-                        variations.append(new_query)
+    matched = False
+    for industry, kw_list in all_industry_variations.items():
+        for kw in kw_list:
+            if kw in base_query:
+                # 同じ業種の別表現を追加
+                for alt_kw in kw_list:
+                    if alt_kw != kw:
+                        if found_region:
+                            new_query = f"{found_region} {alt_kw}"
+                        else:
+                            new_query = alt_kw
+                        if new_query not in variations:
+                            variations.append(new_query)
+                matched = True
+                break
+        if matched:
             break
 
     # 会社/企業の表現バリエーション
