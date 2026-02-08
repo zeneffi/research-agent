@@ -20,7 +20,7 @@ from lib.normalizer import deduplicate_companies, validate_company_data
 from lib.output import generate_json_output, generate_csv_output, generate_markdown_report
 
 
-def collect_search_results(ports, query, max_results=50):
+def collect_search_results(ports, query, max_results=50, num_variations=10, scroll_pages=5):
     """
     複数コンテナで並列検索してURLを収集（クエリバリエーション対応）
 
@@ -28,12 +28,14 @@ def collect_search_results(ports, query, max_results=50):
         ports: ブラウザコンテナのポートリスト
         query: 検索クエリ
         max_results: 最大収集件数
+        num_variations: クエリバリエーション数
+        scroll_pages: 各検索でのスクロール回数
 
     Returns:
         [{title, url, snippet}, ...]
     """
     # クエリバリエーションを生成
-    query_variations = generate_query_variations(query)
+    query_variations = generate_query_variations(query, num_variations)
     print(f"  検索クエリ: {query}")
     print(f"  バリエーション: {len(query_variations)}個")
 
@@ -57,7 +59,7 @@ def collect_search_results(ports, query, max_results=50):
             futures = {}
             for port in query_ports:
                 # スクロールで追加結果も取得
-                futures[executor.submit(search_duckduckgo, port, q, max_results=20, scroll_pages=2)] = port
+                futures[executor.submit(search_duckduckgo, port, q, max_results=20, scroll_pages=scroll_pages)] = port
 
             for future in as_completed(futures):
                 port = futures[future]
@@ -163,6 +165,8 @@ def main():
     parser = argparse.ArgumentParser(description='営業リスト作成スクリプト')
     parser.add_argument('query', help='検索クエリ（例: "東京 IT企業"）')
     parser.add_argument('--max-companies', type=int, default=100, help='最大収集企業数（デフォルト: 100）')
+    parser.add_argument('--query-variations', type=int, default=10, help='検索クエリのバリエーション数（デフォルト: 10）')
+    parser.add_argument('--scroll-pages', type=int, default=5, help='各検索でのスクロール回数（デフォルト: 5）')
     parser.add_argument('--skip-contact-forms', action='store_true', help='問い合わせフォーム検出をスキップ')
     args = parser.parse_args()
 
@@ -190,7 +194,12 @@ def main():
 
     # ステップ1: 検索結果を収集
     print("[1/4] 検索結果を収集中...")
-    search_results = collect_search_results(ports, args.query, max_results=args.max_companies * 2)
+    search_results = collect_search_results(
+        ports, args.query,
+        max_results=args.max_companies * 2,
+        num_variations=args.query_variations,
+        scroll_pages=args.scroll_pages
+    )
     print()
 
     # ステップ2: 企業情報を収集

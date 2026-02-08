@@ -206,12 +206,13 @@ def search_duckduckgo(port: int, query: str, max_results: int = 10, scroll_pages
     return filtered_results[:max_results]
 
 
-def generate_query_variations(base_query: str) -> List[str]:
+def generate_query_variations(base_query: str, max_variations: int = 10) -> List[str]:
     """
     基本クエリから検索バリエーションを生成
 
     Args:
         base_query: 基本クエリ（例: "東京 システム開発会社"）
+        max_variations: 最大バリエーション数
 
     Returns:
         クエリのリスト
@@ -252,7 +253,7 @@ def generate_query_variations(base_query: str) -> List[str]:
     if '企業' in base_query:
         variations.append(base_query.replace('企業', '会社'))
 
-    return variations[:10]  # 最大10バリエーション
+    return variations[:max_variations]
 
 
 def is_valid_company_url(url: str) -> bool:
