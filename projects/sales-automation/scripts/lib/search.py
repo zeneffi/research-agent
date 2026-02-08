@@ -68,17 +68,41 @@ SKIP_DOMAINS = {
     'qopo',  # Qopo:MEDIA（Web制作比較）
     'freeconsul',  # コンサルGO
     'tobus',  # 都バス
+    # 2026-02-09: 比較サイト・ポータル追加
+    'system-dev-navi',  # システム開発ナビ（比較サイト）
+    'odex-telex',  # ODEX展示会
+    'telex',  # 展示会系
+    'tokyo-kosha',  # 東京都中小企業振興公社
+    'tokyo-cci',  # 東京商工会議所
+    'jcci',  # 日本商工会議所
+    'jetro',  # JETRO
+    'smrj',  # 中小機構
 }
 
 # 行政・公共機関ドメイン（企業リストから除外）
 GOVERNMENT_DOMAINS = {
     '.lg.jp',      # 地方自治体
     '.go.jp',      # 政府機関
+    '.or.jp',      # 公益法人・財団法人
     '.metro.tokyo',  # 東京都
     '.city.',      # 市町村
     '.pref.',      # 都道府県
     'govtech',     # GovTech系
     'e-tokyo',     # 東京都電子自治体
+}
+
+# 無効な企業名パターン（タイトルから抽出された無意味なテキスト）
+INVALID_COMPANY_NAMES = {
+    'この条件から検索',
+    '条件から検索',
+    '企業名 株式会社',
+    '会社名 株式会社',
+    '検索結果',
+    '一覧',
+    'トップページ',
+    'ホーム',
+    'HOME',
+    'TOP',
 }
 
 # まとめ記事を示すURLパスパターン（正規表現）
@@ -247,10 +271,15 @@ def generate_query_variations(base_query: str, max_variations: int = 10) -> List
             found_region = region
             break
 
-    # 業種キーワードのバリエーション
+    # 業種キーワードのバリエーション（拡張）
     it_variations = [
         'システム開発', 'Web制作', 'アプリ開発', 'IT企業', 'ソフトウェア開発',
-        'Webサービス', 'SaaS', 'Webシステム', 'DX支援'
+        'Webサービス', 'SaaS', 'Webシステム', 'DX支援',
+        # 2026-02-09: バリエーション追加（件数UP）
+        '受託開発', 'SI企業', 'システムインテグレーター', 'Webアプリ開発',
+        'モバイルアプリ開発', 'クラウド開発', 'AWS構築', 'インフラ構築',
+        'ノーコード開発', 'ローコード開発', 'AI開発', '機械学習',
+        'データ分析', 'IoT開発', 'ブロックチェーン',
     ]
 
     # 基本クエリから業種キーワードを特定して、バリエーションを追加
