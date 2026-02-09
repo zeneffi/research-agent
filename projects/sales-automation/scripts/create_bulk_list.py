@@ -52,7 +52,8 @@ def search_multiple_queries(ports, queries, max_per_query=30):
                     if new_count > 0:
                         print(f"  +{new_count} 件")
                 except Exception as e:
-                    pass
+                    query_str = futures.get(future, "不明なクエリ")
+                    print(f"  ! クエリでエラー: {e}")
         
         if len(all_results) >= max_per_query * len(queries):
             break
@@ -87,8 +88,9 @@ def extract_companies_parallel(ports, search_results, search_context, max_compan
                         company['source_query'] = result.get('title', '')
                         companies.append(company)
                         print(f"  [{len(companies)}] {company.get('company_name', 'Unknown')[:40]}")
-                except:
-                    pass
+                except Exception as e:
+                    url = result.get('url', 'Unknown URL')
+                    print(f"  ! URL '{url}' の情報抽出中にエラー: {e}")
         
         time.sleep(0.3)
     

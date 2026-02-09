@@ -216,8 +216,8 @@ def test_form_fill_dry_run(port: int, form_url: str) -> dict:
 
 def main():
     """メイン処理"""
-    # 最新のリストを読み込み
-    output_dir = '/private/tmp/research-agent/projects/sales-automation/output'
+    # 最新のリストを読み込み（スクリプトの場所を基準とした相対パス）
+    output_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'output')
     json_files = sorted([f for f in os.listdir(output_dir) if f.endswith('.json')])
     if not json_files:
         print("エラー: 営業リストが見つかりません")
