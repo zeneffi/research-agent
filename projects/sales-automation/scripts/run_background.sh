@@ -66,8 +66,8 @@ if python "$SCRIPT_DIR/create_sales_list.py" "$QUERY" --max-companies "$MAX_COMP
     RESULT_FILE=$(ls -t "$OUTPUT_DIR"/sales_list_*.json 2>/dev/null | head -1)
     
     if [ -n "$RESULT_FILE" ] && [ -f "$RESULT_FILE" ]; then
-        COMPANY_COUNT=$(python3 -c "import json; print(len(json.load(open('$RESULT_FILE'))))" 2>/dev/null || echo "?")
-        FORM_COUNT=$(python3 -c "import json; data=json.load(open('$RESULT_FILE')); print(len([c for c in data if c.get('contact_form_url')]))" 2>/dev/null || echo "?")
+        COMPANY_COUNT=$(python3 -c "import json; data=json.load(open('$RESULT_FILE')); print(len(data.get('companies', data)) if isinstance(data, dict) else len(data))" 2>/dev/null || echo "?")
+        FORM_COUNT=$(python3 -c "import json; data=json.load(open('$RESULT_FILE')); companies=data.get('companies', data) if isinstance(data, dict) else data; print(len([c for c in companies if c.get('contact_form_url')]))" 2>/dev/null || echo "?")
         
         log "======================================"
         log "✅ 完了"
