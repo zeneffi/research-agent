@@ -23,22 +23,48 @@ NG_TITLE_PATTERNS = {
     # 行政機関
     'GovTech', '東京都', '都庁', '市役所', '区役所', '県庁',
     '内閣', '省庁', '政府', '自治体',
+    # 2026-02-09: 曖昧・一般的すぎる名前
+    '会社概要', '各部門の紹介', '導入事例', 'キャリア採用', '募集要項',
+    '実績紹介', '開催場所', '配信元', 'English', 'ロゴに込めた', 'UX / UI 専攻',
+    '個人事業主の場合', '業者探し', 'プログラミングなび', 'マナビタイム',
+    'キャリアトラス', 'タレントスクエア', '毎日新聞', 'Forbidden', '403',
 }
 
 def is_valid_company_name(name: str) -> bool:
     """企業名として有効かチェック"""
     if not name or len(name) < 2:
         return False
+    
+    # 前後の空白を除去
+    name = name.strip()
+    
     # NGパターンを含むか
     name_lower = name.lower()
     for ng in NG_TITLE_PATTERNS:
         if ng.lower() in name_lower:
             return False
+    
+    # 法人格のみ、または法人格+1-2文字だけの名前は除外
+    # 例: "株式会社", "対応 株式会社", "Form 株式会社"
+    corp_patterns = ['株式会社', '有限会社', '合同会社', '合資会社']
+    for corp in corp_patterns:
+        if corp in name:
+            # 法人格を除いた部分を取得
+            name_without_corp = name.replace(corp, '').strip()
+            # 法人格を除いた部分が短すぎる（3文字未満）なら除外
+            if len(name_without_corp) < 3:
+                return False
+            # 一般的な単語のみの場合も除外
+            generic_words = ['対応', 'Form', 'English', '会社', '07', '配信元', '開催場所', '導入事例']
+            if name_without_corp in generic_words:
+                return False
+    
     # 法人格を含むか（より信頼性が高い）
     has_corp = any(corp in name for corp in ['株式会社', '有限会社', '合同会社', '合資会社', 'Inc', 'LLC', 'Ltd'])
     # 法人格がなくても、NGでなければOK（ただし短すぎるのはNG）
     if not has_corp and len(name) < 4:
         return False
+    
     return True
 
 
