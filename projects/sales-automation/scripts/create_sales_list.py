@@ -9,6 +9,7 @@ import sys
 import time
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from urllib.parse import urlparse
 
 # ライブラリのインポート
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -126,13 +127,12 @@ def collect_company_info(ports, search_results, search_context, max_companies=10
 def get_domain(url: str) -> str:
     """URLからドメインを抽出（www.を除去）"""
     try:
-        from urllib.parse import urlparse
         parsed = urlparse(url)
         domain = parsed.netloc.lower()
         if domain.startswith('www.'):
             domain = domain[4:]
         return domain
-    except:
+    except Exception:
         return ''
 
 

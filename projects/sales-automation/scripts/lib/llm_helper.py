@@ -3,6 +3,7 @@ LLMを使った業種バリエーション生成
 """
 import os
 import json
+import re
 from typing import List
 from urllib.request import Request, urlopen
 from urllib.error import URLError
@@ -172,10 +173,8 @@ def generate_base_queries(query: str, max_queries: int = 8) -> List[str]:
             lines = [line.strip() for line in content.strip().split('\n') if line.strip()]
             queries = []
             for line in lines:
-                if line[0].isdigit():
-                    line = line.split('.', 1)[-1].strip()
-                elif line.startswith('-'):
-                    line = line[1:].strip()
+                # 行頭の「数字. 」や「- 」パターンを削除（正規表現で安全に処理）
+                line = re.sub(r'^\d+\.\s*|^-\s*', '', line)
                 if line and len(line) > 1:
                     queries.append(line)
             
@@ -185,7 +184,7 @@ def generate_base_queries(query: str, max_queries: int = 8) -> List[str]:
             
             return queries[:max_queries]
             
-    except (URLError, json.JSONDecodeError, KeyError, Exception) as e:
+    except Exception as e:
         print(f"[LLM] Error generating base queries: {e}")
         return [query]
 
