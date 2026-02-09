@@ -103,12 +103,105 @@ Web制作
         return [query]
 
 
+def generate_base_queries(query: str, max_queries: int = 8) -> List[str]:
+    """
+    LLM（GPT-4o-mini）を使って関連するベースクエリを生成
+    
+    例: "東京 IT企業" → ["東京 システム開発会社", "東京 Web制作会社", ...]
+    
+    Args:
+        query: 基本クエリ（例: "東京 IT企業"）
+        max_queries: 最大クエリ数
+    
+    Returns:
+        クエリのリスト
+    """
+    api_key = os.environ.get('OPENAI_API_KEY')
+    if not api_key:
+        return [query]
+    
+    # 地域を抽出
+    regions = ['東京', '大阪', '名古屋', '福岡', '横浜', '札幌', '仙台', '神戸', '京都', '広島']
+    found_region = None
+    for region in regions:
+        if region in query:
+            found_region = region
+            break
+    
+    # 業種キーワードを抽出
+    industry_keyword = query.replace(found_region or '', '').strip() if found_region else query
+    
+    prompt = f"""以下の業種を細分化した検索クエリを{max_queries}個生成してください。
+
+入力: {industry_keyword}
+地域: {found_region or '指定なし'}
+
+要件:
+- 入力の業種を構成する具体的な業種・サービスに細分化
+- 例: "IT企業" → "システム開発会社", "Web制作会社", "アプリ開発", "AI開発"
+- 例: "製造業" → "金属加工", "プラスチック成型", "精密機械", "食品製造"
+- 例: "飲食店" → "レストラン経営", "カフェ運営", "居酒屋", "ケータリング"
+- 検索で企業サイトが見つかりやすいキーワードにする
+- 日本語で出力
+- 1行に1キーワード
+- 地域を含める（例: "東京 システム開発会社"）
+"""
+
+    try:
+        data = json.dumps({
+            "model": "gpt-4o-mini",
+            "messages": [{"role": "user", "content": prompt}],
+            "temperature": 0.7,
+            "max_tokens": 500
+        }).encode('utf-8')
+        
+        req = Request(
+            "https://api.openai.com/v1/chat/completions",
+            data=data,
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {api_key}"
+            }
+        )
+        
+        with urlopen(req, timeout=30) as response:
+            result = json.loads(response.read().decode('utf-8'))
+            content = result['choices'][0]['message']['content']
+            
+            # レスポンスをパース
+            lines = [line.strip() for line in content.strip().split('\n') if line.strip()]
+            queries = []
+            for line in lines:
+                if line[0].isdigit():
+                    line = line.split('.', 1)[-1].strip()
+                elif line.startswith('-'):
+                    line = line[1:].strip()
+                if line and len(line) > 1:
+                    queries.append(line)
+            
+            # 元のクエリを先頭に
+            if query not in queries:
+                queries.insert(0, query)
+            
+            return queries[:max_queries]
+            
+    except (URLError, json.JSONDecodeError, KeyError, Exception) as e:
+        print(f"[LLM] Error generating base queries: {e}")
+        return [query]
+
+
 if __name__ == "__main__":
     # テスト
     import sys
     query = sys.argv[1] if len(sys.argv) > 1 else "東京 飲食店"
     print(f"Query: {query}")
     print("-" * 40)
+    print("バリエーション:")
     variations = generate_industry_variations(query)
     for i, v in enumerate(variations, 1):
-        print(f"{i}. {v}")
+        print(f"  {i}. {v}")
+    print()
+    print("ベースクエリ:")
+    base_queries = generate_base_queries(query)
+    for i, q in enumerate(base_queries, 1):
+        print(f"  {i}. {q}")
