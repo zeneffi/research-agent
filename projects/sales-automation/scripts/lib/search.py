@@ -84,6 +84,11 @@ SKIP_DOMAINS = {
     'geekly',  # ギークリー（エージェント）
     'levtech',  # レバテック（エージェント）
     'crowdtech',  # クラウドテック（エージェント）
+    # 2026-02-09: グルメ・予約サイト追加
+    'tabelog', 'gnavi', 'gurunavi', 'hotpepper', 'hitosara',
+    'ikyu', 'opentable', 'retty', 'tripadvisor',
+    'timeout', 'localbest', 'favy', 'yelp',
+    'ozmall', 'tablecheck', 'toretaplus',
 }
 
 # 行政・公共機関ドメイン（企業リストから除外）
@@ -260,6 +265,8 @@ def search_duckduckgo(port: int, query: str, max_results: int = 10, scroll_pages
 def generate_query_variations(base_query: str, max_variations: int = 10) -> List[str]:
     """
     基本クエリから検索バリエーションを生成
+    
+    LLM（GPT-4o-mini）を優先で使用し、失敗時はハードコードにフォールバック
 
     Args:
         base_query: 基本クエリ（例: "東京 システム開発会社"）
@@ -268,6 +275,17 @@ def generate_query_variations(base_query: str, max_variations: int = 10) -> List
     Returns:
         クエリのリスト
     """
+    # LLMでバリエーション生成を試みる
+    try:
+        from .llm_helper import generate_industry_variations
+        llm_variations = generate_industry_variations(base_query, max_variations)
+        if len(llm_variations) > 1:  # LLMが成功した場合
+            print(f"  [LLM] {len(llm_variations)}個のバリエーション生成")
+            return llm_variations
+    except Exception as e:
+        print(f"  [LLM] フォールバック: {e}")
+    
+    # フォールバック: ハードコードのバリエーション
     variations = [base_query]
 
     # 地域を抽出
