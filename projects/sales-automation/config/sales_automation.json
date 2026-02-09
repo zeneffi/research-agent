@@ -7,10 +7,16 @@
       "interval_seconds": 10
     },
     "sender_info": {
-      "company_name": "zeneffi合同会社",
+      "company_name": "ゼネフィ合同会社",
       "contact_name": "藤崎俊平",
       "email": "shumpei.fujisaki@zeneffi.co.jp",
       "phone": "070-1317-2700"
+    },
+    "message_generation": {
+      "use_llm": true,
+      "model": "gpt-4o-mini",
+      "system_prompt": null,
+      "company_intro": "ゼネフィ合同会社はシステム開発会社です。マッチングプラットフォーム構築、Webアプリ開発、AI活用などが得意です。開発リソースが足りない、技術的な相談相手がほしい企業様のお力になれます。"
     },
     "screenshot_on_error": true,
     "screenshot_dir": "output/screenshots"

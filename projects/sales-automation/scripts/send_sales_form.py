@@ -76,6 +76,7 @@ def load_config(config_path: str) -> dict:
         config = json.load(f)
 
     sender_info = config['form_sales']['sender_info']
+    message_config = config['form_sales'].get('message_generation', {})
 
     # デフォルト値チェック
     if sender_info['company_name'] == '株式会社Example':
@@ -107,7 +108,7 @@ def load_config(config_path: str) -> dict:
     return config
 
 
-def send_to_company(port: int, company: dict, sender_info: dict, rate_limiter: RateLimiter) -> dict:
+def send_to_company(port: int, company: dict, sender_info: dict, rate_limiter: RateLimiter, message_config: dict = None) -> dict:
     """
     1企業へのフォーム送信
 
@@ -170,7 +171,7 @@ def send_to_company(port: int, company: dict, sender_info: dict, rate_limiter: R
         return result
 
     # e. 営業文生成
-    message = generate_sales_message(company, sender_info)
+    message = generate_sales_message(company, sender_info, message_config)
 
     # f. フォーム入力・送信
     form_data = {
@@ -348,6 +349,7 @@ def main():
     config_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), args.config)
     config = load_config(config_path)
     sender_info = config['form_sales']['sender_info']
+    message_config = config['form_sales'].get('message_generation', {})
     print(f"送信者情報: {sender_info['company_name']} / {sender_info['contact_name']}")
     print()
 
@@ -392,7 +394,7 @@ def main():
 
             port = ports[i % len(ports)]
             futures[executor.submit(send_to_company, port, company,
-                                   sender_info, rate_limiter)] = company
+                                   sender_info, rate_limiter, message_config)] = company
             sent_count += 1
 
         # 結果収集（create_sales_list.py 行91-102と同じパターン）
