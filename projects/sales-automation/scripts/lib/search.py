@@ -39,7 +39,7 @@ SKIP_DOMAINS = {
     'system-kanji',  # システム幹事
     'hacchu-lounge', 'hacchulounge',  # 発注ラウンジ
     'itcapital', '1st-net',  # ITキャピタル
-    '発注ナビ', 'haccyu-navi', '発注navi',  # 発注ナビ（hnaviは企業サイトもあるので除外）
+    '発注ナビ', 'haccyu-navi', '発注navi', 'hnavi',  # 発注ナビ
     'rekaizen', 'compare-biz', 'comparebiz',  # 比較ビズ
     'web-kanji', 'webkanji',  # Web幹事
     'meetsmore', 'ミツモア',
@@ -55,67 +55,45 @@ SKIP_DOMAINS = {
     'shukatu-kyokasho', 'syukatu',  # 就活系
     'emeao',  # EMEAO
     'consul-go', 'consulgo',  # コンサルGO
-    # 2026-02-08: 企業コンテンツサイトは除外しない（URLパスで判定）
-    # 以下は削除: andmedia, gicp, hnavi（企業のメディア部門）
-    # 追加（テストで検出）
-    'houjin.goo',  # 全国法人検索（企業DBサイト）
-    # 2026-02-08: メディア・情報サイト追加
-    'fallabs',  # ITキャリアメディア
-    'hojokin-ouendan',  # 補助金情報メディア
-    'ikesai',  # いけてるサイト.com（Web制作比較）
-    'sakufuri',  # サクフリマーケ（マーケティングメディア）
-    'neeed',  # NeeeD（開発会社比較）
-    'qopo',  # Qopo:MEDIA（Web制作比較）
-    'freeconsul',  # コンサルGO
-    'tobus',  # 都バス
-    # 2026-02-09: 比較サイト・ポータル追加
-    'system-dev-navi',  # システム開発ナビ（比較サイト）
-    'odex-telex',  # ODEX展示会
-    'telex',  # 展示会系
-    'tokyo-kosha',  # 東京都中小企業振興公社
-    'tokyo-cci',  # 東京商工会議所
-    'jcci',  # 日本商工会議所
-    'jetro',  # JETRO
-    'smrj',  # 中小機構
-    # 2026-02-09: エージェント・比較サイト追加
-    'mid-works', 'midworks',  # Midworks（エージェント）
-    'itpark', 'it-park',  # IT PARK（比較サイト）
-    'andmedia',  # andmedia（IT PARK運営元）
-    'geekly',  # ギークリー（エージェント）
-    'levtech',  # レバテック（エージェント）
-    'crowdtech',  # クラウドテック（エージェント）
-    # 2026-02-09: グルメ・予約サイト追加
-    'tabelog', 'gnavi', 'gurunavi', 'hotpepper', 'hitosara',
-    'ikyu', 'opentable', 'retty', 'tripadvisor',
-    'timeout', 'localbest', 'favy', 'yelp',
-    'ozmall', 'tablecheck', 'toretaplus',
+    # 追加（2026-02-06: まとめサイト混入対策）
+    'andmedia', 'itpark',  # IT PARK
+    'gicp',  # GICP まとめ記事
+    'digima',  # Digima
+    '発注先探し', 'sourcing',
+    'web-production-navigator',  # Web制作ナビ
+    'lp-maker', 'lpmaker',  # LP系まとめ
+    'system-kanji', 'systemkanji',  # システム幹事
+    'dx-navi', 'dxnavi',  # DXナビ
+    # 追加（2026-02-07: 検索テストで検出）
+    'genee',  # GeNEE まとめ記事
+    'liginc', 'lig',  # LIG ブログ
+    'crexgroup',  # CREX まとめ
+    'sidebiz-recipe',  # 副業レシピ
+    'techpartner',  # テックパートナー
+    'webtan',  # Web担当者Forum
+    'markezine',  # MarkeZine
+    'liskul',  # LISKUL
+    'seleck',  # SELECK
+    'fastgrow',  # FastGrow
+    'thebridge',  # The Bridge
+    'bridgewriters',  # ブリッジライターズ
 }
 
-# 行政・公共機関ドメイン（企業リストから除外）
-GOVERNMENT_DOMAINS = {
-    '.lg.jp',      # 地方自治体
-    '.go.jp',      # 政府機関
-    '.or.jp',      # 公益法人・財団法人
-    '.metro.tokyo',  # 東京都
-    '.city.',      # 市町村
-    '.pref.',      # 都道府県
-    'govtech',     # GovTech系
-    'e-tokyo',     # 東京都電子自治体
-}
-
-# 無効な企業名パターン（タイトルから抽出された無意味なテキスト）
-INVALID_COMPANY_NAMES = {
-    'この条件から検索',
-    '条件から検索',
-    '企業名 株式会社',
-    '会社名 株式会社',
-    '検索結果',
+# まとめ記事を示すタイトルキーワード（タイトルにこれらが含まれる場合は除外）
+SKIP_TITLE_KEYWORDS = [
+    'おすすめ',
+    'オススメ',
+    '選',  # ○選
+    '比較',
+    'ランキング',
+    'まとめ',
     '一覧',
-    'トップページ',
-    'ホーム',
-    'HOME',
+    '厳選',
+    '徹底解説',
+    '完全ガイド',
     'TOP',
-}
+    'Best',
+]
 
 # まとめ記事を示すURLパスパターン（正規表現）
 SKIP_URL_PATTERNS = [
@@ -144,19 +122,31 @@ SKIP_URL_PATTERNS = [
 ]
 
 
-def search_duckduckgo(port: int, query: str, max_results: int = 30, scroll_pages: int = 10) -> List[Dict[str, str]]:
+def search_duckduckgo(port: int, query: str, max_results: int = 10, scroll_pages: int = 3, exclude_matome: bool = True, use_site_operator: bool = False) -> List[Dict[str, str]]:
     """
     DuckDuckGoで検索して結果を取得（スクロールで追加結果も取得）
 
     Args:
         port: ブラウザコンテナのポート
         query: 検索クエリ
-        max_results: 最大取得件数（デフォルト30に増加）
-        scroll_pages: スクロール回数（デフォルト10に増加）
+        max_results: 最大取得件数
+        scroll_pages: スクロール回数（追加読み込み回数）
+        exclude_matome: まとめサイト除外キーワードをクエリに追加するか
+        use_site_operator: site:co.jp / site:.jp を使用して企業サイトに限定するか
 
     Returns:
         [{title: str, url: str, snippet: str}, ...]
     """
+    # site:オペレータで企業ドメインに限定（まとめサイト排除に効果大）
+    if use_site_operator:
+        # co.jpドメインに限定（日本企業の公式サイト率が高い）
+        query = f'site:co.jp {query}'
+    
+    # まとめサイト除外キーワードを追加
+    if exclude_matome:
+        exclude_terms = '-おすすめ -比較 -ランキング -まとめ -一覧 -選び方'
+        query = f'{query} {exclude_terms}'
+    
     encoded_query = quote(query)
     url = f"https://duckduckgo.com/?q={encoded_query}"
 
@@ -248,13 +238,18 @@ def search_duckduckgo(port: int, query: str, max_results: int = 30, scroll_pages
             browser_evaluate(port, scroll_script)
             time.sleep(2)  # 読み込み待機
 
-    # 除外ドメイン・URLパターンのフィルタリング
+    # 除外ドメイン・URLパターン・タイトルキーワードのフィルタリング
     filtered_results = []
     for r in all_results:
         url = r.get('url', '')
+        title = r.get('title', '')
         
         # is_valid_company_url で総合判定
         if not is_valid_company_url(url):
+            continue
+        
+        # タイトルにまとめ記事キーワードが含まれる場合は除外
+        if is_matome_title(title):
             continue
 
         filtered_results.append(r)
@@ -262,31 +257,17 @@ def search_duckduckgo(port: int, query: str, max_results: int = 30, scroll_pages
     return filtered_results[:max_results]
 
 
-def generate_query_variations(base_query: str, max_variations: int = 10) -> List[str]:
+def generate_query_variations(base_query: str) -> List[str]:
     """
-    基本クエリから検索バリエーションを生成
-    
-    LLM（GPT-4o-mini）を優先で使用し、失敗時はハードコードにフォールバック
+    基本クエリから検索バリエーションを生成（公式サイト発見率を高める戦略）
 
     Args:
         base_query: 基本クエリ（例: "東京 システム開発会社"）
-        max_variations: 最大バリエーション数
 
     Returns:
         クエリのリスト
     """
-    # LLMでバリエーション生成を試みる
-    try:
-        from .llm_helper import generate_industry_variations
-        llm_variations = generate_industry_variations(base_query, max_variations)
-        if len(llm_variations) > 1:  # LLMが成功した場合
-            print(f"  [LLM] {len(llm_variations)}個のバリエーション生成")
-            return llm_variations
-    except Exception as e:
-        print(f"  [LLM] フォールバック: {e}")
-    
-    # フォールバック: ハードコードのバリエーション
-    variations = [base_query]
+    variations = []
 
     # 地域を抽出
     regions = ['東京', '大阪', '名古屋', '福岡', '横浜', '札幌', '仙台', '神戸', '京都', '広島']
@@ -296,71 +277,96 @@ def generate_query_variations(base_query: str, max_variations: int = 10) -> List
             found_region = region
             break
 
-    # 業種キーワードのバリエーション（拡張）
-    it_variations = [
+    # 基本クエリから業種キーワードを抽出
+    industry_keyword = None
+    it_keywords = [
         'システム開発', 'Web制作', 'アプリ開発', 'IT企業', 'ソフトウェア開発',
-        'Webサービス', 'SaaS', 'Webシステム', 'DX支援',
-        '受託開発', 'SI企業', 'システムインテグレーター', 'Webアプリ開発',
-        'モバイルアプリ開発', 'クラウド開発', 'AWS構築', 'インフラ構築',
-        'ノーコード開発', 'ローコード開発', 'AI開発', '機械学習',
-        'データ分析', 'IoT開発', 'ブロックチェーン',
+        'Webサービス', 'SaaS', 'Webシステム', 'DX支援', 'システム'
     ]
-
-    # 製造業バリエーション
-    manufacturing_variations = [
-        '製造業', 'メーカー', '工場', '金属加工', '精密機器', '電子部品',
-        '機械製造', '自動車部品', 'プラスチック成形', '板金加工', '切削加工',
-        'NC加工', '金型製作', '試作品', 'OEM', 'ODM',
-    ]
-
-    # 不動産バリエーション
-    realestate_variations = [
-        '不動産会社', '不動産', '賃貸', '売買仲介', '不動産管理',
-        'マンション販売', '住宅販売', 'ビル管理', '不動産投資', '土地活用',
-        'テナント', 'オフィス仲介', '商業施設', '物件管理',
-    ]
-
-    # 建設業バリエーション
-    construction_variations = [
-        '建設会社', '建築', '工務店', 'ゼネコン', 'リフォーム',
-        '施工', '設計事務所', '内装', '外壁', '塗装', '電気工事',
-        '設備工事', '土木', 'プラント',
-    ]
-
-    # 業種判定と適用
-    all_industry_variations = {
-        'it': it_variations,
-        'manufacturing': manufacturing_variations,
-        'realestate': realestate_variations,
-        'construction': construction_variations,
-    }
-
-    # 基本クエリから業種キーワードを特定して、バリエーションを追加
-    matched = False
-    for industry, kw_list in all_industry_variations.items():
-        for kw in kw_list:
-            if kw in base_query:
-                # 同じ業種の別表現を追加
-                for alt_kw in kw_list:
-                    if alt_kw != kw:
-                        if found_region:
-                            new_query = f"{found_region} {alt_kw}"
-                        else:
-                            new_query = alt_kw
-                        if new_query not in variations:
-                            variations.append(new_query)
-                matched = True
-                break
-        if matched:
+    for kw in it_keywords:
+        if kw in base_query:
+            industry_keyword = kw
             break
 
-    # 会社/企業の表現バリエーション
-    if '会社' in base_query:
-        variations.append(base_query.replace('会社', '企業'))
-    if '企業' in base_query:
-        variations.append(base_query.replace('企業', '会社'))
+    # === 戦略1: 公式ページを狙うキーワード ===
+    # 「会社概要」「事業内容」はまとめサイトには存在しない
+    official_page_keywords = ['会社概要', '事業内容', '企業情報']
+    
+    for official_kw in official_page_keywords:
+        if found_region and industry_keyword:
+            variations.append(f'"{official_kw}" {found_region} {industry_keyword}')
+        elif industry_keyword:
+            variations.append(f'"{official_kw}" {industry_keyword}')
+    
+    # === 戦略2: 法人格を明示 ===
+    # 「株式会社」「有限会社」を付けると公式サイトがヒットしやすい
+    corp_types = ['株式会社', '合同会社']
+    
+    for corp in corp_types:
+        if found_region and industry_keyword:
+            variations.append(f'{found_region} {corp} {industry_keyword}')
+        elif industry_keyword:
+            variations.append(f'{corp} {industry_keyword}')
 
-    return variations[:max_variations]
+    # === 戦略3: 基本クエリもバリエーションに追加 ===
+    if base_query not in variations:
+        variations.append(base_query)
+
+    # === 戦略4: 地域を細分化（東京の場合） ===
+    tokyo_areas = ['渋谷区', '港区', '新宿区', '千代田区', '品川区', '中央区']
+    if found_region == '東京' and industry_keyword:
+        for area in tokyo_areas[:3]:  # 上位3区のみ
+            variations.append(f'{area} {industry_keyword}')
+
+    # === 戦略5: 業種の言い換え ===
+    it_variations = {
+        'システム開発': ['受託開発', 'SI', 'システムインテグレーター'],
+        'Web制作': ['ホームページ制作', 'Webサイト制作'],
+        'アプリ開発': ['スマホアプリ開発', 'モバイルアプリ開発'],
+    }
+    
+    if industry_keyword and industry_keyword in it_variations:
+        for alt_kw in it_variations[industry_keyword][:2]:
+            if found_region:
+                variations.append(f'{found_region} {alt_kw}')
+            else:
+                variations.append(alt_kw)
+
+    # 重複除去して最大10バリエーション
+    seen = set()
+    unique_variations = []
+    for v in variations:
+        if v not in seen:
+            seen.add(v)
+            unique_variations.append(v)
+    
+    return unique_variations[:10]
+
+
+def is_matome_title(title: str) -> bool:
+    """
+    タイトルがまとめ記事っぽいかチェック
+
+    Args:
+        title: 検索結果のタイトル
+
+    Returns:
+        True: まとめ記事っぽい, False: 企業サイトっぽい
+    """
+    if not title:
+        return False
+    
+    title_lower = title.lower()
+    
+    for keyword in SKIP_TITLE_KEYWORDS:
+        if keyword.lower() in title_lower:
+            return True
+    
+    # 数字+選のパターン（10選、20選など）
+    if re.search(r'\d+選', title):
+        return True
+    
+    return False
 
 
 def is_valid_company_url(url: str) -> bool:
@@ -380,10 +386,6 @@ def is_valid_company_url(url: str) -> bool:
 
         # 除外ドメイン
         if any(skip in domain for skip in SKIP_DOMAINS):
-            return False
-
-        # 行政・公共機関ドメイン除外
-        if any(gov in domain for gov in GOVERNMENT_DOMAINS):
             return False
 
         # まとめ記事URLパターン除外
