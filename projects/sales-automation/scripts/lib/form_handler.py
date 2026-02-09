@@ -320,12 +320,33 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
             const fields = {fields_json};
             const data = {data_json};
 
+            // セレクタをエスケープする関数
+            function safeQuerySelector(selector) {{
+                try {{
+                    return document.querySelector(selector);
+                }} catch(e) {{
+                    // 特殊文字を含むセレクタの場合、IDとして試す
+                    if (selector.startsWith('#')) {{
+                        const id = selector.slice(1);
+                        return document.getElementById(id);
+                    }}
+                    // name属性として試す
+                    if (selector.startsWith('[name=')) {{
+                        const match = selector.match(/\[name=["']?([^"'\]]+)["']?\]/);
+                        if (match) {{
+                            return document.querySelector('[name="' + CSS.escape(match[1]) + '"]');
+                        }}
+                    }}
+                    return null;
+                }}
+            }}
+
             // 1. フォーム入力
             for (const [field, selector] of Object.entries(fields)) {{
                 if (!data[field]) continue;
 
-                // セレクタで要素を検索（detect_form_fieldsが正しいセレクタを返す前提）
-                const el = document.querySelector(selector);
+                // セレクタで要素を検索（エスケープ対応）
+                const el = safeQuerySelector(selector);
 
                 if (el) {{
                     el.value = data[field];
@@ -348,6 +369,18 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
                 'input[value*="完了"]',
                 'input[value*="Submit"]',
                 'input[value*="Send"]',
+                // class属性
+                '.submit-btn',
+                '.submit-button',
+                '.btn-submit',
+                '.btn-primary',
+                '.contact-submit',
+                // id属性
+                '#submit',
+                '#submitBtn',
+                '#send',
+                // form内のbutton
+                'form button:not([type="button"]):not([type="reset"])',
             ];
 
             const buttonTexts = [

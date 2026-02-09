@@ -144,15 +144,15 @@ SKIP_URL_PATTERNS = [
 ]
 
 
-def search_duckduckgo(port: int, query: str, max_results: int = 10, scroll_pages: int = 5) -> List[Dict[str, str]]:
+def search_duckduckgo(port: int, query: str, max_results: int = 30, scroll_pages: int = 10) -> List[Dict[str, str]]:
     """
     DuckDuckGoで検索して結果を取得（スクロールで追加結果も取得）
 
     Args:
         port: ブラウザコンテナのポート
         query: 検索クエリ
-        max_results: 最大取得件数
-        scroll_pages: スクロール回数（追加読み込み回数）
+        max_results: 最大取得件数（デフォルト30に増加）
+        scroll_pages: スクロール回数（デフォルト10に増加）
 
     Returns:
         [{title: str, url: str, snippet: str}, ...]
