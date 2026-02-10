@@ -32,10 +32,10 @@ python projects/sales-automation/scripts/send_forms.py \
 ```json
 {
   "sender": {
-    "name": "山田太郎",
-    "company": "株式会社サンプル",
-    "email": "taro@example.com",
-    "phone": "03-1234-5678"
+    "name": "藤崎俊平",
+    "company": "ゼネフィ合同会社",
+    "email": "shumpei.fujisaki@zeneffi.co.jp",
+    "phone": "070-1317-2700"
   },
   "llm": {
     "model": "gpt-4o-mini",
@@ -43,8 +43,6 @@ python projects/sales-automation/scripts/send_forms.py \
   }
 }
 ```
-
-※ 実際の運用時は自社の情報に書き換えてください
 
 ## 営業コンセプト
 
