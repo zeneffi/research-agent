@@ -394,6 +394,19 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
                     }}
                 }}
             }}
+            
+            // カスタムUIチェックボックス対応（button role="checkbox"）
+            const customCheckboxes = document.querySelectorAll('button[role="checkbox"][aria-checked="false"]');
+            for (const btn of customCheckboxes) {{
+                // 親要素のテキストで同意関連かを判定
+                const parent = btn.closest('div') || btn.parentElement;
+                const parentText = parent ? (parent.textContent || '') : '';
+                if (parentText.includes('同意') || parentText.includes('個人情報') ||
+                    parentText.includes('プライバシー') || parentText.includes('利用規約') ||
+                    parentText.includes('agree') || parentText.includes('consent')) {{
+                    btn.click();
+                }}
+            }}
 
             // 2. 送信ボタン検出（拡充版）
             const submitPatterns = [
