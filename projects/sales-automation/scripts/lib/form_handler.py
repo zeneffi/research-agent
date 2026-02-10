@@ -341,7 +341,22 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
                 }}
             }}
 
-            // 1. フォーム入力
+            // 1. フォーム入力（React対応版）
+            // React/Next.jsフォームでは直接value設定だけでは状態が更新されない
+            const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+            const nativeTextAreaValueSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value').set;
+            
+            function setReactValue(el, value) {{
+                if (el.tagName === 'TEXTAREA') {{
+                    nativeTextAreaValueSetter.call(el, value);
+                }} else {{
+                    nativeInputValueSetter.call(el, value);
+                }}
+                el.dispatchEvent(new Event('input', {{ bubbles: true }}));
+                el.dispatchEvent(new Event('change', {{ bubbles: true }}));
+                el.dispatchEvent(new Event('blur', {{ bubbles: true }}));
+            }}
+            
             for (const [field, selector] of Object.entries(fields)) {{
                 if (!data[field]) continue;
 
@@ -349,10 +364,7 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
                 const el = safeQuerySelector(selector);
 
                 if (el) {{
-                    el.value = data[field];
-                    el.dispatchEvent(new Event('input', {{ bubbles: true }}));
-                    el.dispatchEvent(new Event('change', {{ bubbles: true }}));
-                    el.dispatchEvent(new Event('blur', {{ bubbles: true }}));
+                    setReactValue(el, data[field]);
                 }}
             }}
 
@@ -396,6 +408,7 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
             }}
             
             // カスタムUIチェックボックス対応（button role="checkbox"）
+            // Radix UI等のカスタムコンポーネントはmousedown/mouseup/clickイベントが必要
             const customCheckboxes = document.querySelectorAll('button[role="checkbox"][aria-checked="false"]');
             for (const btn of customCheckboxes) {{
                 // 親要素のテキストで同意関連かを判定
@@ -404,7 +417,10 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
                 if (parentText.includes('同意') || parentText.includes('個人情報') ||
                     parentText.includes('プライバシー') || parentText.includes('利用規約') ||
                     parentText.includes('agree') || parentText.includes('consent')) {{
-                    btn.click();
+                    // 完全なクリックシーケンスを発火
+                    btn.dispatchEvent(new MouseEvent('mousedown', {{ bubbles: true, cancelable: true, view: window }}));
+                    btn.dispatchEvent(new MouseEvent('mouseup', {{ bubbles: true, cancelable: true, view: window }}));
+                    btn.dispatchEvent(new MouseEvent('click', {{ bubbles: true, cancelable: true, view: window }}));
                 }}
             }}
 
