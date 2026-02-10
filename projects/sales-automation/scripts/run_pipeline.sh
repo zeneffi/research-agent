@@ -117,7 +117,7 @@ log "送信開始: 上限 $MAX_SENDS 件"
 
 if python3 "$SCRIPT_DIR/send_sales_form.py" "$RESULT_FILE" --max-sends "$MAX_SENDS" 2>&1 | tee -a "$LOG_FILE"; then
     # 送信結果を集計（ログディレクトリから最新を取得）
-    SENT_LOG=$(ls -t "$OUTPUT_DIR"/send_log_*.json 2>/dev/null | head -1)
+    SENT_LOG="$OUTPUT_DIR/send_log.json"
     
     if [ -n "$SENT_LOG" ] && [ -f "$SENT_LOG" ]; then
         read SENT_COUNT FAILED_COUNT <<< $(python3 -c "
