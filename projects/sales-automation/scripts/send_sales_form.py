@@ -20,6 +20,7 @@ from lib.browser import get_container_ports, browser_navigate
 from lib.form_handler import detect_form_fields, detect_captcha, fill_and_submit_form
 from lib.message_generator import generate_sales_message
 from lib.rate_limiter import RateLimiter
+from lib.duplicate_checker import mark_as_sent
 
 
 def load_sales_list(file_path: str) -> list:
@@ -213,6 +214,11 @@ def log_and_return(rate_limiter: RateLimiter, company: dict, form_url: str,
         'screenshot': result.get('screenshot')
     }
     rate_limiter.log_send(log_entry)
+
+    # 送信成功時、ドメインを送信済みリストに記録
+    if result.get('status') == 'success':
+        company_url = company.get('url', form_url)
+        mark_as_sent(company_url)
 
 
 def generate_report(log_path: str, output_path: str):

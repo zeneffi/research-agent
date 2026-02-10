@@ -102,14 +102,45 @@ else
 fi
 
 # ========================================
+# Phase 1.5: 重複フィルタリング
+# ========================================
+log ""
+log "========== Phase 1.5: 重複フィルタリング =========="
+
+FILTERED_FILE="$OUTPUT_DIR/filtered_${TIMESTAMP}.json"
+
+# 送信済みドメインをフィルタリング
+python3 "$SCRIPT_DIR/filter_unsent.py" "$RESULT_FILE" --url-key "url" > "$FILTERED_FILE" 2>> "$LOG_FILE"
+
+# フィルタリング結果を取得
+read FILTERED_COUNT FILTERED_FORM_COUNT <<< $(python3 -c "
+import json, sys
+try:
+    data = json.load(open('$FILTERED_FILE'))
+    companies = data if isinstance(data, list) else data.get('companies', [])
+    form_count = len([c for c in companies if c.get('contact_form_url')])
+    print(len(companies), form_count)
+except Exception as e:
+    print('0 0', file=sys.stderr)
+    sys.exit(1)
+" 2>/dev/null || echo "0 0")
+
+SKIPPED_COUNT=$((COMPANY_COUNT - FILTERED_COUNT))
+log "✅ 重複フィルタ完了: ${FILTERED_COUNT}社残り (${SKIPPED_COUNT}社除外)"
+
+# フィルタ後のファイルを使用
+RESULT_FILE="$FILTERED_FILE"
+FORM_COUNT="$FILTERED_FORM_COUNT"
+
+# ========================================
 # Phase 2: フォーム送信
 # ========================================
 log ""
 log "========== Phase 2: フォーム送信 =========="
 
-if [ "$FORM_COUNT" = "0" ] || [ "$FORM_COUNT" = "?" ]; then
-    log "⚠️ 送信可能なフォームがありません"
-    notify "⚠️ パイプライン完了（送信スキップ）: フォームが見つかりませんでした"
+if [ "$FORM_COUNT" = "0" ] || [ "$FILTERED_COUNT" = "0" ]; then
+    log "⚠️ 送信可能なフォームがありません（全て送信済み）"
+    notify "⚠️ パイプライン完了（送信スキップ）: 全て送信済みまたはフォームなし"
     exit 0
 fi
 
