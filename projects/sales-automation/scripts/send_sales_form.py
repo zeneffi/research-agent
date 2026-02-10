@@ -76,7 +76,6 @@ def load_config(config_path: str) -> dict:
         config = json.load(f)
 
     sender_info = config['form_sales']['sender_info']
-    message_config = config['form_sales'].get('message_generation', {})
 
     # デフォルト値チェック
     if sender_info['company_name'] == '株式会社Example':
