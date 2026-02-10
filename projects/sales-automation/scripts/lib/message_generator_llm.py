@@ -4,16 +4,32 @@ LLMを使った営業文生成
 企業情報を元に、動的にパーソナライズされた営業文を生成
 """
 import os
+import logging
 from typing import Dict, Any, Optional
+
+from openai import OpenAI, APIError, RateLimitError, APIConnectionError
+
+logger = logging.getLogger(__name__)
 
 # OpenAIは遅延インポート（インストールされていない環境対応）
 _openai_client = None
 
+
+class OpenAIKeyNotFoundError(Exception):
+    """OpenAI APIキーが設定されていない場合のエラー"""
+    pass
+
+
 def _get_openai_client():
     global _openai_client
     if _openai_client is None:
-        from openai import OpenAI
-        _openai_client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+        api_key = os.environ.get("OPENAI_API_KEY")
+        if not api_key:
+            raise OpenAIKeyNotFoundError(
+                "OPENAI_API_KEY 環境変数が設定されていません。\n"
+                "export OPENAI_API_KEY='sk-...' を実行してください。"
+            )
+        _openai_client = OpenAI(api_key=api_key)
     return _openai_client
 
 
@@ -54,6 +70,9 @@ def generate_sales_message_llm(
     
     Returns:
         生成された営業文
+    
+    Raises:
+        OpenAIKeyNotFoundError: APIキーが設定されていない場合
     """
     client = _get_openai_client()
     
@@ -71,9 +90,9 @@ def generate_sales_message_llm(
     sender_email = sender_info.get('email', '')
     sender_phone = sender_info.get('phone', '')
     
-    # プロンプト
-    sys_prompt = system_prompt or DEFAULT_SYSTEM_PROMPT
-    intro = company_intro or DEFAULT_COMPANY_INTRO
+    # プロンプト（Noneの場合のみデフォルト使用、空文字は許容）
+    sys_prompt = system_prompt if system_prompt is not None else DEFAULT_SYSTEM_PROMPT
+    intro = company_intro if company_intro is not None else DEFAULT_COMPANY_INTRO
 
     user_prompt = f"""以下の企業に送る営業文を作成してください。
 
@@ -97,17 +116,26 @@ def generate_sales_message_llm(
 営業文を作成してください（本文のみ、件名は不要）：
 """
 
-    response = client.chat.completions.create(
-        model=model,
-        messages=[
-            {"role": "system", "content": sys_prompt},
-            {"role": "user", "content": user_prompt}
-        ],
-        max_tokens=500,
-        temperature=0.7
-    )
-    
-    return response.choices[0].message.content.strip()
+    try:
+        response = client.chat.completions.create(
+            model=model,
+            messages=[
+                {"role": "system", "content": sys_prompt},
+                {"role": "user", "content": user_prompt}
+            ],
+            max_tokens=500,
+            temperature=0.7
+        )
+        return response.choices[0].message.content.strip()
+    except RateLimitError as e:
+        logger.error(f"OpenAI APIレート制限エラー: {e}")
+        raise
+    except APIConnectionError as e:
+        logger.error(f"OpenAI API接続エラー: {e}")
+        raise
+    except APIError as e:
+        logger.error(f"OpenAI APIエラー: {e}")
+        raise
 
 
 def estimate_cost(num_companies: int) -> dict:
