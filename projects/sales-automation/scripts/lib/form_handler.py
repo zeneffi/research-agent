@@ -6,6 +6,7 @@ v2: 検出精度向上版
 """
 import json
 import os
+import time
 from typing import Optional, Dict, Any
 from datetime import datetime
 from pathlib import Path
@@ -527,6 +528,79 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
                     # 確認画面のレスポンス解析失敗はログして続行
                     print(f"[WARN] Confirm screen response parse failed: {e}")
 
+        # 送信成功判定の厳格化（A+B+C）
+        if result.get('status') == 'success':
+            time.sleep(2)  # ページ遷移を待つ（TODO: 動的待機に改善予定）
+            
+            validation_script = """
+            (function() {
+                const result = {
+                    hasThankYou: false,
+                    hasError: false,
+                    formGone: false,
+                    errorMessages: [],
+                    currentUrl: location.href
+                };
+                
+                // A. サンキューページ検出
+                const bodyText = document.body.innerText || '';
+                const thankYouPatterns = [
+                    'ありがとう', 'ありがとうございます', '送信完了', '送信しました',
+                    '受け付けました', '受付完了', 'お問い合わせを受け付け',
+                    'Thank you', 'successfully', 'submitted', 'complete'
+                ];
+                for (const pattern of thankYouPatterns) {
+                    if (bodyText.includes(pattern)) {
+                        result.hasThankYou = true;
+                        break;
+                    }
+                }
+                
+                // B. エラーメッセージ検出
+                const errorElements = document.querySelectorAll(
+                    '[class*="error"], [class*="Error"], [class*="invalid"], [class*="validation"], [role="alert"]'
+                );
+                for (const el of errorElements) {
+                    const text = (el.textContent || '').trim();
+                    if (text && text.length < 200 && text.length > 0) {
+                        result.errorMessages.push(text);
+                        result.hasError = true;
+                    }
+                }
+                
+                // C. フォーム消失チェック（入力フィールドが見えなくなったか）
+                const inputs = document.querySelectorAll('input[type="text"], input[type="email"], textarea');
+                const visibleInputs = Array.from(inputs).filter(i => i.offsetParent !== null);
+                result.formGone = visibleInputs.length === 0;
+                
+                return JSON.stringify(result);
+            })()
+            """
+            
+            validation_result = browser_evaluate(port, validation_script, timeout=10)
+            
+            if validation_result:
+                try:
+                    validation = json.loads(validation_result)
+                    
+                    # 判定ロジック
+                    # 成功: サンキューページあり OR フォーム消失
+                    # 失敗: エラーメッセージあり AND サンキューなし AND フォームあり
+                    
+                    is_success = validation.get('hasThankYou') or validation.get('formGone')
+                    has_error = validation.get('hasError') and not validation.get('hasThankYou') and not validation.get('formGone')
+                    
+                    if has_error:
+                        result['status'] = 'failed'
+                        result['error'] = 'フォームエラー検出: ' + ', '.join(validation.get('errorMessages', [])[:3])
+                        result['validation'] = validation
+                    else:
+                        result['validation'] = validation
+                        
+                except json.JSONDecodeError as e:
+                    print(f"[WARN] Validation script returned invalid JSON: {e}")
+                    # 検証失敗でも送信自体は成功した可能性があるため、元の結果を維持
+        
         result['screenshot'] = None
         return result
     except json.JSONDecodeError as e:
