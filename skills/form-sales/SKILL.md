@@ -18,7 +18,7 @@ source .venv/bin/activate
 
 # リストからフォーム送信
 python projects/sales-automation/scripts/send_forms.py \
-  --input projects/sales-automation/output/companies_YYYYMMDD.json \
+  --input projects/sales-automation/output/companies_YYYYMMDD_HHMMSS.json \
   --max-send 30
 
 # または一気通貫（リスト作成→送信）
@@ -32,10 +32,10 @@ python projects/sales-automation/scripts/send_forms.py \
 ```json
 {
   "sender": {
-    "name": "藤崎俊平",
-    "company": "ゼネフィ合同会社",
-    "email": "shumpei.fujisaki@zeneffi.co.jp",
-    "phone": "070-1317-2700"
+    "name": "山田太郎",
+    "company": "株式会社サンプル",
+    "email": "taro@example.com",
+    "phone": "03-1234-5678"
   },
   "llm": {
     "model": "gpt-4o-mini",
@@ -43,6 +43,8 @@ python projects/sales-automation/scripts/send_forms.py \
   }
 }
 ```
+
+※ 実際の運用時は自社の情報に書き換えてください
 
 ## 営業コンセプト
 
