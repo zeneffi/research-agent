@@ -356,6 +356,45 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
                 }}
             }}
 
+            // 1.5. 同意チェックボックスを検出してチェック
+            const agreePatterns = [
+                'input[type="checkbox"][name*="agree"]',
+                'input[type="checkbox"][name*="consent"]',
+                'input[type="checkbox"][name*="privacy"]',
+                'input[type="checkbox"][name*="policy"]',
+                'input[type="checkbox"][name*="terms"]',
+                'input[type="checkbox"][name*="同意"]',
+                'input[type="checkbox"][id*="agree"]',
+                'input[type="checkbox"][id*="consent"]',
+                'input[type="checkbox"][id*="privacy"]',
+            ];
+            
+            // パターンマッチで同意チェックボックスを探す
+            for (const sel of agreePatterns) {{
+                const checkbox = document.querySelector(sel);
+                if (checkbox && !checkbox.checked) {{
+                    checkbox.checked = true;
+                    checkbox.dispatchEvent(new Event('change', {{ bubbles: true }}));
+                }}
+            }}
+            
+            // ラベルテキストで同意チェックボックスを探す
+            const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+            for (const cb of allCheckboxes) {{
+                const label = document.querySelector('label[for="' + cb.id + '"]') || cb.closest('label');
+                if (label) {{
+                    const labelText = label.textContent || '';
+                    if (labelText.includes('同意') || labelText.includes('個人情報') || 
+                        labelText.includes('プライバシー') || labelText.includes('利用規約') ||
+                        labelText.includes('agree') || labelText.includes('consent')) {{
+                        if (!cb.checked) {{
+                            cb.checked = true;
+                            cb.dispatchEvent(new Event('change', {{ bubbles: true }}));
+                        }}
+                    }}
+                }}
+            }}
+
             // 2. 送信ボタン検出（拡充版）
             const submitPatterns = [
                 // type属性
