@@ -250,15 +250,88 @@ def detect_form_fields(port: int, url: str) -> Optional[Dict[str, str]]:
 
     result_str = browser_evaluate(port, script)
     if not result_str or result_str == 'null':
-        return None
+        # フォールバック: シンプルな検出を試行
+        return _detect_form_fields_fallback(port)
 
     try:
         result = json.loads(result_str)
         if not result or not result.get('message'):
-            return None
+            # フォールバック: シンプルな検出を試行
+            return _detect_form_fields_fallback(port)
         return result
     except json.JSONDecodeError as e:
         print(f"[WARN] Form fields response parse failed: {e}")
+        return _detect_form_fields_fallback(port)
+
+
+def _detect_form_fields_fallback(port: int) -> Optional[Dict[str, str]]:
+    """
+    フォールバック検出（シンプル版）
+    複雑なパターンマッチが失敗した場合に使用
+    """
+    fallback_script = """
+    (function() {
+        const result = {};
+        
+        // メッセージ（textarea）
+        const textarea = document.querySelector('textarea');
+        if (!textarea) return JSON.stringify(null);
+        result.message = textarea.id ? '#' + textarea.id : 
+                         textarea.name ? '[name="' + textarea.name + '"]' : 'textarea';
+        
+        // 名前フィールド
+        const nameInput = document.querySelector(
+            'input[name="name"], input[id="name"], ' +
+            'input[name*="name" i], input[id*="name" i], ' +
+            'input[name="shimei"], input[name="fullname"]'
+        );
+        if (nameInput) {
+            result.name = nameInput.id ? '#' + nameInput.id : '[name="' + nameInput.name + '"]';
+        }
+        
+        // 会社フィールド
+        const companyInput = document.querySelector(
+            'input[name="company"], input[id="company"], ' +
+            'input[name="organization"], input[id="organization"], ' +
+            'input[name*="company" i], input[name*="organization" i]'
+        );
+        if (companyInput) {
+            result.company = companyInput.id ? '#' + companyInput.id : '[name="' + companyInput.name + '"]';
+        }
+        
+        // メールフィールド
+        const emailInput = document.querySelector(
+            'input[type="email"], input[name="email"], input[id="email"], ' +
+            'input[name*="mail" i]'
+        );
+        if (emailInput) {
+            result.email = emailInput.id ? '#' + emailInput.id : '[name="' + emailInput.name + '"]';
+        }
+        
+        // 電話フィールド
+        const phoneInput = document.querySelector(
+            'input[type="tel"], input[name="tel"], input[name="phone"], ' +
+            'input[name*="tel" i], input[name*="phone" i]'
+        );
+        if (phoneInput) {
+            result.phone = phoneInput.id ? '#' + phoneInput.id : '[name="' + phoneInput.name + '"]';
+        }
+        
+        return JSON.stringify(result);
+    })()
+    """
+    
+    result_str = browser_evaluate(port, fallback_script)
+    if not result_str or result_str == 'null':
+        return None
+    
+    try:
+        result = json.loads(result_str)
+        if result and result.get('message'):
+            print(f"[INFO] Fallback detection succeeded: {list(result.keys())}")
+            return result
+        return None
+    except json.JSONDecodeError:
         return None
 
 
