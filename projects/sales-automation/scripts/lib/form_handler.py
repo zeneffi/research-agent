@@ -6,6 +6,7 @@ v2: 検出精度向上版
 """
 import json
 import os
+import time
 from typing import Optional, Dict, Any
 from datetime import datetime
 from pathlib import Path
@@ -529,8 +530,7 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
 
         # 送信成功判定の厳格化（A+B+C）
         if result.get('status') == 'success':
-            import time
-            time.sleep(2)  # ページ遷移を待つ
+            time.sleep(2)  # ページ遷移を待つ（TODO: 動的待機に改善予定）
             
             validation_script = """
             (function() {
@@ -597,8 +597,9 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
                     else:
                         result['validation'] = validation
                         
-                except json.JSONDecodeError:
-                    pass  # 検証失敗は無視して元の結果を使う
+                except json.JSONDecodeError as e:
+                    print(f"[WARN] Validation script returned invalid JSON: {e}")
+                    # 検証失敗でも送信自体は成功した可能性があるため、元の結果を維持
         
         result['screenshot'] = None
         return result
