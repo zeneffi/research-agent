@@ -7,6 +7,8 @@ import os
 import logging
 from typing import Dict, Any, Optional
 
+from openai import OpenAI, APIError, RateLimitError, APIConnectionError
+
 logger = logging.getLogger(__name__)
 
 # OpenAIは遅延インポート（インストールされていない環境対応）
@@ -21,7 +23,6 @@ class OpenAIKeyNotFoundError(Exception):
 def _get_openai_client():
     global _openai_client
     if _openai_client is None:
-        from openai import OpenAI
         api_key = os.environ.get("OPENAI_API_KEY")
         if not api_key:
             raise OpenAIKeyNotFoundError(
@@ -126,8 +127,14 @@ def generate_sales_message_llm(
             temperature=0.7
         )
         return response.choices[0].message.content.strip()
-    except Exception as e:
-        logger.error(f"OpenAI API呼び出しエラー: {e}")
+    except RateLimitError as e:
+        logger.error(f"OpenAI APIレート制限エラー: {e}")
+        raise
+    except APIConnectionError as e:
+        logger.error(f"OpenAI API接続エラー: {e}")
+        raise
+    except APIError as e:
+        logger.error(f"OpenAI APIエラー: {e}")
         raise
 
 
