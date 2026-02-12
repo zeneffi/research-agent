@@ -110,7 +110,7 @@ log "========== Phase 1.5: 重複フィルタリング =========="
 FILTERED_FILE="$OUTPUT_DIR/filtered_${TIMESTAMP}.json"
 
 # 送信済みドメインをフィルタリング
-python3 "$SCRIPT_DIR/filter_unsent.py" "$RESULT_FILE" --url-key "url" > "$FILTERED_FILE" 2>> "$LOG_FILE"
+python3 "$SCRIPT_DIR/filter_unsent.py" "$RESULT_FILE" --url-key "contact_form_url" > "$FILTERED_FILE" 2>> "$LOG_FILE"
 
 # フィルタリング結果を取得
 read FILTERED_COUNT FILTERED_FORM_COUNT <<< $(python3 -c "

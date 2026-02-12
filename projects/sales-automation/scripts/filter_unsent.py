@@ -22,7 +22,7 @@ def main():
     parser.add_argument('input_file', nargs='?', help='入力JSONファイル')
     parser.add_argument('--stats', action='store_true', help='統計情報を表示')
     parser.add_argument('--mark-sent', help='指定URLを送信済みとしてマーク')
-    parser.add_argument('--url-key', default='url', help='URLが格納されているキー名')
+    parser.add_argument('--url-key', default='contact_form_url', help='URLが格納されているキー名')
     args = parser.parse_args()
 
     # 統計表示
@@ -44,7 +44,16 @@ def main():
         sys.exit(1)
 
     with open(args.input_file, 'r', encoding='utf-8') as f:
-        companies = json.load(f)
+        data = json.load(f)
+
+    # {"metadata": ..., "companies": [...]} 形式に対応
+    if isinstance(data, dict) and 'companies' in data:
+        companies = data['companies']
+    elif isinstance(data, list):
+        companies = data
+    else:
+        print("エラー: 不明なJSON形式", file=sys.stderr)
+        sys.exit(1)
 
     original_count = len(companies)
     unsent = filter_unsent_companies(companies, args.url_key)
