@@ -92,12 +92,8 @@ log "営業パイプライン 開始"
 log "クエリ: $QUERY"
 log "リスト目標: $MAX_COMPANIES社"
 log "送信上限: $MAX_SENDS件"
-log "======================================"
-
-notify "🚀 営業パイプライン開始
-• クエリ: \`$QUERY\`
-• リスト: ${MAX_COMPANIES}社
-• 送信上限: ${MAX_SENDS}件"
+log "======================================="
+# 開始通知は送らない（完了時にまとめて通知）
 
 cd "$REPO_DIR"
 
@@ -209,17 +205,35 @@ fi
 
 # 送信結果を集計
 if [ -f "$SENT_LOG" ]; then
+    # 成功/失敗カウントと成功企業名一覧を取得
     read SENT_COUNT FAILED_COUNT TOTAL_COUNT <<< $(python3 -c "
 import json, sys
 try:
     data = json.load(open('$SENT_LOG'))
-    success = len([r for r in data if r.get('status') == 'success'])
-    failed = len([r for r in data if r.get('status') != 'success'])
-    print(success, failed, len(data))
+    entries = data.get('entries', data) if isinstance(data, dict) else data
+    success = len([e for e in entries if e.get('status') == 'success'])
+    failed = len([e for e in entries if e.get('status') != 'success'])
+    print(success, failed, len(entries))
 except Exception as e:
     print('0 0 0', file=sys.stderr)
     sys.exit(1)
 " 2>/dev/null || echo "0 0 0")
+    
+    # 成功した企業名一覧を取得
+    SUCCESS_COMPANIES=$(python3 -c "
+import json, sys
+try:
+    data = json.load(open('$SENT_LOG'))
+    entries = data.get('entries', data) if isinstance(data, dict) else data
+    success_names = [e.get('company_name', '不明') for e in entries if e.get('status') == 'success']
+    if success_names:
+        for name in success_names:
+            print(f'• {name}')
+    else:
+        print('（なし）')
+except Exception as e:
+    print('（取得失敗）')
+" 2>/dev/null || echo "（取得失敗）")
     
     log "✅ フォーム送信完了: 成功${SENT_COUNT}件 / 失敗${FAILED_COUNT}件 (試行${TOTAL_COUNT}件)"
 else
@@ -227,6 +241,7 @@ else
     SENT_COUNT=0
     FAILED_COUNT=0
     TOTAL_COUNT=0
+    SUCCESS_COMPANIES="（なし）"
 fi
 
 # ========================================
@@ -252,12 +267,27 @@ else
     RESULT_MSG="全件失敗"
 fi
 
+# 成功企業一覧をSlack用に整形（長すぎる場合は省略）
+if [ ${SENT_COUNT:-0} -gt 0 ]; then
+    SUCCESS_LIST=$(echo "$SUCCESS_COMPANIES" | head -10)
+    if [ ${SENT_COUNT:-0} -gt 10 ]; then
+        SUCCESS_LIST="${SUCCESS_LIST}
+• ...他$((SENT_COUNT - 10))社"
+    fi
+else
+    SUCCESS_LIST="（なし）"
+fi
+
 notify "${RESULT_ICON} 営業パイプライン完了 - ${RESULT_MSG}
 📊 結果:
 • リスト収集: ${COMPANY_COUNT}社
 • フォーム検出: ${FORM_COUNT}件
 • 重複除外: ${SKIPPED_COUNT}件
 • 送信成功: ${SENT_COUNT:-0}件 / 試行${TOTAL_COUNT:-0}件
+
+✉️ 送信成功:
+${SUCCESS_LIST}
+
 📁 ログ: \`pipeline_${TIMESTAMP}.log\`"
 
 # ========================================
