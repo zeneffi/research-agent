@@ -2,3 +2,22 @@
 # 新規利用時はこのファイルを空にしてください
 
 micata-tech.co.jp
+infordio.co.jp
+tceconsulting.co.jp
+figeo.co.jp
+beesys.co.jp
+letier.co.jp
+zacros.co.jp
+ssu.co.jp
+agb.co.jp
+tokyosystem.co.jp
+altcorp.co.jp
+us-design.co.jp
+kaihatsuya.co.jp
+bizbright.co.jp
+nts-it.co.jp
+chinasoft-tokyo.co.jp
+itfllc.co.jp
+sowaretokyo.co.jp
+3sss.co.jp
+syssolu.co.jp
