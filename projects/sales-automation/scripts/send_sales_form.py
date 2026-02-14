@@ -147,16 +147,21 @@ def send_to_company(port: int, company: dict, sender_info: dict, rate_limiter: R
         log_and_return(rate_limiter, company, form_url, result, '')
         return result
 
-    # c. CAPTCHA検出
-    if detect_captcha(port):
-        result = {
-            'status': 'skipped',
-            'reason': 'CAPTCHA detected',
-            'error': None,
-            'screenshot': None
-        }
-        log_and_return(rate_limiter, company, form_url, result, '')
-        return result
+    # b2. 動的フォーム読み込み待機（LeadGrid等のJS生成フォーム対応）
+    import time
+    time.sleep(3)
+
+    # c. CAPTCHA検出（reCAPTCHA v3/invisibleは送信可能なのでスキップしない）
+    # 現在はCAPTCHAがあっても送信を試みて、失敗したらログに記録
+    # if detect_captcha(port):
+    #     result = {
+    #         'status': 'skipped',
+    #         'reason': 'CAPTCHA detected',
+    #         'error': None,
+    #         'screenshot': None
+    #     }
+    #     log_and_return(rate_limiter, company, form_url, result, '')
+    #     return result
 
     # d. フォーム項目検出
     fields = detect_form_fields(port, form_url)
@@ -174,11 +179,25 @@ def send_to_company(port: int, company: dict, sender_info: dict, rate_limiter: R
     message = generate_sales_message(company, sender_info, message_config)
 
     # f. フォーム入力・送信
+    # 電話番号: ハイフンありとなしの両方を用意
+    phone_raw = sender_info.get('phone', '')
+    phone_no_hyphen = phone_raw.replace('-', '')
+    
+    # 名前を姓名分割（一部フォーム用）
+    contact_name = sender_info.get('contact_name', '')
+    name_parts = contact_name.split() if ' ' in contact_name else [contact_name, '']
+    
     form_data = {
         'company': sender_info.get('company_name', ''),
         'name': sender_info.get('contact_name', ''),
+        'name_sei': name_parts[0] if len(name_parts) > 0 else contact_name,  # 姓
+        'name_mei': name_parts[1] if len(name_parts) > 1 else '',  # 名
+        'kana': sender_info.get('contact_name_kana', 'フジサキ シュンペイ'),  # フリガナ対応
+        'kana_sei': 'フジサキ',  # フリガナ（姓）
+        'kana_mei': 'シュンペイ',  # フリガナ（名）
         'email': sender_info.get('email', ''),
-        'phone': sender_info.get('phone', ''),
+        'phone': phone_raw,  # ハイフンあり
+        'phone_no_hyphen': phone_no_hyphen,  # ハイフンなし
         'message': message
     }
 

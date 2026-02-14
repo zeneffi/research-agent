@@ -63,6 +63,9 @@ def find_contact_form_url(port: int, base_url: str) -> str:
     # === 方法1: よくあるパスを直接試す（キーワード + HTML構造を同時チェック）===
     for path in COMMON_CONTACT_PATHS:
         candidate_url = urljoin(base_url, path)
+        # 英語ページはスキップ
+        if is_english_page(candidate_url):
+            continue
         if browser_navigate(port, candidate_url, timeout=3):
             time.sleep(1)  # JavaScript読み込み待機
             # キーワード検証とHTML構造検証を同時に実行（効率化）
@@ -143,14 +146,22 @@ def find_contact_form_url(port: int, base_url: str) -> str:
         try:
             parsed = json.loads(result)
             if isinstance(parsed, str) and parsed:
-                print(f"  [DEBUG] Method 2 (link search): {parsed}")
-                return parsed
+                # 英語ページはスキップ
+                if is_english_page(parsed):
+                    print(f"  [DEBUG] Method 2 skipped (English page): {parsed}")
+                else:
+                    print(f"  [DEBUG] Method 2 (link search): {parsed}")
+                    return parsed
         except json.JSONDecodeError:
             pass
         # 文字列として直接返す
         if isinstance(result, str) and result.startswith('http'):
-            print(f"  [DEBUG] Method 2 (link search): {result}")
-            return result
+            # 英語ページはスキップ
+            if is_english_page(result):
+                print(f"  [DEBUG] Method 2 skipped (English page): {result}")
+            else:
+                print(f"  [DEBUG] Method 2 (link search): {result}")
+                return result
 
     # === 方法3: フッターやヘッダーから検出 ===
     footer_script = """(function() {
@@ -194,13 +205,21 @@ def find_contact_form_url(port: int, base_url: str) -> str:
         try:
             parsed = json.loads(result)
             if isinstance(parsed, str) and parsed:
-                print(f"  [DEBUG] Method 3 (footer/header): {parsed}")
-                return parsed
+                # 英語ページはスキップ
+                if is_english_page(parsed):
+                    print(f"  [DEBUG] Method 3 skipped (English page): {parsed}")
+                else:
+                    print(f"  [DEBUG] Method 3 (footer/header): {parsed}")
+                    return parsed
         except json.JSONDecodeError:
             pass
         if isinstance(result, str) and result.startswith('http'):
-            print(f"  [DEBUG] Method 3 (footer/header): {result}")
-            return result
+            # 英語ページはスキップ
+            if is_english_page(result):
+                print(f"  [DEBUG] Method 3 skipped (English page): {result}")
+            else:
+                print(f"  [DEBUG] Method 3 (footer/header): {result}")
+                return result
 
     # 見つからなかった
     print(f"  [DEBUG] Form URL not found for {base_url}")
@@ -222,9 +241,14 @@ def is_valid_contact_url(url: str) -> bool:
 
     try:
         parsed = urlparse(url)
+        path_lower = parsed.path.lower()
+
+        # 英語ページは除外（日本語フォームがないことが多い）
+        english_path_patterns = ['/en/', '/en-', '/english/', '/eng/']
+        if any(pattern in path_lower for pattern in english_path_patterns):
+            return False
 
         # 問い合わせフォームらしいパス
-        path_lower = parsed.path.lower()
         contact_indicators = ['contact', 'inquiry', 'toiawase', 'form', 'お問い合わせ']
 
         if any(indicator in path_lower for indicator in contact_indicators):
@@ -233,3 +257,21 @@ def is_valid_contact_url(url: str) -> bool:
         return False
     except:
         return False
+
+
+def is_english_page(url: str) -> bool:
+    """
+    英語ページかどうかをチェック
+
+    Args:
+        url: チェック対象URL
+
+    Returns:
+        True: 英語ページ, False: それ以外
+    """
+    if not url:
+        return False
+
+    path_lower = url.lower()
+    english_patterns = ['/en/', '/en-', '/english/', '/eng/', '/en.', '?lang=en', '&lang=en']
+    return any(pattern in path_lower for pattern in english_patterns)

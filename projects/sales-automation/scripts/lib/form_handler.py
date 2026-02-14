@@ -42,6 +42,11 @@ def detect_form_fields(port: int, url: str) -> Optional[Dict[str, str]]:
                 placeholderPatterns: ['お名前', '氏名', '名前', 'ご担当者', '担当者名', 'フルネーム', 'your name', 'full name'],
                 labelPatterns: ['お名前', '氏名', '名前', 'ご担当者', '担当者', 'ご芳名', '御名前']
             },
+            kana: {
+                namePatterns: ['kana', 'furigana', 'ruby', 'yomi', 'フリガナ', 'ふりがな', 'カナ', 'name_kana', 'name-kana', 'namekana'],
+                placeholderPatterns: ['フリガナ', 'ふりがな', 'カナ', 'ヨミガナ', 'よみがな', 'セイメイ'],
+                labelPatterns: ['フリガナ', 'ふりがな', 'カナ', 'ヨミガナ', '読み仮名', 'お名前（カナ）', '氏名（カナ）']
+            },
             email: {
                 namePatterns: ['email', 'mail', 'e-mail', 'メール', 'メールアドレス'],
                 placeholderPatterns: ['メールアドレス', 'メール', 'email', 'e-mail', 'your email', 'ご連絡先'],
@@ -57,6 +62,12 @@ def detect_form_fields(port: int, url: str) -> Optional[Dict[str, str]]:
                 namePatterns: ['company', 'organization', 'corp', 'firm', '会社', '法人', '企業', '所属', 'kaisha', 'shozoku'],
                 placeholderPatterns: ['会社名', '法人名', '企業名', 'ご所属', '組織名', 'company', 'organization', '株式会社'],
                 labelPatterns: ['会社名', '御社名', '貴社名', '法人名', '企業名', 'ご所属', '組織名']
+            },
+            inquiry_type: {
+                namePatterns: ['type', 'category', 'inquiry_type', 'contact_type', 'subject', '種類', '種別', 'syurui'],
+                placeholderPatterns: ['お問い合わせの種類', '種類', 'お問い合わせ種別', 'ご用件'],
+                labelPatterns: ['お問い合わせの種類', 'お問い合わせ種別', '種類', 'ご用件', 'お問い合わせ項目'],
+                isSelect: true
             },
             message: {
                 namePatterns: ['message', 'content', 'body', 'inquiry', 'comment', 'detail', 'description', '内容', '本文', 'naiyou', 'メッセージ', 'お問い合わせ'],
@@ -266,56 +277,80 @@ def detect_form_fields(port: int, url: str) -> Optional[Dict[str, str]]:
 
 def _detect_form_fields_fallback(port: int) -> Optional[Dict[str, str]]:
     """
-    フォールバック検出（シンプル版）
+    フォールバック検出（シンプル版 + LeadGrid対応）
     複雑なパターンマッチが失敗した場合に使用
+    日本語URLエンコードされたname属性にも対応
     """
     fallback_script = """
     (function() {
         const result = {};
         
-        // メッセージ（textarea）
-        const textarea = document.querySelector('textarea');
-        if (!textarea) return JSON.stringify(null);
-        result.message = textarea.id ? '#' + textarea.id : 
-                         textarea.name ? '[name="' + textarea.name + '"]' : 'textarea';
+        // ヘルパー: URLデコードしてパターンマッチ
+        function decodeAndMatch(name, patterns) {
+            if (!name) return false;
+            try {
+                const decoded = decodeURIComponent(name);
+                return patterns.some(p => decoded.includes(p) || name.toLowerCase().includes(p.toLowerCase()));
+            } catch(e) {
+                return patterns.some(p => name.toLowerCase().includes(p.toLowerCase()));
+            }
+        }
+        
+        // ヘルパー: placeholderでマッチ
+        function matchByPlaceholder(inputs, patterns) {
+            for (const input of inputs) {
+                const ph = (input.placeholder || '').toLowerCase();
+                if (patterns.some(p => ph.includes(p.toLowerCase()))) {
+                    return input;
+                }
+            }
+            return null;
+        }
+        
+        // ヘルパー: セレクタ生成
+        function getSelector(el) {
+            if (el.id) return '#' + el.id;
+            if (el.name) return '[name="' + el.name + '"]';
+            return el.tagName.toLowerCase();
+        }
+        
+        const allInputs = Array.from(document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input:not([type])'));
+        const allTextareas = Array.from(document.querySelectorAll('textarea:not(.g-recaptcha-response)'));
+        const allSelects = Array.from(document.querySelectorAll('select'));
+        
+        // メッセージ（textarea）- reCAPTCHA以外
+        const messageTA = allTextareas.find(ta => !ta.name.includes('recaptcha'));
+        if (!messageTA) return JSON.stringify(null);
+        result.message = getSelector(messageTA);
         
         // 名前フィールド
-        const nameInput = document.querySelector(
-            'input[name="name"], input[id="name"], ' +
-            'input[name*="name" i], input[id*="name" i], ' +
-            'input[name="shimei"], input[name="fullname"]'
-        );
-        if (nameInput) {
-            result.name = nameInput.id ? '#' + nameInput.id : '[name="' + nameInput.name + '"]';
-        }
+        let nameInput = allInputs.find(i => i.name === 'name' || decodeAndMatch(i.name, ['氏名', '名前']));
+        if (!nameInput) nameInput = matchByPlaceholder(allInputs, ['名前', '太郎', 'name']);
+        if (nameInput) result.name = getSelector(nameInput);
         
-        // 会社フィールド
-        const companyInput = document.querySelector(
-            'input[name="company"], input[id="company"], ' +
-            'input[name="organization"], input[id="organization"], ' +
-            'input[name*="company" i], input[name*="organization" i]'
-        );
-        if (companyInput) {
-            result.company = companyInput.id ? '#' + companyInput.id : '[name="' + companyInput.name + '"]';
-        }
+        // フリガナフィールド（日本語対応）
+        let kanaInput = allInputs.find(i => decodeAndMatch(i.name, ['フリガナ', 'ふりがな', 'カナ', 'kana', 'furigana']));
+        if (!kanaInput) kanaInput = matchByPlaceholder(allInputs, ['タナカ', 'タロウ', 'カナ', 'フリガナ']);
+        if (kanaInput) result.kana = getSelector(kanaInput);
+        
+        // 会社フィールド（日本語対応）
+        let companyInput = allInputs.find(i => i.name === 'company' || decodeAndMatch(i.name, ['会社', '法人', '企業', '所属']));
+        if (!companyInput) companyInput = matchByPlaceholder(allInputs, ['会社', '株式会社', 'company']);
+        if (companyInput) result.company = getSelector(companyInput);
         
         // メールフィールド
-        const emailInput = document.querySelector(
-            'input[type="email"], input[name="email"], input[id="email"], ' +
-            'input[name*="mail" i]'
-        );
-        if (emailInput) {
-            result.email = emailInput.id ? '#' + emailInput.id : '[name="' + emailInput.name + '"]';
-        }
+        let emailInput = document.querySelector('input[type="email"]');
+        if (!emailInput) emailInput = allInputs.find(i => decodeAndMatch(i.name, ['email', 'mail', 'メール']));
+        if (emailInput) result.email = getSelector(emailInput);
         
-        // 電話フィールド
-        const phoneInput = document.querySelector(
-            'input[type="tel"], input[name="tel"], input[name="phone"], ' +
-            'input[name*="tel" i], input[name*="phone" i]'
-        );
-        if (phoneInput) {
-            result.phone = phoneInput.id ? '#' + phoneInput.id : '[name="' + phoneInput.name + '"]';
-        }
+        // 電話フィールド（日本語対応）
+        let phoneInput = document.querySelector('input[type="tel"]');
+        if (!phoneInput) phoneInput = allInputs.find(i => decodeAndMatch(i.name, ['電話', 'tel', 'phone']));
+        if (phoneInput) result.phone = getSelector(phoneInput);
+        
+        // お問い合わせ種類（select、日本語対応）
+        let typeSelect = allSelects.find(s => decodeAndMatch(s.name, ['種類', '種別', 'type', 'category', 'subject']));
+        if (typeSelect) result.inquiry_type = getSelector(typeSelect);
         
         return JSON.stringify(result);
     })()
@@ -423,6 +458,32 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
             function setReactValue(el, value) {{
                 if (el.tagName === 'TEXTAREA') {{
                     nativeTextAreaValueSetter.call(el, value);
+                }} else if (el.tagName === 'SELECT') {{
+                    // SELECTの場合: 「その他」「お問い合わせ」等を優先選択
+                    const preferredTexts = ['その他', 'お問い合わせ', '問い合わせ', 'ご相談', '一般', 'その他のお問い合わせ', 'other', 'inquiry', 'general'];
+                    let selected = false;
+                    
+                    // 優先テキストにマッチするオプションを探す
+                    for (const text of preferredTexts) {{
+                        for (const opt of el.options) {{
+                            if (opt.text.toLowerCase().includes(text.toLowerCase()) || opt.value.toLowerCase().includes(text.toLowerCase())) {{
+                                el.value = opt.value;
+                                selected = true;
+                                break;
+                            }}
+                        }}
+                        if (selected) break;
+                    }}
+                    
+                    // マッチしない場合は最初の非空オプションを選択
+                    if (!selected) {{
+                        for (const opt of el.options) {{
+                            if (opt.value && opt.value !== '') {{
+                                el.value = opt.value;
+                                break;
+                            }}
+                        }}
+                    }}
                 }} else {{
                     nativeInputValueSetter.call(el, value);
                 }}
@@ -432,13 +493,109 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
             }}
             
             for (const [field, selector] of Object.entries(fields)) {{
-                if (!data[field]) continue;
+                // inquiry_type(select)は自動選択するのでスキップ可
+                if (field === 'inquiry_type') {{
+                    const el = safeQuerySelector(selector);
+                    if (el && el.tagName === 'SELECT') {{
+                        setReactValue(el, '');  // 自動選択を実行
+                    }}
+                    continue;
+                }}
+                
+                let value = data[field];
+                
+                // 電話番号: フォームの期待形式を判定してから選択
+                if (field === 'phone') {{
+                    const el = safeQuerySelector(selector);
+                    if (el) {{
+                        const pattern = el.getAttribute('pattern') || '';
+                        const placeholder = el.getAttribute('placeholder') || '';
+                        const name = el.getAttribute('name') || '';
+                        
+                        // ハイフンなしを期待するパターン
+                        const noHyphenPatterns = [
+                            /^\d+$/, // 数字のみ
+                            /[0-9]{{10,11}}/, // 10-11桁の数字
+                        ];
+                        
+                        // ハイフンありを期待するパターン
+                        const hasHyphenPatterns = [
+                            /\d{{2,4}}-\d{{2,4}}-\d{{4}}/, // 03-1234-5678形式
+                            /000-0000-0000/, // placeholderでハイフンあり
+                        ];
+                        
+                        let useNoHyphen = false;
+                        
+                        // pattern属性をチェック
+                        if (pattern) {{
+                            if (noHyphenPatterns.some(p => p.test(pattern))) {{
+                                useNoHyphen = true;
+                            }}
+                        }}
+                        
+                        // placeholder属性をチェック
+                        if (placeholder) {{
+                            if (placeholder.includes('-')) {{
+                                useNoHyphen = false; // ハイフンあり期待
+                            }} else if (/^\d+$/.test(placeholder.replace(/\s/g, ''))) {{
+                                useNoHyphen = true; // 数字のみ期待
+                            }}
+                        }}
+                        
+                        // 判定結果に応じて値を選択
+                        if (useNoHyphen && data['phone_no_hyphen']) {{
+                            value = data['phone_no_hyphen'];
+                        }}
+                    }}
+                }}
+                
+                // 名前フィールド: 姓名分割が必要か判定
+                if (field === 'name') {{
+                    const el = safeQuerySelector(selector);
+                    if (el) {{
+                        const name = (el.getAttribute('name') || '').toLowerCase();
+                        const placeholder = el.getAttribute('placeholder') || '';
+                        
+                        // 姓のみのフィールドか判定
+                        if (name.includes('sei') || name.includes('last') || name.includes('family') ||
+                            placeholder.includes('姓') || placeholder.includes('苗字')) {{
+                            if (data['name_sei']) value = data['name_sei'];
+                        }}
+                        // 名のみのフィールドか判定
+                        else if (name.includes('mei') || name.includes('first') || name.includes('given') ||
+                                 placeholder.includes('名') && !placeholder.includes('氏名')) {{
+                            if (data['name_mei']) value = data['name_mei'];
+                        }}
+                    }}
+                }}
+                
+                // フリガナフィールド: 姓名分割が必要か判定
+                if (field === 'kana') {{
+                    const el = safeQuerySelector(selector);
+                    if (el) {{
+                        const name = (el.getAttribute('name') || '').toLowerCase();
+                        const placeholder = el.getAttribute('placeholder') || '';
+                        
+                        // 姓のフリガナのみか判定
+                        if (name.includes('sei') || name.includes('last') ||
+                            placeholder.includes('セイ') || placeholder.includes('姓')) {{
+                            if (data['kana_sei']) value = data['kana_sei'];
+                        }}
+                        // 名のフリガナのみか判定
+                        else if (name.includes('mei') || name.includes('first') ||
+                                 placeholder.includes('メイ') || placeholder.includes('名')) {{
+                            if (data['kana_mei']) value = data['kana_mei'];
+                        }}
+                    }}
+                }}
+                
+                if (!value) continue;
 
                 // セレクタで要素を検索（エスケープ対応）
                 const el = safeQuerySelector(selector);
 
                 if (el) {{
-                    setReactValue(el, data[field]);
+                    setReactValue(el, value);
                 }}
             }}
 
@@ -459,8 +616,22 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
             for (const sel of agreePatterns) {{
                 const checkbox = document.querySelector(sel);
                 if (checkbox && !checkbox.checked) {{
+                    // 方法1: 直接チェック
                     checkbox.checked = true;
                     checkbox.dispatchEvent(new Event('change', {{ bubbles: true }}));
+                    
+                    // 方法2: 親のlabelをクリック（カスタムUI対応）
+                    const label = checkbox.closest('label') || document.querySelector('label[for="' + checkbox.id + '"]');
+                    if (label) {{
+                        label.click();
+                    }}
+                    
+                    // 方法3: LeadGrid等の特殊構造対応（隣接spanをクリック）
+                    const parent = checkbox.closest('div');
+                    if (parent) {{
+                        const clickable = parent.querySelector('.c-form__checkboxLabel, span[class*="checkbox"]');
+                        if (clickable) clickable.click();
+                    }}
                 }}
             }}
             
@@ -638,6 +809,24 @@ def fill_and_submit_form(port: int, form_fields: Dict[str, str],
                     if (text && text.length < 200 && text.length > 0) {
                         result.errorMessages.push(text);
                         result.hasError = true;
+                    }
+                }
+                
+                // B2. PHPエラー/サーバーエラー検出
+                const phpErrorPatterns = [
+                    '<br />', '<b>Notice</b>', '<b>Warning</b>', '<b>Fatal error</b>',
+                    'Parse error', 'Undefined variable', 'Undefined index',
+                    'Call to undefined', 'mysql_', 'mysqli_',
+                    '500 Internal Server Error', '503 Service Unavailable',
+                    'Server Error', 'Application Error'
+                ];
+                const htmlSource = document.body.innerHTML || '';
+                for (const pattern of phpErrorPatterns) {
+                    if (htmlSource.includes(pattern)) {
+                        result.hasError = true;
+                        result.errorMessages.push('Server/PHP error detected: ' + pattern);
+                        result.serverError = true;
+                        break;
                     }
                 }
                 
