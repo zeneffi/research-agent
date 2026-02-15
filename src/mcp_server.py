@@ -77,6 +77,10 @@ class ResearchAgentMCPServer:
         self._jobs: dict[str, ResearchJob] = {}
         self._running_tasks: dict[str, asyncio.Task] = {}
         
+        # Cleanup settings
+        self._max_completed_jobs = 100
+        self._job_retention_hours = 24
+        
         # Create MCP server
         self.server = Server("research-agent")
         self._setup_handlers()
@@ -194,6 +198,36 @@ class ResearchAgentMCPServer:
                     text=json.dumps({"error": str(e)}, indent=2)
                 )]
     
+    def _cleanup_completed_jobs(self) -> None:
+        """Remove old completed/failed jobs to prevent memory leaks."""
+        now = datetime.now(timezone.utc)
+        completed_jobs = [
+            (job_id, job) for job_id, job in self._jobs.items()
+            if job.status in ("completed", "failed")
+        ]
+        
+        # Remove jobs older than retention period
+        for job_id, job in completed_jobs:
+            if job.completed_at:
+                age_hours = (now - job.completed_at).total_seconds() / 3600
+                if age_hours > self._job_retention_hours:
+                    self._jobs.pop(job_id, None)
+                    self._running_tasks.pop(job_id, None)
+        
+        # If still too many completed jobs, remove oldest ones
+        remaining_completed = [
+            (job_id, job) for job_id, job in self._jobs.items()
+            if job.status in ("completed", "failed")
+        ]
+        if len(remaining_completed) > self._max_completed_jobs:
+            sorted_jobs = sorted(
+                remaining_completed,
+                key=lambda x: x[1].completed_at or x[1].created_at
+            )
+            for job_id, _ in sorted_jobs[:-self._max_completed_jobs]:
+                self._jobs.pop(job_id, None)
+                self._running_tasks.pop(job_id, None)
+
     async def _start_research(
         self,
         query: str,
@@ -201,6 +235,9 @@ class ResearchAgentMCPServer:
         screenshot: bool = False,
     ) -> dict:
         """Start a new research job."""
+        # Cleanup old completed jobs before starting new one
+        self._cleanup_completed_jobs()
+        
         job_id = str(uuid4())[:8]
         
         job = ResearchJob(

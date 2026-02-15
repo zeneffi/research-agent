@@ -187,7 +187,10 @@ class LLMClient:
             return json.loads(content)
         except json.JSONDecodeError as e:
             # Try to extract JSON from the response
-            json_match = re.search(r'\{[\s\S]*\}|\[[\s\S]*\]', content)
-            if json_match:
-                return json.loads(json_match.group())
+            try:
+                json_match = re.search(r'\{[\s\S]*\}|\[[\s\S]*\]', content)
+                if json_match:
+                    return json.loads(json_match.group())
+            except (json.JSONDecodeError, re.error) as extract_error:
+                raise ValueError(f"Failed to parse JSON from response: {e}; extraction also failed: {extract_error}")
             raise ValueError(f"Failed to parse JSON from response: {e}")

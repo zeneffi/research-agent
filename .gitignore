@@ -68,8 +68,5 @@ projects/*/output/*.md
 *.log
 *.tmp
 *.bak
-projects/sales-automation/output/*.bak
-projects/sales-automation/output/*.json.bak*
-# Output files
 projects/*/output/*.bak*
 projects/*/data/sent_domains.txt

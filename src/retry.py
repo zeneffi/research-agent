@@ -13,6 +13,47 @@ from typing import Any, Awaitable, Callable, Optional, TypeVar
 T = TypeVar("T")
 
 
+def calculate_backoff_delay(
+    attempt: int,
+    base_delay: float = 1.0,
+    exponential_base: float = 2.0,
+    max_delay: float = 30.0,
+) -> float:
+    """
+    Calculate exponential backoff delay.
+    
+    Args:
+        attempt: Current attempt number (0-indexed)
+        base_delay: Base delay in seconds
+        exponential_base: Base for exponential calculation
+        max_delay: Maximum delay cap
+        
+    Returns:
+        Delay in seconds
+    """
+    delay = base_delay * (exponential_base ** attempt)
+    return min(delay, max_delay)
+
+
+async def backoff_sleep(
+    attempt: int,
+    base_delay: float = 1.0,
+    exponential_base: float = 2.0,
+    max_delay: float = 30.0,
+) -> None:
+    """
+    Sleep with exponential backoff.
+    
+    Args:
+        attempt: Current attempt number (0-indexed)
+        base_delay: Base delay in seconds
+        exponential_base: Base for exponential calculation
+        max_delay: Maximum delay cap
+    """
+    delay = calculate_backoff_delay(attempt, base_delay, exponential_base, max_delay)
+    await asyncio.sleep(delay)
+
+
 @dataclass
 class RetryConfig:
     """Configuration for retry behavior."""

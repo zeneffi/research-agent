@@ -437,7 +437,7 @@ class LLMTaskParser:
             
         except Exception as e:
             # Log the exception to understand why LLM parsing failed
-            logger.warning(f"LLM query parsing failed, falling back to rules: {e}")
+            logger.warning(f"LLM query parsing failed, falling back to rules: {e}", exc_info=True)
             if not self.fallback_to_rules:
                 raise
             # Fall through to rule-based parsing

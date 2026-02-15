@@ -22,10 +22,13 @@ from .browser_pool import BrowserPool, BrowserInstance
 from .snapshot import SnapshotManager
 from .task_parser import TaskParser, LLMTaskParser, ResearchTask, create_parser
 from .semantic_filter import SemanticFilter
-from .retry import retry_with_backoff, RetryConfig, get_fallback_search_url
+from .retry import retry_with_backoff, RetryConfig, get_fallback_search_url, backoff_sleep
 
 if TYPE_CHECKING:
     from .llm_client import LLMClient
+else:
+    # Runtime import (deferred to avoid circular imports at module load)
+    LLMClient = None
 
 
 # System prompt for result summarization
@@ -395,7 +398,7 @@ class Orchestrator:
                         last_error = nav_result.get("error", "Navigation failed")
                         if attempt < max_retries:
                             # Wait before retry with exponential backoff
-                            await asyncio.sleep(1.0 * (2 ** attempt))
+                            await backoff_sleep(attempt)
                             continue
                         # Try next URL
                         break
@@ -430,14 +433,14 @@ class Orchestrator:
                 except asyncio.TimeoutError:
                     last_error = f"Timeout after {self.timeout}s"
                     if attempt < max_retries:
-                        await asyncio.sleep(1.0 * (2 ** attempt))
+                        await backoff_sleep(attempt)
                         continue
                     # Try next URL
                     break
                 except Exception as e:
                     last_error = str(e)
                     if attempt < max_retries:
-                        await asyncio.sleep(1.0 * (2 ** attempt))
+                        await backoff_sleep(attempt)
                         continue
                     # Try next URL
                     break
@@ -466,7 +469,7 @@ class Orchestrator:
                 last_error = e
             
             if attempt < max_retries:
-                await asyncio.sleep(0.5 * (2 ** attempt))
+                await backoff_sleep(attempt, base_delay=0.5)
         
         error_msg = f"Failed to get content: {last_error}" if last_error else "Failed to get content"
         return {"success": False, "error": error_msg}
@@ -561,8 +564,8 @@ class Orchestrator:
         try:
             # Get or create LLM client
             if self.llm_client is None:
-                from .llm_client import LLMClient
-                self.llm_client = LLMClient()
+                from .llm_client import LLMClient as LLMClientImpl
+                self.llm_client = LLMClientImpl()
             
             # Prepare findings text for LLM
             findings_text = self._format_findings_for_llm(findings)
