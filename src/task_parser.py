@@ -9,11 +9,14 @@ import logging
 import re
 import urllib.parse
 from dataclasses import dataclass, field
-from typing import Optional, TYPE_CHECKING
+from typing import Optional
 from uuid import uuid4
 
-if TYPE_CHECKING:
+# Import LLMClient at module level (may fail if litellm not installed)
+try:
     from .llm_client import LLMClient
+except ImportError:
+    LLMClient = None  # type: ignore
 
 logger = logging.getLogger(__name__)
 
@@ -382,7 +385,7 @@ class LLMTaskParser:
     
     def __init__(
         self,
-        llm_client: Optional["LLMClient"] = None,
+        llm_client: Optional[LLMClient] = None,
         default_engine: str = "duckduckgo",
         fallback_to_rules: bool = True,
     ):
@@ -399,10 +402,11 @@ class LLMTaskParser:
         self.fallback_to_rules = fallback_to_rules
         self._rule_parser = TaskParser(default_engine=default_engine)
     
-    async def _get_llm_client(self) -> "LLMClient":
+    async def _get_llm_client(self) -> LLMClient:
         """Get or create LLM client lazily."""
         if self.llm_client is None:
-            from .llm_client import LLMClient
+            if LLMClient is None:
+                raise ImportError("LLMClient not available. Install litellm.")
             self.llm_client = LLMClient()
         return self.llm_client
     
