@@ -8,7 +8,7 @@ with Clawdbot and other MCP-compatible systems.
 import asyncio
 import json
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Optional
 from uuid import uuid4
@@ -207,7 +207,7 @@ class ResearchAgentMCPServer:
             id=job_id,
             query=query,
             status="pending",
-            created_at=datetime.now(),
+            created_at=datetime.now(timezone.utc),
         )
         self._jobs[job_id] = job
         
@@ -248,12 +248,12 @@ class ResearchAgentMCPServer:
             result = await orchestrator.run(query)
             
             job.status = "completed"
-            job.completed_at = datetime.now()
+            job.completed_at = datetime.now(timezone.utc)
             job.result = result
             
         except Exception as e:
             job.status = "failed"
-            job.completed_at = datetime.now()
+            job.completed_at = datetime.now(timezone.utc)
             job.error = str(e)
         
         finally:

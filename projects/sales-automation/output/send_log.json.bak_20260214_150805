@@ -1,0 +1,178 @@
+{
+  "summary": {
+    "total": 12,
+    "success": 2,
+    "failed": 6,
+    "skipped": 4,
+    "started_at": "2026-02-14T13:11:24.690263",
+    "completed_at": "2026-02-14T14:17:30.668209"
+  },
+  "entries": [
+    {
+      "company_name": "SYNC Inc.",
+      "url": "https://www.hotsync.co.jp/contact/",
+      "status": "failed",
+      "timestamp": "2026-02-14T13:11:24.690263",
+      "message_preview": "初めてご連絡いたします。ゼネフィ合同会社の藤崎です。\n\nリソース不足や専門外を理由にお断りしているシ...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "company",
+        "message"
+      ],
+      "error": "フォームエラー検出: Unexpected token '<', \"<br /> <b>\"... is not valid JSON, Server/PHP error detected: <br />",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社リクルート",
+      "url": "https://www.recruit.co.jp/contact/",
+      "status": "skipped",
+      "timestamp": "2026-02-14T13:11:25.658289",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "Form not detected",
+      "screenshot": null
+    },
+    {
+      "company_name": "New Japan Bit Corporation",
+      "url": "https://www.nbit.co.jp/contact.html",
+      "status": "skipped",
+      "timestamp": "2026-02-14T13:11:25.927439",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "Form not detected",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社スタイラジー",
+      "url": "https://www.stylagy.co.jp/contact",
+      "status": "failed",
+      "timestamp": "2026-02-14T13:58:53.834071",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社スタイラジー様の事業内容を拝見し、弊社のサービスをご提案させ...",
+      "form_fields_detected": [
+        "message",
+        "name",
+        "email",
+        "phone"
+      ],
+      "error": "フォームエラー検出: お問い合わせの種類は必須項目です。, フリガナは必須項目です。, チェックしてください。",
+      "screenshot": null
+    },
+    {
+      "company_name": "SYNC Inc.",
+      "url": "https://www.hotsync.co.jp/contact/",
+      "status": "failed",
+      "timestamp": "2026-02-14T13:58:58.257415",
+      "message_preview": "突然のご連絡失礼いたします。\n\nSYNC Inc.様の事業内容を拝見し、弊社のサービスをご提案させて...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "company",
+        "message"
+      ],
+      "error": "フォームエラー検出: Unexpected token '<', \"<br /> <b>\"... is not valid JSON, Server/PHP error detected: <br />",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社スタイラジー",
+      "url": "https://www.stylagy.co.jp/contact",
+      "status": "failed",
+      "timestamp": "2026-02-14T13:59:21.211532",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社スタイラジー様の事業内容を拝見し、弊社のサービスをご提案させ...",
+      "form_fields_detected": [
+        "message"
+      ],
+      "error": "送信ボタンが見つかりません",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社スタイラジー",
+      "url": "https://www.stylagy.co.jp/contact",
+      "status": "skipped",
+      "timestamp": "2026-02-14T14:13:53.042431",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "Form not detected",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社スタイラジー",
+      "url": "https://www.stylagy.co.jp/contact",
+      "status": "skipped",
+      "timestamp": "2026-02-14T14:15:02.016545",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "Form not detected",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社スタイラジー",
+      "url": "https://www.stylagy.co.jp/contact",
+      "status": "failed",
+      "timestamp": "2026-02-14T14:15:40.414317",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社スタイラジー様の事業内容を拝見し、弊社のサービスをご提案させ...",
+      "form_fields_detected": [
+        "name",
+        "kana",
+        "email",
+        "phone",
+        "company",
+        "inquiry_type",
+        "message"
+      ],
+      "error": "フォームエラー検出: チェックしてください。",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社スタイラジー",
+      "url": "https://www.stylagy.co.jp/contact",
+      "status": "success",
+      "timestamp": "2026-02-14T14:16:34.426401",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社スタイラジー様の事業内容を拝見し、弊社のサービスをご提案させ...",
+      "form_fields_detected": [
+        "name",
+        "kana",
+        "email",
+        "phone",
+        "company",
+        "inquiry_type",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社スタイラジー",
+      "url": "https://www.stylagy.co.jp/contact",
+      "status": "success",
+      "timestamp": "2026-02-14T14:17:11.116548",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社スタイラジー様の事業内容を拝見し、弊社のサービスをご提案させ...",
+      "form_fields_detected": [
+        "name",
+        "kana",
+        "email",
+        "phone",
+        "company",
+        "inquiry_type",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "SYNC Inc.",
+      "url": "https://www.hotsync.co.jp/contact/",
+      "status": "failed",
+      "timestamp": "2026-02-14T14:17:30.668209",
+      "message_preview": "突然のご連絡失礼いたします。\n\nSYNC Inc.様の事業内容を拝見し、弊社のサービスをご提案させて...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "company",
+        "message"
+      ],
+      "error": "フォームエラー検出: Unexpected token '<', \"<br /> <b>\"... is not valid JSON, Server/PHP error detected: <br />",
+      "screenshot": null
+    }
+  ]
+}

@@ -5,6 +5,7 @@ Breaks down a research query into specific URLs and search tasks.
 Supports both rule-based and LLM-powered query decomposition.
 """
 
+import logging
 import re
 import urllib.parse
 from dataclasses import dataclass, field
@@ -13,6 +14,31 @@ from uuid import uuid4
 
 if TYPE_CHECKING:
     from .llm_client import LLMClient
+
+logger = logging.getLogger(__name__)
+
+# Search engines and their query formats (shared by all parsers)
+SEARCH_ENGINES = {
+    "google": "https://www.google.com/search?q={query}",
+    "bing": "https://www.bing.com/search?q={query}",
+    "duckduckgo": "https://duckduckgo.com/?q={query}",
+}
+
+
+def build_search_url(query: str, engine: str = "duckduckgo") -> str:
+    """
+    Build search engine URL.
+    
+    Args:
+        query: Search query
+        engine: Search engine name
+        
+    Returns:
+        Search URL
+    """
+    template = SEARCH_ENGINES.get(engine, SEARCH_ENGINES["duckduckgo"])
+    encoded_query = urllib.parse.quote_plus(query)
+    return template.format(query=encoded_query)
 
 
 # System prompt for LLM query decomposition
@@ -68,13 +94,6 @@ class TaskParser:
     - Direct URL extraction
     - Keyword extraction for relevance filtering
     """
-
-    # Common search engines and their query formats
-    SEARCH_ENGINES = {
-        "google": "https://www.google.com/search?q={query}",
-        "bing": "https://www.bing.com/search?q={query}",
-        "duckduckgo": "https://duckduckgo.com/?q={query}",
-    }
 
     # Common domain patterns for direct research
     RESEARCH_DOMAINS = [
@@ -276,10 +295,8 @@ class TaskParser:
         return text.strip()
 
     def _build_search_url(self, query: str, engine: str = "google") -> str:
-        """Build search engine URL."""
-        template = self.SEARCH_ENGINES.get(engine, self.SEARCH_ENGINES["google"])
-        encoded_query = urllib.parse.quote_plus(query)
-        return template.format(query=encoded_query)
+        """Build search engine URL (delegates to module-level function)."""
+        return build_search_url(query, engine)
 
     def _generate_query_variants(self, query: str) -> list[str]:
         """Generate variant queries for broader coverage."""
@@ -363,13 +380,6 @@ class LLMTaskParser:
     Falls back to rule-based TaskParser on failure.
     """
     
-    # Search engines for URL building
-    SEARCH_ENGINES = {
-        "google": "https://www.google.com/search?q={query}",
-        "bing": "https://www.bing.com/search?q={query}",
-        "duckduckgo": "https://duckduckgo.com/?q={query}",
-    }
-    
     def __init__(
         self,
         llm_client: Optional["LLMClient"] = None,
@@ -422,6 +432,8 @@ class LLMTaskParser:
                 return tasks
             
         except Exception as e:
+            # Log the exception to understand why LLM parsing failed
+            logger.warning(f"LLM query parsing failed, falling back to rules: {e}")
             if not self.fallback_to_rules:
                 raise
             # Fall through to rule-based parsing
@@ -477,13 +489,8 @@ class LLMTaskParser:
         return tasks
     
     def _build_search_url(self, query: str) -> str:
-        """Build search engine URL."""
-        template = self.SEARCH_ENGINES.get(
-            self.default_engine,
-            self.SEARCH_ENGINES["duckduckgo"]
-        )
-        encoded_query = urllib.parse.quote_plus(query)
-        return template.format(query=encoded_query)
+        """Build search engine URL (delegates to module-level function)."""
+        return build_search_url(query, self.default_engine)
 
 
 def create_parser(use_llm: bool = False, **kwargs) -> TaskParser | LLMTaskParser:

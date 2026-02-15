@@ -7,6 +7,7 @@ Supports LLM-powered query decomposition and result summarization.
 
 import asyncio
 import json
+import logging
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -14,6 +15,8 @@ from typing import Any, Optional, TYPE_CHECKING
 from uuid import uuid4
 
 from rich.progress import Progress
+
+logger = logging.getLogger(__name__)
 
 from .browser_pool import BrowserPool, BrowserInstance
 from .snapshot import SnapshotManager
@@ -451,18 +454,22 @@ class Orchestrator:
         max_retries: int = 2,
     ) -> dict:
         """Get page content with retry."""
+        last_error: Optional[Exception] = None
         for attempt in range(max_retries + 1):
             try:
                 result = await self.pool.get_content(instance)
                 if result.get("success"):
                     return result
-            except Exception:
-                pass
+            except Exception as e:
+                # Log exception for debugging
+                logger.debug(f"get_content attempt {attempt + 1} failed: {e}")
+                last_error = e
             
             if attempt < max_retries:
                 await asyncio.sleep(0.5 * (2 ** attempt))
         
-        return {"success": False, "error": "Failed to get content"}
+        error_msg = f"Failed to get content: {last_error}" if last_error else "Failed to get content"
+        return {"success": False, "error": error_msg}
 
     def _extract_findings(self, content: str, keywords: list[str]) -> list[dict]:
         """Extract relevant findings from page content."""
@@ -524,9 +531,10 @@ class Orchestrator:
                     top_k=50,
                 )
                 return [self.semantic_filter.scored_to_dict(s) for s in scored]
-            except Exception:
+            except Exception as e:
+                # Log exception to understand why semantic filtering failed
+                logger.warning(f"Semantic filtering failed, using keyword ranking: {e}")
                 # Fall through to basic sorting on error
-                pass
 
         # Sort by relevance
         all_findings.sort(key=lambda x: x.get("relevance", 0), reverse=True)

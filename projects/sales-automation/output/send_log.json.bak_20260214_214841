@@ -1,0 +1,716 @@
+{
+  "summary": {
+    "total": 52,
+    "success": 20,
+    "failed": 12,
+    "skipped": 20,
+    "started_at": "2026-02-14T15:51:24.024503",
+    "completed_at": "2026-02-14T21:46:33.726135"
+  },
+  "entries": [
+    {
+      "company_name": "SYNC Inc.",
+      "url": "https://www.hotsync.co.jp/contact/",
+      "status": "failed",
+      "timestamp": "2026-02-14T15:51:24.024503",
+      "message_preview": "突然のご連絡失礼いたします。\n\nSYNC Inc.様の事業内容を拝見し、弊社のサービスをご提案させて...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "company",
+        "message"
+      ],
+      "error": "フォームエラー検出: Unexpected token '<', \"<br /> <b>\"... is not valid JSON, Server/PHP error detected: <br />",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社リクルート",
+      "url": "https://www.recruit.co.jp/contact/",
+      "status": "skipped",
+      "timestamp": "2026-02-14T15:51:28.082204",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "Form not detected",
+      "screenshot": null
+    },
+    {
+      "company_name": "New Japan Bit Corporation",
+      "url": "https://www.nbit.co.jp/contact.html",
+      "status": "skipped",
+      "timestamp": "2026-02-14T15:51:31.564486",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "Form not detected",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社ホムタホールディングス",
+      "url": "https://www.homuta.co.jp/ja/contact.html",
+      "status": "failed",
+      "timestamp": "2026-02-14T15:51:39.055500",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社ホムタホールディングス様の事業内容を拝見し、弊社のサービスを...",
+      "form_fields_detected": [
+        "name",
+        "kana",
+        "email",
+        "phone",
+        "company",
+        "message"
+      ],
+      "error": "フォームエラー検出: Field 会社名・団体名 is required!, Field ご担当者名 is required!, Field フリガナ is required!",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社ツクルン",
+      "url": "https://tsukurun.co.jp/contact/",
+      "status": "success",
+      "timestamp": "2026-02-14T15:51:45.326909",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社ツクルン様の事業内容を拝見し、弊社のサービスをご提案させてい...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "company",
+        "inquiry_type",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "GoMA株式会社",
+      "url": "https://www.go-ma.co.jp/contact",
+      "status": "success",
+      "timestamp": "2026-02-14T15:52:03.138072",
+      "message_preview": "突然のご連絡失礼いたします。\n\nGoMA株式会社様の事業内容を拝見し、弊社のサービスをご提案させてい...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "phone",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社イクシス",
+      "url": "https://www.ixs.co.jp/inquiry_en/",
+      "status": "failed",
+      "timestamp": "2026-02-14T15:52:20.898629",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社イクシス様の事業内容を拝見し、弊社のサービスをご提案させてい...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "phone",
+        "company",
+        "inquiry_type",
+        "message"
+      ],
+      "error": "フォームエラー検出: There are blanks or errors in the input contents.Please check the contents below and click \"Confirm\" again., Please input Name, Please input Countory",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社アドバンスト・ソフト",
+      "url": "https://www.advn.co.jp/contact/",
+      "status": "failed",
+      "timestamp": "2026-02-14T15:52:28.667691",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社アドバンスト・ソフト様の事業内容を拝見し、弊社のサービスをご...",
+      "form_fields_detected": [
+        "name",
+        "kana",
+        "email",
+        "phone",
+        "inquiry_type",
+        "message"
+      ],
+      "error": "フォームエラー検出: 入力内容に不備があります, 0 / 1000",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社ディーアイ",
+      "url": "https://www.di-git.co.jp/contact.html",
+      "status": "success",
+      "timestamp": "2026-02-14T15:52:36.369275",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社ディーアイ様の事業内容を拝見し、弊社のサービスをご提案させて...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社Rubato",
+      "url": "https://rubato-tech.co.jp/#contact",
+      "status": "success",
+      "timestamp": "2026-02-14T15:52:54.102625",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社Rubato様の事業内容を拝見し、弊社のサービスをご提案させ...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "phone",
+        "company",
+        "inquiry_type",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社SERO",
+      "url": "https://www.sero.co.jp/",
+      "status": "success",
+      "timestamp": "2026-02-14T15:53:12.349746",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社SERO様の事業内容を拝見し、弊社のサービスをご提案させてい...",
+      "form_fields_detected": [
+        "email",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社NEXTTRAIL",
+      "url": "https://www.nexttrail.co.jp/contact.php",
+      "status": "success",
+      "timestamp": "2026-02-14T15:53:28.229299",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社NEXTTRAIL様の事業内容を拝見し、弊社のサービスをご提...",
+      "form_fields_detected": [
+        "name",
+        "kana",
+        "email",
+        "phone",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "合同会社FIRE",
+      "url": "https://fireapp.co.jp/contact",
+      "status": "success",
+      "timestamp": "2026-02-14T15:53:45.949154",
+      "message_preview": "突然のご連絡失礼いたします。\n\n合同会社FIRE様の事業内容を拝見し、弊社のサービスをご提案させてい...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "company",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社ワイド情報開発",
+      "url": "https://www.wide.co.jp/contact/",
+      "status": "failed",
+      "timestamp": "2026-02-14T15:54:04.613946",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社ワイド情報開発様の事業内容を拝見し、弊社のサービスをご提案さ...",
+      "form_fields_detected": [
+        "name",
+        "kana",
+        "email",
+        "phone",
+        "company",
+        "message"
+      ],
+      "error": "フォームエラー検出: 電話番号の形式ではありません。, 未入力です。, 未入力です。",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社アテネコーポレーション【東京・台東区】",
+      "url": "https://athene.co.jp/contact/",
+      "status": "skipped",
+      "timestamp": "2026-02-14T15:54:07.948173",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "Form not detected",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社ネクサス",
+      "url": "https://nexus-nt.co.jp/contact/",
+      "status": "failed",
+      "timestamp": "2026-02-14T15:54:15.917221",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社ネクサス様の事業内容を拝見し、弊社のサービスをご提案させてい...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "phone",
+        "company",
+        "message"
+      ],
+      "error": "フォームエラー検出: * 選択してください, * 選択してください",
+      "screenshot": null
+    },
+    {
+      "company_name": "ビートテック株式会社",
+      "url": "https://beat-tech.co.jp/contact/",
+      "status": "success",
+      "timestamp": "2026-02-14T15:54:22.979069",
+      "message_preview": "突然のご連絡失礼いたします。\n\nビートテック株式会社様の事業内容を拝見し、弊社のサービスをご提案させ...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "phone",
+        "company",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社フリラン",
+      "url": "https://www.fuliran.co.jp/contact",
+      "status": "success",
+      "timestamp": "2026-02-14T15:54:40.660470",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社フリラン様の事業内容を拝見し、弊社のサービスをご提案させてい...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "weeybrid,llc",
+      "url": "https://weeybrid.co.jp/bp",
+      "status": "skipped",
+      "timestamp": "2026-02-14T15:54:54.463457",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "Form not detected",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社Infinity",
+      "url": "https://infinity00.co.jp/contact/",
+      "status": "failed",
+      "timestamp": "2026-02-14T15:55:08.395208",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社Infinity様の事業内容を拝見し、弊社のサービスをご提案...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "company",
+        "message"
+      ],
+      "error": "フォームエラー検出: 予期しない問題が発生しました。後でもう一度やり直すか、他の方法で管理者に連絡してください。",
+      "screenshot": null
+    },
+    {
+      "company_name": "リジッドシステム",
+      "url": "https://rigidsystem.co.jp/%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b/",
+      "status": "success",
+      "timestamp": "2026-02-14T15:55:16.252330",
+      "message_preview": "突然のご連絡失礼いたします。\n\nリジッドシステム様の事業内容を拝見し、弊社のサービスをご提案させてい...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "company",
+        "inquiry_type",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社クルーク(Klug)",
+      "url": "https://gulk.co.jp/contact/",
+      "status": "success",
+      "timestamp": "2026-02-14T15:55:34.407547",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社クルーク(Klug)様の事業内容を拝見し、弊社のサービスをご...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社システムネットワークコーポレートサイト",
+      "url": "https://www.snw.co.jp/contact/",
+      "status": "success",
+      "timestamp": "2026-02-14T15:55:52.810792",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社システムネットワークコーポレートサイト様の事業内容を拝見し、...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "company",
+        "inquiry_type",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社DUTA",
+      "url": "",
+      "status": "skipped",
+      "timestamp": "2026-02-14T21:43:45.473783",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "No contact form URL",
+      "screenshot": null
+    },
+    {
+      "company_name": "Monoware",
+      "url": "",
+      "status": "skipped",
+      "timestamp": "2026-02-14T21:43:45.474327",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "No contact form URL",
+      "screenshot": null
+    },
+    {
+      "company_name": "Toyo Riki Engineering CO.,LTD",
+      "url": "",
+      "status": "skipped",
+      "timestamp": "2026-02-14T21:43:45.474594",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "No contact form URL",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社プリズム",
+      "url": "",
+      "status": "skipped",
+      "timestamp": "2026-02-14T21:43:45.474799",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "No contact form URL",
+      "screenshot": null
+    },
+    {
+      "company_name": "SYNC Inc.",
+      "url": "https://www.hotsync.co.jp/contact/",
+      "status": "failed",
+      "timestamp": "2026-02-14T21:43:54.746290",
+      "message_preview": "突然のご連絡失礼いたします。\n\nSYNC Inc.様の事業内容を拝見し、弊社のサービスをご提案させて...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "company",
+        "message"
+      ],
+      "error": "フォームエラー検出: Unexpected token '<', \"<br /> <b>\"... is not valid JSON, Server/PHP error detected: <br />",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社BEES",
+      "url": "https://beesys.co.jp/contact/",
+      "status": "success",
+      "timestamp": "2026-02-14T21:44:02.747435",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社BEES様の事業内容を拝見し、弊社のサービスをご提案させてい...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "micata Inc.",
+      "url": "",
+      "status": "skipped",
+      "timestamp": "2026-02-14T21:44:12.837164",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "No contact form URL",
+      "screenshot": null
+    },
+    {
+      "company_name": "Cfc Innovation",
+      "url": "",
+      "status": "skipped",
+      "timestamp": "2026-02-14T21:44:12.837710",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "No contact form URL",
+      "screenshot": null
+    },
+    {
+      "company_name": "Chromwell",
+      "url": "",
+      "status": "skipped",
+      "timestamp": "2026-02-14T21:44:12.838085",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "No contact form URL",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社乃村工藝社",
+      "url": "",
+      "status": "skipped",
+      "timestamp": "2026-02-14T21:44:12.838312",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "No contact form URL",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社ホムタホールディングス",
+      "url": "https://www.homuta.co.jp/ja/contact.html",
+      "status": "failed",
+      "timestamp": "2026-02-14T21:44:20.279405",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社ホムタホールディングス様の事業内容を拝見し、弊社のサービスを...",
+      "form_fields_detected": [
+        "name",
+        "kana",
+        "email",
+        "phone",
+        "company",
+        "message"
+      ],
+      "error": "フォームエラー検出: Field 会社名・団体名 is required!, Field ご担当者名 is required!, Field フリガナ is required!",
+      "screenshot": null
+    },
+    {
+      "company_name": "ユニスト株式会社",
+      "url": "",
+      "status": "skipped",
+      "timestamp": "2026-02-14T21:44:20.281869",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "No contact form URL",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社TCEコンサルティング",
+      "url": "https://www.tceconsulting.co.jp/inquiry/",
+      "status": "success",
+      "timestamp": "2026-02-14T21:44:28.123143",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社TCEコンサルティング様の事業内容を拝見し、弊社のサービスを...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "phone",
+        "company",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "VISION",
+      "url": "",
+      "status": "skipped",
+      "timestamp": "2026-02-14T21:44:38.266745",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "No contact form URL",
+      "screenshot": null
+    },
+    {
+      "company_name": "MANUFACTURING COLD FORGED PARTS, BOLT, NUT, MINAMIDA",
+      "url": "",
+      "status": "skipped",
+      "timestamp": "2026-02-14T21:44:38.267961",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "No contact form URL",
+      "screenshot": null
+    },
+    {
+      "company_name": "WILL GROUP",
+      "url": "",
+      "status": "skipped",
+      "timestamp": "2026-02-14T21:44:38.269022",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "No contact form URL",
+      "screenshot": null
+    },
+    {
+      "company_name": "404 File Not Found",
+      "url": "",
+      "status": "skipped",
+      "timestamp": "2026-02-14T21:44:38.269627",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "No contact form URL",
+      "screenshot": null
+    },
+    {
+      "company_name": "GoMA株式会社",
+      "url": "https://www.go-ma.co.jp/contact",
+      "status": "success",
+      "timestamp": "2026-02-14T21:44:45.700712",
+      "message_preview": "突然のご連絡失礼いたします。\n\nGoMA株式会社様の事業内容を拝見し、弊社のサービスをご提案させてい...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "phone",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "企業情報",
+      "url": "",
+      "status": "skipped",
+      "timestamp": "2026-02-14T21:44:55.792034",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "No contact form URL",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社イクシス",
+      "url": "https://www.ixs.co.jp/inquiry_en/",
+      "status": "failed",
+      "timestamp": "2026-02-14T21:45:03.572121",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社イクシス様の事業内容を拝見し、弊社のサービスをご提案させてい...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "phone",
+        "company",
+        "inquiry_type",
+        "message"
+      ],
+      "error": "フォームエラー検出: There are blanks or errors in the input contents.Please check the contents below and click \"Confirm\" again., Please input Name, Please input Countory",
+      "screenshot": null
+    },
+    {
+      "company_name": "Osaka office",
+      "url": "",
+      "status": "skipped",
+      "timestamp": "2026-02-14T21:45:03.573127",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "No contact form URL",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社大阪システム開発",
+      "url": "https://osaka-sd.co.jp/inquiry/",
+      "status": "success",
+      "timestamp": "2026-02-14T21:45:11.044614",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社大阪システム開発様の事業内容を拝見し、弊社のサービスをご提案...",
+      "form_fields_detected": [
+        "name",
+        "kana",
+        "email",
+        "phone",
+        "company",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社リーディ",
+      "url": "https://www.ridi.co.jp/contact.php",
+      "status": "failed",
+      "timestamp": "2026-02-14T21:45:26.738563",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社リーディ様の事業内容を拝見し、弊社のサービスをご提案させてい...",
+      "form_fields_detected": [
+        "name",
+        "kana",
+        "email",
+        "phone",
+        "company",
+        "inquiry_type",
+        "message"
+      ],
+      "error": "フォームエラー検出: ※ メールアドレス確認は入力必須項目です",
+      "screenshot": null
+    },
+    {
+      "company_name": "テラウェーブ・システム株式会社",
+      "url": "https://terawave.co.jp/contact.php",
+      "status": "success",
+      "timestamp": "2026-02-14T21:45:32.324871",
+      "message_preview": "突然のご連絡失礼いたします。\n\nテラウェーブ・システム株式会社様の事業内容を拝見し、弊社のサービスを...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社VISK",
+      "url": "https://visk.co.jp/contact",
+      "status": "success",
+      "timestamp": "2026-02-14T21:45:50.703837",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社VISK様の事業内容を拝見し、弊社のサービスをご提案させてい...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "company",
+        "inquiry_type",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社エス・シー・アイ",
+      "url": "https://scij.co.jp/#contact",
+      "status": "skipped",
+      "timestamp": "2026-02-14T21:46:04.205206",
+      "message_preview": "",
+      "form_fields_detected": [],
+      "error": "Form not detected",
+      "screenshot": null
+    },
+    {
+      "company_name": "株式会社シンシアシステム開発",
+      "url": "https://www.s-sd.co.jp/contact/",
+      "status": "failed",
+      "timestamp": "2026-02-14T21:46:10.158072",
+      "message_preview": "突然のご連絡失礼いたします。\n\n株式会社シンシアシステム開発様の事業内容を拝見し、弊社のサービスをご...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "phone",
+        "company",
+        "message"
+      ],
+      "error": "フォームエラー検出: 必須項目です。, お問合わせ内容詳細が選択されていません。",
+      "screenshot": null
+    },
+    {
+      "company_name": "システム開発、ソフトウェア開発に関するシステム会社、大阪の株式会社アットイクス",
+      "url": "https://www.at-ex.co.jp/contact/",
+      "status": "success",
+      "timestamp": "2026-02-14T21:46:18.056038",
+      "message_preview": "突然のご連絡失礼いたします。\n\nシステム開発、ソフトウェア開発に関するシステム会社、大阪の株式会社ア...",
+      "form_fields_detected": [
+        "name",
+        "kana",
+        "email",
+        "phone",
+        "company",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    },
+    {
+      "company_name": "システム開発株式会社",
+      "url": "http://www.sysky.co.jp/contact/",
+      "status": "success",
+      "timestamp": "2026-02-14T21:46:33.726135",
+      "message_preview": "突然のご連絡失礼いたします。\n\nシステム開発株式会社様の事業内容を拝見し、弊社のサービスをご提案させ...",
+      "form_fields_detected": [
+        "name",
+        "email",
+        "phone",
+        "company",
+        "message"
+      ],
+      "error": null,
+      "screenshot": null
+    }
+  ]
+}

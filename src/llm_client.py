@@ -6,7 +6,9 @@ Supports multiple providers via LiteLLM.
 
 import asyncio
 import json
+import logging
 import os
+import re
 from dataclasses import dataclass
 from typing import Any, Optional
 
@@ -16,6 +18,8 @@ try:
     LITELLM_AVAILABLE = True
 except ImportError:
     LITELLM_AVAILABLE = False
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -68,9 +72,8 @@ class LLMClient:
         self.temperature = temperature
         self.max_tokens = max_tokens
         
-        # Set API key if provided
-        if api_key:
-            self._set_api_key(api_key)
+        # Store API key as instance variable instead of modifying os.environ
+        self.api_key = api_key or self._get_api_key_from_env()
     
     def _detect_model(self) -> str:
         """Detect best available model based on API keys."""
@@ -84,14 +87,15 @@ class LLMClient:
             # Default to Anthropic
             return self.DEFAULT_MODELS["anthropic"]
     
-    def _set_api_key(self, api_key: str) -> None:
-        """Set API key based on model provider."""
+    def _get_api_key_from_env(self) -> Optional[str]:
+        """Get API key from environment based on model provider."""
         if "claude" in self.model.lower():
-            os.environ["ANTHROPIC_API_KEY"] = api_key
+            return os.environ.get("ANTHROPIC_API_KEY")
         elif "gpt" in self.model.lower():
-            os.environ["OPENAI_API_KEY"] = api_key
+            return os.environ.get("OPENAI_API_KEY")
         elif "gemini" in self.model.lower():
-            os.environ["GOOGLE_API_KEY"] = api_key
+            return os.environ.get("GOOGLE_API_KEY") or os.environ.get("GEMINI_API_KEY")
+        return None
     
     async def complete(
         self,
@@ -123,6 +127,10 @@ class LLMClient:
             "temperature": self.temperature,
             "max_tokens": self.max_tokens,
         }
+        
+        # Pass API key directly to acompletion instead of modifying os.environ
+        if self.api_key:
+            kwargs["api_key"] = self.api_key
         
         # Add JSON mode for supported models
         if json_mode:
@@ -179,7 +187,6 @@ class LLMClient:
             return json.loads(content)
         except json.JSONDecodeError as e:
             # Try to extract JSON from the response
-            import re
             json_match = re.search(r'\{[\s\S]*\}|\[[\s\S]*\]', content)
             if json_match:
                 return json.loads(json_match.group())

@@ -6,6 +6,7 @@ Provides robust error handling for browser operations.
 
 import asyncio
 import random
+import urllib.parse
 from dataclasses import dataclass
 from typing import Any, Awaitable, Callable, Optional, TypeVar
 
@@ -158,8 +159,6 @@ def get_fallback_search_url(query: str, failed_engine: str) -> Optional[str]:
     Returns:
         Alternative search URL or None if no fallback available
     """
-    import urllib.parse
-    
     # Order of preference
     preference_order = ["duckduckgo", "bing", "google", "startpage"]
     
