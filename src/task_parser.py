@@ -2,13 +2,78 @@
 Task Parser - Parse research queries into executable browser tasks.
 
 Breaks down a research query into specific URLs and search tasks.
+Supports both rule-based and LLM-powered query decomposition.
 """
 
+import logging
 import re
 import urllib.parse
 from dataclasses import dataclass, field
 from typing import Optional
 from uuid import uuid4
+
+# Import LLMClient at module level (may fail if litellm not installed)
+try:
+    from .llm_client import LLMClient
+except ImportError:
+    LLMClient = None  # type: ignore
+
+logger = logging.getLogger(__name__)
+
+# Search engines and their query formats (shared by all parsers)
+SEARCH_ENGINES = {
+    "google": "https://www.google.com/search?q={query}",
+    "bing": "https://www.bing.com/search?q={query}",
+    "duckduckgo": "https://duckduckgo.com/?q={query}",
+}
+
+
+def build_search_url(query: str, engine: str = "duckduckgo") -> str:
+    """
+    Build search engine URL.
+    
+    Args:
+        query: Search query
+        engine: Search engine name
+        
+    Returns:
+        Search URL
+    """
+    template = SEARCH_ENGINES.get(engine, SEARCH_ENGINES["duckduckgo"])
+    encoded_query = urllib.parse.quote_plus(query)
+    return template.format(query=encoded_query)
+
+
+# System prompt for LLM query decomposition
+LLM_QUERY_DECOMPOSITION_PROMPT = """You are a research query analyzer. Your job is to break down complex research queries into specific, actionable search tasks.
+
+For each query, analyze:
+1. The main research objective
+2. Key topics and subtopics to investigate
+3. Specific search queries that would gather comprehensive information
+
+Output a JSON object with the following structure:
+{
+    "objective": "Brief description of the research goal",
+    "topics": ["topic1", "topic2", ...],
+    "search_queries": [
+        {
+            "query": "specific search query",
+            "type": "search|domain|comparison|news",
+            "priority": 1-10,
+            "domains": ["optional.com", "specific.domains.to.search"]
+        }
+    ],
+    "keywords": ["key", "words", "for", "relevance", "filtering"]
+}
+
+Guidelines:
+- Generate 3-8 search queries depending on complexity
+- Use specific, focused queries rather than broad ones
+- Include comparison queries when appropriate
+- For technical topics, include domain-specific searches (github.com, stackoverflow.com, etc.)
+- For news/trends, include recent date qualifiers
+- Keywords should capture the essential terms for relevance filtering"""
 
 
 @dataclass
@@ -32,13 +97,6 @@ class TaskParser:
     - Direct URL extraction
     - Keyword extraction for relevance filtering
     """
-
-    # Common search engines and their query formats
-    SEARCH_ENGINES = {
-        "google": "https://www.google.com/search?q={query}",
-        "bing": "https://www.bing.com/search?q={query}",
-        "duckduckgo": "https://duckduckgo.com/?q={query}",
-    }
 
     # Common domain patterns for direct research
     RESEARCH_DOMAINS = [
@@ -240,10 +298,8 @@ class TaskParser:
         return text.strip()
 
     def _build_search_url(self, query: str, engine: str = "google") -> str:
-        """Build search engine URL."""
-        template = self.SEARCH_ENGINES.get(engine, self.SEARCH_ENGINES["google"])
-        encoded_query = urllib.parse.quote_plus(query)
-        return template.format(query=encoded_query)
+        """Build search engine URL (delegates to module-level function)."""
+        return build_search_url(query, engine)
 
     def _generate_query_variants(self, query: str) -> list[str]:
         """Generate variant queries for broader coverage."""
@@ -317,3 +373,141 @@ class TaskParser:
             ))
 
         return tasks
+
+
+class LLMTaskParser:
+    """
+    LLM-powered task parser for intelligent query decomposition.
+    
+    Uses an LLM to analyze complex queries and generate targeted search tasks.
+    Falls back to rule-based TaskParser on failure.
+    """
+    
+    def __init__(
+        self,
+        llm_client: Optional[LLMClient] = None,
+        default_engine: str = "duckduckgo",
+        fallback_to_rules: bool = True,
+    ):
+        """
+        Initialize LLM task parser.
+        
+        Args:
+            llm_client: LLM client instance (creates default if not provided)
+            default_engine: Default search engine
+            fallback_to_rules: Whether to fallback to rule-based parsing on failure
+        """
+        self.llm_client = llm_client
+        self.default_engine = default_engine
+        self.fallback_to_rules = fallback_to_rules
+        self._rule_parser = TaskParser(default_engine=default_engine)
+    
+    async def _get_llm_client(self) -> LLMClient:
+        """Get or create LLM client lazily."""
+        if self.llm_client is None:
+            if LLMClient is None:
+                raise ImportError("LLMClient not available. Install litellm.")
+            self.llm_client = LLMClient()
+        return self.llm_client
+    
+    async def parse(self, query: str) -> list[ResearchTask]:
+        """
+        Parse a research query into tasks using LLM.
+        
+        Args:
+            query: Natural language research query
+            
+        Returns:
+            List of ResearchTask objects
+        """
+        try:
+            llm = await self._get_llm_client()
+            
+            # Call LLM for query decomposition
+            result = await llm.parse_json(
+                prompt=f"Analyze and decompose this research query:\n\n{query}",
+                system=LLM_QUERY_DECOMPOSITION_PROMPT,
+            )
+            
+            # Convert LLM output to ResearchTasks
+            tasks = self._convert_to_tasks(query, result)
+            
+            if tasks:
+                return tasks
+            
+        except Exception as e:
+            # Log the exception to understand why LLM parsing failed
+            logger.warning(f"LLM query parsing failed, falling back to rules: {e}", exc_info=True)
+            if not self.fallback_to_rules:
+                raise
+            # Fall through to rule-based parsing
+        
+        # Fallback to rule-based parsing
+        if self.fallback_to_rules:
+            return await self._rule_parser.parse(query)
+        
+        return []
+    
+    def _convert_to_tasks(self, original_query: str, llm_result: dict) -> list[ResearchTask]:
+        """Convert LLM decomposition result to ResearchTask objects."""
+        tasks = []
+        keywords = llm_result.get("keywords", [])
+        
+        for search_item in llm_result.get("search_queries", []):
+            search_query = search_item.get("query", "")
+            if not search_query:
+                continue
+            
+            task_type = search_item.get("type", "search")
+            priority = search_item.get("priority", 5)
+            domains = search_item.get("domains", [])
+            
+            if task_type == "domain" and domains:
+                # Domain-specific searches
+                for i, domain in enumerate(domains[:3]):
+                    site_query = f"site:{domain} {search_query}"
+                    url = self._build_search_url(site_query)
+                    tasks.append(ResearchTask(
+                        id=str(uuid4()),
+                        query=site_query,
+                        url=url,
+                        keywords=keywords,
+                        task_type="search",
+                        priority=priority - i
+                    ))
+            else:
+                # Regular search
+                url = self._build_search_url(search_query)
+                tasks.append(ResearchTask(
+                    id=str(uuid4()),
+                    query=search_query,
+                    url=url,
+                    keywords=keywords,
+                    task_type="search",
+                    priority=priority
+                ))
+        
+        # Sort by priority
+        tasks.sort(key=lambda t: t.priority, reverse=True)
+        
+        return tasks
+    
+    def _build_search_url(self, query: str) -> str:
+        """Build search engine URL (delegates to module-level function)."""
+        return build_search_url(query, self.default_engine)
+
+
+def create_parser(use_llm: bool = False, **kwargs) -> TaskParser | LLMTaskParser:
+    """
+    Factory function to create appropriate parser.
+    
+    Args:
+        use_llm: Whether to use LLM-powered parsing
+        **kwargs: Additional arguments for parser
+        
+    Returns:
+        TaskParser or LLMTaskParser instance
+    """
+    if use_llm:
+        return LLMTaskParser(**kwargs)
+    return TaskParser(**kwargs)

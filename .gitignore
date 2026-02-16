@@ -68,3 +68,5 @@ projects/*/output/*.md
 *.log
 *.tmp
 *.bak
+projects/*/output/*.bak*
+projects/*/data/sent_domains.txt

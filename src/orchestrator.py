@@ -2,21 +2,62 @@
 Orchestrator - Coordinates parallel browser research tasks.
 
 Manages task distribution, result aggregation, and session state.
+Supports LLM-powered query decomposition and result summarization.
 """
 
 import asyncio
 import json
+import logging
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Optional, TYPE_CHECKING
 from uuid import uuid4
 
 from rich.progress import Progress
 
+logger = logging.getLogger(__name__)
+
 from .browser_pool import BrowserPool, BrowserInstance
 from .snapshot import SnapshotManager
-from .task_parser import TaskParser, ResearchTask
+from .task_parser import TaskParser, LLMTaskParser, ResearchTask, create_parser
+from .semantic_filter import SemanticFilter
+from .retry import retry_with_backoff, RetryConfig, get_fallback_search_url, backoff_sleep
+
+if TYPE_CHECKING:
+    from .llm_client import LLMClient
+else:
+    # Runtime import (deferred to avoid circular imports at module load)
+    LLMClient = None
+
+
+# System prompt for result summarization
+SUMMARIZATION_PROMPT = """You are a research analyst. Your job is to synthesize research findings into a clear, actionable summary.
+
+Given a set of research findings from multiple sources, create a comprehensive summary that:
+1. Identifies the key insights and themes
+2. Highlights important facts and statistics
+3. Notes any conflicting information between sources
+4. Provides actionable conclusions
+
+Format your response as Markdown with the following structure:
+
+## Summary
+A brief 2-3 sentence overview of the findings.
+
+## Key Insights
+- Bullet points of the most important discoveries
+
+## Details
+Detailed findings organized by topic/theme.
+
+## Sources
+Notable sources and their contributions.
+
+## Conclusions
+Actionable takeaways from the research.
+
+Be concise but thorough. Focus on information that directly answers the original research query."""
 
 
 @dataclass
@@ -62,6 +103,7 @@ class Orchestrator:
     - Distribute tasks to browsers
     - Collect and aggregate results
     - Save session state for resume
+    - Summarize findings with LLM (optional)
     """
 
     def __init__(
@@ -71,7 +113,9 @@ class Orchestrator:
         screenshot: bool = False,
         session_name: Optional[str] = None,
         timeout: int = 300,
-        profile_dir: Optional[Path] = None
+        profile_dir: Optional[Path] = None,
+        use_llm: bool = False,
+        llm_client: Optional["LLMClient"] = None,
     ):
         self.parallel = parallel
         self.output_dir = output_dir
@@ -79,10 +123,14 @@ class Orchestrator:
         self.session_name = session_name or f"session-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
         self.timeout = timeout
         self.profile_dir = profile_dir
+        self.use_llm = use_llm
+        self.llm_client = llm_client
+        self.use_semantic_filter = use_llm  # Enable semantic filter with LLM
 
         self.pool = BrowserPool()
         self.snapshot_manager = SnapshotManager(output_dir)
-        self.task_parser = TaskParser()
+        self.task_parser = create_parser(use_llm=use_llm)
+        self.semantic_filter = SemanticFilter() if self.use_semantic_filter else None
 
         self.session: Optional[ResearchSession] = None
         self._running = False
@@ -145,21 +193,31 @@ class Orchestrator:
             self.session.results = results
             self.session.completed = len([r for r in results if r.status == "success"])
 
-            # Aggregate findings
-            findings = self._aggregate_findings(results)
+            # Aggregate findings (with semantic filtering if enabled)
+            findings = await self._aggregate_findings(results, query)
+
+            # Summarize with LLM if enabled
+            if progress and self.use_llm:
+                summary_task = progress.add_task("Summarizing results...", total=None)
+            
+            summary = await self.summarize_results(findings, query)
+            
+            if progress and self.use_llm:
+                progress.update(summary_task, completed=True, description="Summary generated")
 
             # Save session
             self.session.status = "completed"
             await self.snapshot_manager.save_session(self.session)
 
             # Save results to file
-            output_path = await self._save_results(findings)
+            output_path = await self._save_results(findings, summary)
 
             return {
                 "session_id": self.session.id,
                 "completed": self.session.completed,
                 "total": self.session.total,
                 "findings": findings,
+                "summary": summary,
                 "output_path": str(output_path)
             }
 
@@ -239,11 +297,12 @@ class Orchestrator:
         self.session.results = all_results
         self.session.completed = len([r for r in all_results if r.status == "success"])
 
-        findings = self._aggregate_findings(all_results)
+        findings = await self._aggregate_findings(all_results, session_data["query"])
+        summary = await self.summarize_results(findings, session_data["query"])
 
         self.session.status = "completed"
         await self.snapshot_manager.save_session(self.session)
-        output_path = await self._save_results(findings)
+        output_path = await self._save_results(findings, summary)
 
         await self.pool.close()
 
@@ -252,6 +311,7 @@ class Orchestrator:
             "completed": self.session.completed,
             "total": self.session.total,
             "findings": findings,
+            "summary": summary,
             "output_path": str(output_path)
         }
 
@@ -295,62 +355,124 @@ class Orchestrator:
     async def _execute_single_task(
         self,
         task: ResearchTask,
-        instance: BrowserInstance
+        instance: BrowserInstance,
+        max_retries: int = 2,
     ) -> TaskResult:
-        """Execute a single research task."""
+        """Execute a single research task with retry and fallback support."""
         result = TaskResult(
             task_id=task.id,
             instance_id=instance.id,
             status="running",
             started_at=datetime.now()
         )
+        
+        # URLs to try (original + fallbacks)
+        urls_to_try = [task.url]
+        
+        # Add fallback URL if this is a search task
+        if task.task_type == "search":
+            # Extract engine from URL
+            failed_engine = None
+            for engine in ["duckduckgo", "google", "bing"]:
+                if engine in task.url.lower():
+                    failed_engine = engine
+                    break
+            
+            if failed_engine:
+                fallback_url = get_fallback_search_url(task.query, failed_engine)
+                if fallback_url:
+                    urls_to_try.append(fallback_url)
 
-        try:
-            # Navigate to URL
-            nav_result = await asyncio.wait_for(
-                self.pool.navigate(instance, task.url),
-                timeout=self.timeout
-            )
-
-            if not nav_result.get("success"):
-                result.status = "error"
-                result.error = nav_result.get("error", "Navigation failed")
-                return result
-
-            result.url = nav_result.get("url", task.url)
-            result.title = nav_result.get("title", "")
-
-            # Wait for page to stabilize
-            await asyncio.sleep(2)
-
-            # Get page content
-            content_result = await self.pool.get_content(instance)
-            if content_result.get("success"):
-                result.content = content_result.get("text", "")[:10000]  # Limit content size
-
-            # Take screenshot if enabled
-            if self.screenshot:
-                screenshot_result = await self.pool.screenshot(instance, full_page=True)
-                if screenshot_result.get("success"):
-                    screenshot_path = await self._save_screenshot(
-                        task.id,
-                        screenshot_result.get("screenshot", "")
+        last_error: Optional[str] = None
+        
+        for url_idx, url in enumerate(urls_to_try):
+            for attempt in range(max_retries + 1):
+                try:
+                    # Navigate to URL with retry
+                    nav_result = await asyncio.wait_for(
+                        self.pool.navigate(instance, url),
+                        timeout=self.timeout
                     )
-                    result.screenshot_path = str(screenshot_path)
 
-            # Extract findings
-            result.findings = self._extract_findings(result.content, task.keywords)
-            result.status = "success"
-            result.completed_at = datetime.now()
+                    if not nav_result.get("success"):
+                        last_error = nav_result.get("error", "Navigation failed")
+                        if attempt < max_retries:
+                            # Wait before retry with exponential backoff
+                            await backoff_sleep(attempt)
+                            continue
+                        # Try next URL
+                        break
 
-        except asyncio.TimeoutError:
-            result.status = "timeout"
-            result.error = f"Task timed out after {self.timeout}s"
-        except Exception as e:
-            result.status = "error"
-            result.error = str(e)
+                    result.url = nav_result.get("url", url)
+                    result.title = nav_result.get("title", "")
 
+                    # Wait for page to stabilize
+                    await asyncio.sleep(2)
+
+                    # Get page content with retry
+                    content_result = await self._get_content_with_retry(instance)
+                    if content_result.get("success"):
+                        result.content = content_result.get("text", "")[:10000]
+
+                    # Take screenshot if enabled
+                    if self.screenshot:
+                        screenshot_result = await self.pool.screenshot(instance, full_page=True)
+                        if screenshot_result.get("success"):
+                            screenshot_path = await self._save_screenshot(
+                                task.id,
+                                screenshot_result.get("screenshot", "")
+                            )
+                            result.screenshot_path = str(screenshot_path)
+
+                    # Extract findings
+                    result.findings = self._extract_findings(result.content, task.keywords)
+                    result.status = "success"
+                    result.completed_at = datetime.now()
+                    return result
+
+                except asyncio.TimeoutError:
+                    last_error = f"Timeout after {self.timeout}s"
+                    if attempt < max_retries:
+                        await backoff_sleep(attempt)
+                        continue
+                    # Try next URL
+                    break
+                except Exception as e:
+                    last_error = str(e)
+                    if attempt < max_retries:
+                        await backoff_sleep(attempt)
+                        continue
+                    # Try next URL
+                    break
+
+        # All URLs and retries exhausted
+        result.status = "error"
+        result.error = last_error or "Unknown error"
+        result.completed_at = datetime.now()
         return result
+    
+    async def _get_content_with_retry(
+        self,
+        instance: BrowserInstance,
+        max_retries: int = 2,
+    ) -> dict:
+        """Get page content with retry."""
+        last_error: Optional[Exception] = None
+        for attempt in range(max_retries + 1):
+            try:
+                result = await self.pool.get_content(instance)
+                if result.get("success"):
+                    return result
+            except Exception as e:
+                # Log exception for debugging
+                logger.debug(f"get_content attempt {attempt + 1} failed: {e}")
+                last_error = e
+            
+            if attempt < max_retries:
+                await backoff_sleep(attempt, base_delay=0.5)
+        
+        error_msg = f"Failed to get content: {last_error}" if last_error else "Failed to get content"
+        return {"success": False, "error": error_msg}
 
     def _extract_findings(self, content: str, keywords: list[str]) -> list[dict]:
         """Extract relevant findings from page content."""
@@ -382,8 +504,12 @@ class Orchestrator:
         findings.sort(key=lambda x: x.get("relevance", 0), reverse=True)
         return findings[:10]
 
-    def _aggregate_findings(self, results: list[TaskResult]) -> list[dict]:
-        """Aggregate findings from all results."""
+    async def _aggregate_findings(
+        self,
+        results: list[TaskResult],
+        query: str = "",
+    ) -> list[dict]:
+        """Aggregate findings from all results, optionally with semantic filtering."""
         all_findings = []
 
         for result in results:
@@ -399,9 +525,104 @@ class Orchestrator:
                     "relevance": finding.get("relevance", 0)
                 })
 
+        # Apply semantic filtering if available
+        if self.semantic_filter and self.semantic_filter.available and query:
+            try:
+                scored = await self.semantic_filter.filter_findings(
+                    query=query,
+                    findings=all_findings,
+                    top_k=50,
+                )
+                return [self.semantic_filter.scored_to_dict(s) for s in scored]
+            except Exception as e:
+                # Log exception to understand why semantic filtering failed
+                logger.warning(f"Semantic filtering failed, using keyword ranking: {e}")
+                # Fall through to basic sorting on error
+
         # Sort by relevance
         all_findings.sort(key=lambda x: x.get("relevance", 0), reverse=True)
         return all_findings[:50]
+
+    async def summarize_results(
+        self,
+        findings: list[dict],
+        query: str,
+    ) -> str:
+        """
+        Summarize research findings using LLM.
+        
+        Args:
+            findings: Aggregated findings from research
+            query: Original research query
+            
+        Returns:
+            Markdown summary of findings
+        """
+        if not self.use_llm or not findings:
+            return self._generate_basic_summary(findings, query)
+        
+        try:
+            # Get or create LLM client
+            if self.llm_client is None:
+                from .llm_client import LLMClient as LLMClientImpl
+                self.llm_client = LLMClientImpl()
+            
+            # Prepare findings text for LLM
+            findings_text = self._format_findings_for_llm(findings)
+            
+            prompt = f"""Original Research Query: {query}
+
+Research Findings:
+{findings_text}
+
+Please synthesize these findings into a comprehensive research summary."""
+            
+            response = await self.llm_client.complete(
+                prompt=prompt,
+                system=SUMMARIZATION_PROMPT,
+            )
+            
+            return response.content
+            
+        except Exception as e:
+            # Fallback to basic summary on error
+            return self._generate_basic_summary(findings, query) + f"\n\n*Note: LLM summarization failed: {e}*"
+    
+    def _format_findings_for_llm(self, findings: list[dict]) -> str:
+        """Format findings for LLM consumption."""
+        sections = []
+        
+        for i, finding in enumerate(findings[:20], 1):
+            source = finding.get("source", "Unknown")
+            title = finding.get("title", "No title")
+            summary = finding.get("summary", "")
+            
+            sections.append(f"""### Finding {i}
+**Source:** {source}
+**Title:** {title}
+**Content:** {summary}
+""")
+        
+        return "\n".join(sections)
+    
+    def _generate_basic_summary(self, findings: list[dict], query: str) -> str:
+        """Generate basic summary without LLM."""
+        lines = [
+            f"# Research Summary: {query}",
+            "",
+            f"**Total Findings:** {len(findings)}",
+            "",
+            "## Top Findings",
+            "",
+        ]
+        
+        for i, finding in enumerate(findings[:10], 1):
+            lines.append(f"### {i}. {finding.get('title', 'Unknown')}")
+            lines.append(f"**Source:** {finding.get('source', '')}")
+            lines.append(f"{finding.get('summary', '')}")
+            lines.append("")
+        
+        return "\n".join(lines)
 
     async def _save_screenshot(self, task_id: str, base64_data: str) -> Path:
         """Save screenshot to file."""
@@ -418,7 +639,11 @@ class Orchestrator:
 
         return filepath
 
-    async def _save_results(self, findings: list[dict]) -> Path:
+    async def _save_results(
+        self,
+        findings: list[dict],
+        summary: Optional[str] = None,
+    ) -> Path:
         """Save results to JSON file."""
         results_dir = self.output_dir / "results"
         results_dir.mkdir(parents=True, exist_ok=True)
@@ -439,17 +664,22 @@ class Orchestrator:
                     if self.session and self.session.total > 0 else 0
                 )
             },
-            "findings": findings
+            "findings": findings,
+            "summary": summary or "",
         }
 
         filepath.write_text(json.dumps(output, indent=2, ensure_ascii=False))
 
         # Also save markdown summary
-        await self._save_markdown_summary(findings)
+        await self._save_markdown_summary(findings, summary)
 
         return filepath
 
-    async def _save_markdown_summary(self, findings: list[dict]) -> Path:
+    async def _save_markdown_summary(
+        self,
+        findings: list[dict],
+        summary: Optional[str] = None,
+    ) -> Path:
         """Save markdown summary."""
         results_dir = self.output_dir / "results"
         filepath = results_dir / f"{self.session_name}.md"
@@ -460,9 +690,19 @@ class Orchestrator:
             f"**Date:** {datetime.now().strftime('%Y-%m-%d %H:%M')}",
             f"**Tasks:** {self.session.completed if self.session else 0}/{self.session.total if self.session else 0}",
             "",
-            "## Findings",
-            ""
         ]
+        
+        # Add LLM summary if available
+        if summary:
+            lines.append("## Summary")
+            lines.append("")
+            lines.append(summary)
+            lines.append("")
+            lines.append("---")
+            lines.append("")
+
+        lines.append("## Raw Findings")
+        lines.append("")
 
         for i, finding in enumerate(findings[:20], 1):
             lines.append(f"### {i}. {finding.get('title', 'Unknown')}")
