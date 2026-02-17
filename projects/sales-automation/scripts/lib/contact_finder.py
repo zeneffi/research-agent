@@ -9,6 +9,42 @@ from typing import Optional
 from .browser import browser_navigate, browser_evaluate
 
 
+def normalize_base_url(url: str) -> str:
+    """
+    英語ページURLを日本語ページ（ルート）に変換
+    
+    例:
+    - https://example.com/en/ → https://example.com/
+    - https://example.com/en/about/ → https://example.com/
+    - https://example.com/english/contact → https://example.com/
+    
+    Args:
+        url: 変換対象URL
+        
+    Returns:
+        日本語ページURL（変換不要の場合はそのまま）
+    """
+    if not url:
+        return url
+    
+    # 英語ページパターンを削除してルートに
+    english_patterns = [
+        r'/en/.*$',      # /en/ 以降を削除
+        r'/en-[a-z]+/.*$',  # /en-us/ 等
+        r'/english/.*$', # /english/ 以降を削除
+        r'/eng/.*$',     # /eng/ 以降を削除
+    ]
+    
+    normalized = url
+    for pattern in english_patterns:
+        if re.search(pattern, normalized, re.IGNORECASE):
+            normalized = re.sub(pattern, '/', normalized, flags=re.IGNORECASE)
+            print(f"  [DEBUG] Normalized URL: {url} → {normalized}")
+            break
+    
+    return normalized
+
+
 # よくある問い合わせフォームパス
 COMMON_CONTACT_PATHS = [
     # 営業・協業用（優先）
@@ -60,6 +96,10 @@ def find_contact_form_url(port: int, base_url: str) -> str:
     Returns:
         問い合わせフォームURL（見つからない場合は空文字列）
     """
+    # === 前処理: 英語ページURLを日本語ページに変換 ===
+    original_url = base_url
+    base_url = normalize_base_url(base_url)
+    
     # === 方法1: よくあるパスを直接試す（キーワード + HTML構造を同時チェック）===
     for path in COMMON_CONTACT_PATHS:
         candidate_url = urljoin(base_url, path)
