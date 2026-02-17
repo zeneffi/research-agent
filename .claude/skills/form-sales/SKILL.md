@@ -21,14 +21,38 @@ description: 問い合わせフォームから営業文を自動送信。企業�
 - CAPTCHA検出時は自動スキップ
 - 全送信を記録（成功/失敗/スキップ）
 
+## 環境セットアップ（初回のみ）
+
+### 1. Dockerコンテナ起動
+
+```bash
+cd docker
+docker compose up -d
+cd ..
+```
+
+### 2. Python仮想環境を有効化
+
+```bash
+source projects/sales-automation/venv/bin/activate
+```
+
+### 3. LLMで営業文を生成する場合（オプション）
+
+```bash
+export OPENAI_API_KEY="your-api-key"
+```
+
+---
+
 ## 前提条件
 
 ### 1. 営業リストが作成済み
 
-`/sales-list-creation` スキルで営業リストを作成してください。
+`sales-list-creation` スキルで営業リストを作成してください。
 
-```
-/sales-list-creation "東京 IT企業" --max-companies 50
+```bash
+python projects/sales-automation/scripts/create_sales_list.py "東京 IT企業" --max-companies 50
 ```
 
 ### 2. 送信者情報を設定
@@ -82,19 +106,29 @@ nano projects/sales-automation/config/sales_automation.json
 
 ### 2. テスト送信（少数）
 
-```
-/form-sales output/sales_list_20260204_2034.json --max-sends 3
+```bash
+python projects/sales-automation/scripts/send_sales_form.py \
+  projects/sales-automation/output/sales_list_20260204_2034.json \
+  --max-sends 3
 ```
 
 **推奨**: 最初は3〜5社でテストしてください。
 
 ### 3. 本番送信
 
-```
-/form-sales output/sales_list_20260204_2034.json
+```bash
+python projects/sales-automation/scripts/send_sales_form.py \
+  projects/sales-automation/output/sales_list_20260204_2034.json
 ```
 
 デフォルトで100件/日まで送信されます。
+
+### 一気通貫（リスト作成→送信）
+
+```bash
+./projects/sales-automation/scripts/run_pipeline.sh "東京 IT企業" 50 30
+```
+※ 検索クエリ、収集企業数、送信上限を指定
 
 ### 4. 結果確認
 

@@ -21,27 +21,45 @@ description: 営業ターゲット企業のリストを自動作成。DuckDuckGo
 - **スタートアップ**: 調達ラウンド、調達額、調達日
 - **その他**: 業種に応じて柔軟に判定
 
-## 実行手順
+## 環境セットアップ（初回のみ）
 
 ### 1. Dockerコンテナ起動
 
 ```bash
 cd docker
-docker compose up -d --scale browser=15
+docker compose up -d
+cd ..
 ```
 
-### 2. スキル実行
+### 2. Python仮想環境を有効化
 
+```bash
+source projects/sales-automation/venv/bin/activate
 ```
-/sales-list-creation "検索クエリ" --max-companies 100
+
+---
+
+## 実行手順
+
+### 1. リスト作成
+
+```bash
+python projects/sales-automation/scripts/create_sales_list.py "検索クエリ" --max-companies 100
 ```
 
 **例**:
+```bash
+python projects/sales-automation/scripts/create_sales_list.py "東京 IT企業"
+python projects/sales-automation/scripts/create_sales_list.py "大阪 Web制作会社" --max-companies 50
+python projects/sales-automation/scripts/create_sales_list.py "AI スタートアップ 資金調達" --max-companies 30
 ```
-/sales-list-creation "東京 IT企業"
-/sales-list-creation "大阪 Web制作会社" --max-companies 50
-/sales-list-creation "AI スタートアップ 資金調達" --max-companies 30
+
+### 一気通貫（リスト作成→フォーム送信）
+
+```bash
+./projects/sales-automation/scripts/run_pipeline.sh "東京 IT企業" 50 30
 ```
+※ 検索クエリ、収集企業数、送信上限を指定
 
 ### 3. 出力確認
 
