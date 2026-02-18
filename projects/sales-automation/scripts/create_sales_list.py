@@ -207,11 +207,15 @@ def main():
     print()
 
     # ステップ4: 問い合わせフォーム検出
-    if not args.skip_contact_forms:
+    if not companies:
+        print("[4/4] 問い合わせフォーム検出: 対象企業が0社のためスキップ")
+        print()
+    elif not args.skip_contact_forms:
         print("[4/4] 問い合わせフォーム検出中...")
         companies = collect_contact_forms(ports, companies)
         detected_count = sum(1 for c in companies if c.get('contact_form_url', ''))
-        print(f"  検出完了: {detected_count}/{len(companies)}社 ({detected_count/len(companies)*100:.1f}%)")
+        pct = (detected_count / len(companies) * 100) if companies else 0.0
+        print(f"  検出完了: {detected_count}/{len(companies)}社 ({pct:.1f}%)")
         print()
     else:
         print("[4/4] 問い合わせフォーム検出: スキップ")
