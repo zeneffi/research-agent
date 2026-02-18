@@ -20,7 +20,7 @@ from lib.browser import get_container_ports, browser_navigate
 from lib.form_handler import detect_form_fields, detect_captcha, fill_and_submit_form
 from lib.message_generator import generate_sales_message
 from lib.rate_limiter import RateLimiter
-from lib.duplicate_checker import mark_as_sent
+from lib.duplicate_checker import mark_as_sent, filter_unsent_companies
 
 
 def load_sales_list(file_path: str) -> list:
@@ -366,7 +366,15 @@ def main():
     # 1. 営業リスト読み込み
     print("[1/5] 営業リスト読み込み中...")
     companies = load_sales_list(args.list_file)
-    print(f"  読み込み完了: {len(companies)}社")
+    total_loaded = len(companies)
+    print(f"  読み込み完了: {total_loaded}社")
+
+    # 重複チェック（送信済み企業を除外）
+    companies = filter_unsent_companies(companies, url_key='url')
+    filtered_count = total_loaded - len(companies)
+    if filtered_count > 0:
+        print(f"  重複除外: {filtered_count}社（送信済み）")
+    print(f"  送信対象: {len(companies)}社")
     print()
 
     # 2. 設定読み込み
