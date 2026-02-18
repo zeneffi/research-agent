@@ -49,7 +49,7 @@ COMMON_CONTACT_PATHS = [
 ]
 
 
-def find_contact_form_url(port: int, base_url: str) -> str:
+def find_contact_form_url(port: int, base_url: str, *, max_total_seconds: int = 25) -> str:
     """
     問い合わせフォームURLを4段階で検出
 
@@ -60,14 +60,24 @@ def find_contact_form_url(port: int, base_url: str) -> str:
     Returns:
         問い合わせフォームURL（見つからない場合は空文字列）
     """
+    started_at = time.time()
+
+    def timed_out() -> bool:
+        return (time.time() - started_at) >= max_total_seconds
+
     # === 方法1: よくあるパスを直接試す（キーワード + HTML構造を同時チェック）===
     for path in COMMON_CONTACT_PATHS:
+        if timed_out():
+            print(f"  [DEBUG] Contact form detection timed out ({max_total_seconds}s): {base_url}")
+            return ''
+
         candidate_url = urljoin(base_url, path)
         # 英語ページはスキップ
         if is_english_page(candidate_url):
             continue
         if browser_navigate(port, candidate_url, timeout=3):
-            time.sleep(1)  # JavaScript読み込み待機
+            # JavaScript読み込み待機（長く待つと全体が詰まりやすいので短め）
+            time.sleep(0.3)
             # キーワード検証とHTML構造検証を同時に実行（効率化）
             combined_script = """(function() {
                 const title = document.title.toLowerCase();
@@ -96,10 +106,14 @@ def find_contact_form_url(port: int, base_url: str) -> str:
                 return candidate_url
 
     # === 方法2: トップページからリンクを探す ===
-    if not browser_navigate(port, base_url):
+    if timed_out():
+        print(f"  [DEBUG] Contact form detection timed out ({max_total_seconds}s): {base_url}")
         return ''
 
-    time.sleep(2)  # JavaScript動的生成リンク対応のため待機
+    if not browser_navigate(port, base_url, timeout=10):
+        return ''
+
+    time.sleep(1)  # JavaScript動的生成リンク対応のため待機
 
     # 問い合わせリンクを検出するスクリプト
     script = """(function() {
@@ -139,6 +153,10 @@ def find_contact_form_url(port: int, base_url: str) -> str:
 
         return '';
     })()"""
+
+    if timed_out():
+        print(f"  [DEBUG] Contact form detection timed out ({max_total_seconds}s): {base_url}")
+        return ''
 
     result = browser_evaluate(port, script, timeout=3)
     if result and result != '':
@@ -199,6 +217,10 @@ def find_contact_form_url(port: int, base_url: str) -> str:
 
         return '';
     })()"""
+
+    if timed_out():
+        print(f"  [DEBUG] Contact form detection timed out ({max_total_seconds}s): {base_url}")
+        return ''
 
     result = browser_evaluate(port, footer_script, timeout=3)
     if result and result != '':

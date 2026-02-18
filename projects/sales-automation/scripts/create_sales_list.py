@@ -143,6 +143,7 @@ def collect_contact_forms(ports, companies):
             for i, company in enumerate(batch):
                 port = ports[i % len(ports)]
                 base_url = company.get('company_url', '')
+                print(f"    → フォーム検出開始: {company.get('company_name', '')[:30]} ({base_url})")
                 futures[executor.submit(find_contact_form_url, port, base_url)] = company
 
             for future in as_completed(futures):
