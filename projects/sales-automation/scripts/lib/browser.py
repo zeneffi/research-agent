@@ -9,7 +9,7 @@ import os
 from pathlib import Path
 from typing import Optional, List
 from urllib.request import Request, urlopen
-from urllib.error import URLError
+from urllib.error import URLError, HTTPError
 
 
 def get_container_ports() -> List[int]:
@@ -36,16 +36,60 @@ def get_container_ports() -> List[int]:
     return sorted(ports)
 
 
+def _browser_post(port: int, path: str, payload: dict, timeout: int = 30) -> Optional[dict]:
+    try:
+        api_url = f"http://localhost:{port}{path}"
+        data = json.dumps(payload).encode('utf-8')
+        req = Request(api_url, data=data, headers={'Content-Type': 'application/json'})
+        with urlopen(req, timeout=timeout) as response:
+            return json.loads(response.read().decode('utf-8'))
+    except (URLError, HTTPError, json.JSONDecodeError, Exception):
+        return None
+
+
+def _browser_new_tab(port: int, url: str = 'about:blank', timeout: int = 30) -> bool:
+    """ブラウザに新規タブを作成（active tabが無い状態の復旧用）"""
+    result = _browser_post(port, '/browser/tabs/new', {"url": url}, timeout=timeout)
+    return bool(result and result.get('success'))
+
+
+def _browser_recover(port: int, timeout: int = 30) -> bool:
+    """Playwrightがクラッシュした/変な状態になったときの復旧（close→init→new tab）"""
+    _browser_post(port, '/browser/close', {}, timeout=timeout)
+    init = _browser_post(port, '/browser/init', {}, timeout=timeout)
+    if not (init and init.get('success')):
+        return False
+    return _browser_new_tab(port, timeout=timeout)
+
+
 def browser_navigate(port: int, url: str, timeout: int = 30) -> bool:
     """ブラウザをURLにナビゲート"""
-    try:
-        api_url = f"http://localhost:{port}/browser/navigate"
-        data = json.dumps({"url": url}).encode('utf-8')
-        req = Request(api_url, data=data, headers={'Content-Type': 'application/json'})
+    api_url = f"http://localhost:{port}/browser/navigate"
+    data = json.dumps({"url": url}).encode('utf-8')
+    req = Request(api_url, data=data, headers={'Content-Type': 'application/json'})
 
+    try:
         with urlopen(req, timeout=timeout) as response:
             result = json.loads(response.read().decode('utf-8'))
             return result.get("success", False)
+    except HTTPError as e:
+        # Browser APIが "No active tab" や "Page crashed" を返すことがある
+        # → 状況に応じて 1回だけ復旧・リトライ
+        try:
+            body = e.read().decode('utf-8')
+            if 'No active tab' in body:
+                if _browser_new_tab(port, timeout=timeout):
+                    with urlopen(req, timeout=timeout) as response:
+                        result = json.loads(response.read().decode('utf-8'))
+                        return result.get("success", False)
+            if 'Page crashed' in body:
+                if _browser_recover(port, timeout=timeout):
+                    with urlopen(req, timeout=timeout) as response:
+                        result = json.loads(response.read().decode('utf-8'))
+                        return result.get("success", False)
+        except Exception:
+            pass
+        return False
     except (URLError, json.JSONDecodeError, Exception):
         return False
 
